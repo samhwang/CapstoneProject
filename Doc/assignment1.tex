@@ -1,0 +1,45 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{graphicx}
+\title{Improving web search using structured and unstructured geospatial information}
+\author{Bin Lu, S3360014\\Supervisor: Professor Timos Sellis\\Program: Minor thesis}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+This project will investigate new approaches to ranked retrieval for location-aware search. Close to 20\% of all web search queries contain location information, and this number is expected to continue growing as users become increasingly dependent on mobile devices for all of their daily Internet activities. We intend to combine state-of-the-art research from two domains: spatial keyword search in databases and ad-hoc search in Information Retrieval to improve the overall quality of search result.\\
+The number of internet users increase from 16 million to 2749 million from year 1995 to 2013. By 2012, Google indexed 50 billion pages compare to 11 billion pages in 2008. In 2013 Google served approximately 2.16 trillion searches in total, in that case about 400 billion searches are related to location. This topic is important because we are searching a way to improve efficiency and accuracy of information retrieval with location information; this is one of the most effective way for modern search engine to sustain the tremendous increase of internet and its user. 
+\end{abstract}
+
+\section{Reference List}
+\begin{enumerate}
+
+\item Keyword search on spatial databases.\cite{ref1} \\ This paper has been cited more than 144 times, and its form IEEE International Conference on Data Engineering (ICDE), which is an A rated venue.  h-Index of V. Hristidis and N. Rishe is 27 and 22 respectively. This paper will be used as main source for my topic; it has details of implementation of top-k spatial keyword search problem and $IR^{2}-Tree$ algorithms. The methods are shown to have superior performance and excellent scalability when compare to current method.
+
+\item Best position algorithms for efficient top- k query processing.\cite{ref2} \\ This paper been cited more than 90 times. This paper introduces two algorithms that answer top-k query in a more efficient way. This reference can be used to improve efficiency of searching database. No h-index found for authors.
+
+\item Keyword search in spatial databases: Towards searching by document.\cite{ref3} \\ This paper been cited more than 90 times, the h-index of Y. Chee and A. Tung is 13 and 35 respectively. ICDE is rated A*. This paper describes a different approach of keyword search in spatial databases compare to De Felipe. The algorithm is based on $bR^*-Tree$ which expends $R^*-Tree$, answers mCK queries.
+
+\item Efficient continuously moving top-k spatial keyword query processing.\cite{ref4} \\ This paper has been cited 36 times. h-Index of M. Yiu and C. Jensen is 26 and 60 respectively. It’s also published by ICDE. This paper gives prominence to spatial keyword queries, which involve both the locations and textual descriptions of content.
+
+\item Processing spatial-keyword (SK) queries in geographic information retrieval (GIR) systems.\cite{ref5} \\ This paper has been cited 80 times. h-index of B. Hore is 9. SSDBM is rated A in CORE2013. The paper focus on indexing strategies that can process spatial keyword queries efficiently. This makes this paper one of my main source for my topic.
+
+\item Spatial variation in search engine Results.\cite{ref6} \\ Different from previous papers, this one is more focused on geographical data classification analyse. This is helpful when indexing spatial database. Even this paper is only cited twice, but the HICSS is rated A in CORE2013. I will consider to include this paper in my research.
+
+\item A semantic index structure for integrating ogc services in a spatial search engine.\cite{ref7} \\ This paper won’t be used as main reference as my research, however it introduces an ad-hoc semantic-index structure that relate to real life examples.  This can give me some idea on how the structured spatial data can be indexed and searched in real life.
+
+\item Geographic IR helped by structured geospatial knowledge resources.\cite{ref8} \\ This paper has been cited 5 times, h-index of A. Toral and O. Ferrández is 10 and 12 respectively. This paper is about a research on an existing IR module and a Geographic Knowledge module. The result of the research shows the impact on the search result with additional geographic knowledge.
+
+\item A graph-based algorithm to define urban topology from unstructured geospatial data\cite{ref9} \\ This paper has been cited only once, h-index of JP de Almeida and JG Morley is 2 and 11 respectively. This paper is not about spatial keyword in search engine, but discussed classification of unstructured geospatial data, that could be valuable to my research topic, as most of my reference are about spatial keyword database that is built on structured geographic knowledge.
+
+\item GeoDiscover – a specialized search engine to discover geospatial data in the Web\cite{ref10} \\ This paper has been cited twice. h-index of G.Câmara is 34. This paper discussed the technology of a search engine that can access and recover geospatial data in the Web. This could be a reference on how the data is collected in the large scale.
+
+\end{enumerate}
+
+\bibliographystyle{plain}
+% there are various bibliography styles you can set
+\bibliography{reference}
+% this tells latex to generate the reference list, using the bibfile.bib file of references.
+% you will need to do pdflatex <tex filename>; then bibtex <tex filename without extension>;
+% pdflatex <tex filename> again twice. then you have a formatted pdf.
+
+\end{document}
