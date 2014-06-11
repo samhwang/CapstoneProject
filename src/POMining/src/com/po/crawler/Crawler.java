@@ -23,6 +23,7 @@ public class Crawler {
 
 	public static final int ModeID = 1;
 	public static final int ModeStory = 2;
+	public static final int ModeSinglePageForID = 3;
 	
 	private final String strIDFileSuffix = "IDs.txt";
 	private final String strStoryFileSuffix = "Story.txt";
@@ -30,14 +31,14 @@ public class Crawler {
 	private final String strPageNumber = "/opinions/searchresults?page=";
 	private final String strOpinions = "/opinions/";
 	
-	private final int SleepTime = 120000;
+	private final int SleepTime = 300000;
 	
 	private String strEntryURL;
 	private String strOutFile;
 //	private String strRegion;
 	private Set<String> setOpinionIDs;
 	
-	public void run(int nMode, String strRegion)
+	public void run(int nMode, String strRegion, int nStartSeq)
 	{
 	    System.getProperties().put("proxySet", "true");
 	    System.getProperties().put("proxyHost", "webironport2");
@@ -55,14 +56,17 @@ public class Crawler {
 		{
 		case ModeID:
 			strOutFile = strRegion+strIDFileSuffix;
-			GetIDs(strEntryURL, strRegion);
+			GetIDs(strEntryURL, strRegion, nStartSeq);
 			break;
 		case ModeStory:
 			setOpinionIDs = new TreeSet<String>();
 			LoadOpinionIDs(strRegion+strIDFileSuffix);
 			strOutFile = strRegion+strStoryFileSuffix;
-			ProcessOpinions();
+			ProcessOpinions(nStartSeq);
 			break;
+		case ModeSinglePageForID:
+			strOutFile = strRegion+strIDFileSuffix;
+			GetSinglePageID(strEntryURL, strRegion, nStartSeq);
 		default:
 			System.out.println("Mode: " + nMode + " Not supported");
 			break;
@@ -71,7 +75,13 @@ public class Crawler {
 		System.out.println("Crawler End..." + "Mode:" + nMode + " Region: " + strRegion);
 	}
 	
-	private void GetIDs(String strURL, String strRegion)
+	private void GetSinglePageID(String strURL, String strRegion, int nPageNumber)
+	{
+		String strPageURL = "https://www.patientopinion.org.au/opinions?page=" + nPageNumber;
+		ParseAndStoreIDs(getHTML(strPageURL));
+	}
+	
+	private void GetIDs(String strURL, String strRegion, int nStartSeq)
 	{
 		String strHTML = getHTML(strURL);
 		Document doc = Jsoup.parse(strHTML);
@@ -100,6 +110,8 @@ public class Crawler {
 		
 		for(int i = 1; i <= nMaxPage; i++)
 		{
+			if(i <= nStartSeq)
+				continue;
 			String strPageURL = "https://www.patientopinion.org.au/opinions?page=" + i;
 			ParseAndStoreIDs(getHTML(strPageURL));
 			System.out.println("Page[" + i + "] Done!");
@@ -129,6 +141,7 @@ public class Crawler {
 				{
 				    out = new PrintWriter(new BufferedWriter(new FileWriter(strOutFile, true)));
 				    out.println(strTempID);
+				    System.out.print(strTempID + ";");
 				}
 				catch(IOException ioe)
 				{
@@ -141,6 +154,7 @@ public class Crawler {
 				}
 			}
 		}
+		System.out.println();
 	}
 	
 	private void LoadOpinionIDs(String strFile)
@@ -165,15 +179,17 @@ public class Crawler {
 		}
 	}
 	
-	private void ProcessOpinions()
+	private void ProcessOpinions(int nStartSeq)
 	{
 		int i = 0;
 		for(String strID : setOpinionIDs)
 		{
 			i++;
+			if(Integer.valueOf(strID).intValue() <= nStartSeq)
+				continue;
 			String strURL = strEntryURL + "/" + strID;
 			
-			ParseAndStoreOpinion(getHTML(strURL));
+			ParseAndStoreOpinion(getHTML(strURL), strID);
 			System.out.println("[" + i + "] Opinion - " + strID + " Done!");
 			try {
 				Thread.sleep(SleepTime);
@@ -184,7 +200,7 @@ public class Crawler {
 		}
 	}
 	
-	private void ParseAndStoreOpinion(String strHTML)
+	private void ParseAndStoreOpinion(String strHTML, String strID)
 	{
 		String strTitle = "";
 		String strAuthorRole = "";
@@ -279,6 +295,7 @@ public class Crawler {
 		try
 		{
 		    out = new PrintWriter(new BufferedWriter(new FileWriter(strOutFile, true)));
+		    out.println("ID: " + strID);
 			out.println("Title: " + strTitle);
 			out.println("Time: " + strTime);
 			out.print("Location: ");
@@ -329,6 +346,7 @@ public class Crawler {
 	      BufferedReader rd;
 	      String line;
 	      String result = "";
+	      boolean bProcessed = true;
 	      try {
 	         url = new URL(urlToRead);
 	         conn = (HttpURLConnection) url.openConnection();
@@ -340,9 +358,26 @@ public class Crawler {
 	         rd.close();
 	      } catch (IOException e) {
 	         e.printStackTrace();
+	         bProcessed = false;
 	      } catch (Exception e) {
 	         e.printStackTrace();
+	         bProcessed = false;
 	      }
+	      
+	      finally{
+		      if(!bProcessed)
+		      {
+				try {
+					Thread.sleep(SleepTime+SleepTime);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	return getHTML(urlToRead);
+		      }
+		      //return result;
+	      }
+
 	      return result;
 	   }
 }
