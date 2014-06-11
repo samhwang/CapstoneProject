@@ -1,27 +1,46 @@
-\documentclass[a4paper,11pt]{article}
+\documentclass[10pt,twocolumn]{article} 
+\usepackage{simpleConference}
+\usepackage{times}
 \usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{url,hyperref}
 \title{Analyzing complaint data for healthcare}
 \author{Bin Lu, S3360014\\Supervisor: Xiuzhen Jenny Zhang, Daryl D'Souza, Amanda Kimpton\\Program: Minor thesis}
 
 \begin{document}
 \maketitle
+\thispagestyle{empty}
+
 \section{Introduction}
-The provision of high-quality healthcare service is an increasingly difficult challenge, on the other hand the effective governance is increasingly recognized as pivotal to improvements in healthcare quality \cite{ref6}. The Australian Health Practitioner Regulation Agency (AHPRA) plays a crucial role in this aspect; it works with 14 National Health Practitioner Boards in implementing the National Registration and Accreditation Scheme. AHPRA also accept consumers or patients’ complaints, the AHPRA categorize the complaints based on the nature of the practice and then distribute them to the corresponding board. The board members will review the complaints in regular meeting to identify the issues and make suggestions; set new standards to improve the quality of service. Previous study\cite{ref5} shows the effectiveness of the boards is effected by insufficient resource and inadequate information received. Manually processing and analyzing this type of data is time consuming and inefficient. Moreover, even highly professional people could put subjective thinking into analyzes. Modern data mining technology already been employed in many area. For example market database system will analyze customers, categorize them in different groups and forecast their behavior. There is a huge potential to introduce data mining system into healthcare service. Not only reducing the labor required to process the massive amount of data, also tend to produce more accurate and objective analysis. Forecast the possibility of complaint against a medical practitioner based on historical data is a very valuable indicator for board members when they making the decision.\\
-Although data mining techniques for marketing, manufacturing, security etc. is ripe for deployment\cite{ref12}\cite{ref11}, to apply data mining techniques to healthcare data is not a simple matter of switching content due to the complexity and sensitivity of the data. It is not a single task to develop one data mining package to cover all 14 boards, the variables and attributes affecting the result are different from board to board.\cite{ref1}\cite{ref2}\cite{ref3}\cite{ref4} There won’t be sufficient time and resource to develop algorithms to cover them all, however we are trying to find a generic data mining package to analyze the common variables among 14 boards, and develop an in depth analyze against one or two specialized boards, the similar method can be adapt to other boards with minimum amount of work in the future.
+The provision of high-quality healthcare service is an increasingly difficult challenge, on the other hand the effective governance is increasingly recognized as pivotal to improvements in healthcare quality\cite{ref6}. The Australian Health Practitioner Regulation Agency (AHPRA) plays a crucial role in this aspect; it works with 14 National Health Practitioner Boards in implementing the National Registration and Accreditation Scheme. AHPRA also accept consumers or patients’ complaints, the AHPRA categorize the complaints based on the nature of the practice and then distribute them to the corresponding board. The board members will review the complaints in regular meeting to identify the issues and make suggestions; set new standards to improve the quality of service. Previous study\cite{ref5}shows the effectiveness of the boards is affected by insufficient resource and inadequate information received. Manually processing and analyzing this type of data is time consuming and inefficient. Moreover, even highly trained professional could put subjective thinking into analyzes. Modern data mining technology already been employed in many area. For example market database system will analyze customers, categorize them in different groups and forecast their behavior. There is a huge potential to introduce data mining system into healthcare service. Not only reducing the labor required to process the massive amount of data, also tend to produce more accurate and objective analysis. Forecast the possibility of complaint against a medical practitioner based on historical data is a very valuable indicator for board members when they making the decision.\\
+The availability of official data from AHPRA is subject to approval, so we planned a backup source for the data. The stories or opinion from www.patientopinion.org.au. Patient Opinion Australia(POA) was established in 2012 and, similar to its UK counterpart, is registered as an independent not-for-profit charitable institution. As the data from AHPRA remains uncertain, the later one will be used as primary data source for this project. The opinion data will be different from formal complaint data in many ways. For example, the opinions won’t be clearly categorized by specialty, they could be either positive or negative, people who make opinion can be patients, carers or relatives. Since all the opinions are available to public through web pages, we will develop a simple crawler to retrieve all the opinions from website. Then apply some machine learning techniques to classify the free formatted data. The classifier should be able to predict an opinion is positive or negative, finally statistical analyze to find distribution of the opinion across specialty, location and autho role. An unsupervised machine learning technique will be used for clustering the whole data set. By clustering the opinion, we hope to discover some hidden patterns within data set.\\
+There is a potential problem for the POA data. A single story could contain multiple aspects (treatment, doctor, hospital) with different sentiment. To solve this problem, an application called aspect-based summarization\cite{ref11} will be used.The set of aspects will be extracted from opinion and the sentiment of each aspect will be analyzed.\\
+The search question or the goal of the project will be: 1) Is the classification of opinion data sufficient to identify the distribution of the positive/negative feedbacks against specialty, location, service or even hospital. 2) Is the classification of opinion data sufficient to rank the specialty and hospital. 3) Discover the similarity between opinions by clustering. 4)Is aspect-based summarization more suitable to opinion websites, blogs Internet forums and social networks.
 
 \section{Related Work}
-\subsection{A statistical study of healthcare complaint data}\cite{ref5}
-Unfortunately, data miming against healthcare complaint hasn’t attracted much attention,  some studies has been done recently to discover the relationship between complaint data against particular or particular group ( gender, age, specialty ) of doctors with one decade worth of official complaint data within healthcare system. The study analyzed the distribution of complaints among practicing doctors. Then used recurrent-event survival analysis to identify characteristics of doctor at high risk of recurrent complaints, and to estimate each individual doctor’s risk of incurring future complaints. The study shows some very interesting and inspirational ideas, it coded specialty into 13 categories, for example: General Practice; Surgery; Psychiatry etc. The issues or complaints also categorized into 20 sections, for example Medication, Treatment in Clinical care; Consent, Information in Communication; Cost, Billing, Sexual Contact in Conduct etc. The result then been project to groups of doctors based on their gender, age and location (Urban/Rural). 
+\subsection{Aspect-Based Summarization}
+One of the most relevant applications of opinion mining and sentiment analysis is aspect-based summarization. Broadly speaking, given a collection of opinion posts, this task is aimed at obtaining relevant aspects (such as product features), along with associated sentiment information expressed by customers (usually an opinion word and/or a polarity score). Aspect-based summarization is usually composed of three main tasks: aspect identification, sentiment classification, and aspect rating. Aspect identification is focused on extracting the set of aspects or product features from the source collection. The word aspect is intended to represent the opinion or sentiment targets, which are also referred to as product features when the collection of posts—typically, customer reviews—is about products or services. For example, given the sentence, “The bed was comfortable” in a review about a hotel room, the aspect being referred to is “bed” and the opinion is positively expressed by means of the opinion word “comfortable.” The sentiment classification task consists of determining the opinions about the aspects and/or their polarities, whereas aspect rating leverages the relevance of aspects and their opinions to properly present them to users.\cite{ref11}A similar approach will be used in analyzing patient opinions. Each opinion can be classified as positive/negative by sentiment classification. In advance mode, aspects will be identified from each opinion. The feedback will be extended to each aspect. For example, if both practitioner and a hospital mentioned in an opinion, but practitioner get a positive feedback but hospital is negative. The opinion level rating isn’t accurate enough to describe all the aspects.
+
+\subsection{A statistical study of healthcare complaint data}
+Unfortunately, data miming against healthcare complaint hasn’t attracted much attention,  some studies has been done recently to discover the relationship between complaint data against particular or particular group ( gender, age, specialty ) of doctors with one decade worth of official complaint data within healthcare system. The study analyzed the distribution of complaints among practicing doctors.\cite{ref5} Then used recurrent-event survival analysis to identify characteristics of doctor at high risk of recurrent complaints, and to estimate each individual doctor’s risk of incurring future complaints. The study shows some very interesting and inspirational ideas, it coded specialty into 13 categories, for example: General Practice; Surgery; Psychiatry etc. The issues or complaints also categorized into 20 sections, for example Medication, Treatment in Clinical care; Consent, Information in Communication; Cost, Billing, Sexual Contact in Conduct etc. The result then been project to groups of doctors based on their gender, age and location (Urban/Rural).Figure 1 plots the cumulative distribution of complaints among doctors in six jurisdictions over a decade. (New South Wales data was not included in these plots because the complaints window there spanned only 5 years.) The curve on the left side of the figure shows the distribution of complaints among doctors who experienced one or more complaints in the decade. Fifteen percent of doctors named in complaints accounted for 49\% of all complaints, and 4\% accounted for a quarter of all complaints. The curve on the right side of the figure shows the distribution of complaints across the full population of practicing doctors, not just those who experienced complaints. Three percent of all doctors accounted for 49\% of all complaints, and 1\% accounted for a quarter of all complaints.
+The study also concluded it is feasible to predict which doctors are at high risk of incurring more complaints in the near future.\cite{ref5}
+\begin{figure}[!b]
+  \begin{center}
+    \includegraphics[width=3.5in]{fig1.jpg}
+  \end{center}
+  \caption{\small Cumulative distribution of complaints and doctors named in complaints.}
+  \label{Fig1}
+\end{figure} 
 
 \subsection{Data mining techniques in Customer Relationship Management (CRM)}
-The data mining techniques that used in other fields or industry can be used as a guide line for healthcare system, for example data mining in CRM. According to Swift (2001, p. 12), Parvatiyar and Sheth (2001, p.5) and Kracklauer, Mills, and Seifert (2004, p. 4), CRM consists of four dimensions:
+The data mining techniques that used in other fields or industry can be used as a guide line for healthcare system, for example data mining in CRM.\cite{ref10} According to Swift (2001, p. 12)\cite{ref13}, Parvatiyar and Sheth (2001, p.5)\cite{ref14} and Kracklauer, Mills, and Seifert (2004, p. 4)\cite{ref15}, CRM consists of four dimensions:
 \begin{enumerate}
 \item Customer Identification;
 \item Customer Attraction;
 \item Customer Retention;
 \item Customer Development.
 \end{enumerate}
- These four dimensions can be seen as a closed cycle of a customer management system (Au \& Chan, 2003; Kracklauer et al., 2004; Ling \& Yen, 2001). They share the common goal of creating a deeper understanding of customers to maximize customer value to the organization in the long term. Data mining techniques, therefore, can help to accomplish such a goal by extracting or detecting hidden customer characteristics and behaviours from large databases. The generative aspect of data mining consists of the building of a model from data (Carrier \& Povel, 2003). Each data mining technique can perform one or more of the following types of data modelling: 
+ These four dimensions can be seen as a closed cycle of a customer management system (Au \& Chan, 2003;\cite{ref16} Kracklauer et al., 2004;\cite{ref15} Ling \& Yen, 2001\cite{ref17}). They share the common goal of creating a deeper understanding of customers to maximize customer value to the organization in the long term. Data mining techniques, therefore, can help to accomplish such a goal by extracting or detecting hidden customer characteristics and behaviours from large databases. The generative aspect of data mining consists of the building of a model from data (Carrier \& Povel, 2003)\cite{ref18}. Each data mining technique can perform one or more of the following types of data modelling: 
  \begin{enumerate}
 \item Association; 
 \item Classification; 
@@ -31,36 +50,47 @@ The data mining techniques that used in other fields or industry can be used as 
 \item Sequence discovery; 
 \item Visualization. 
  \end{enumerate}
- The above seven models cover the generally mentioned data mining models in various articles (Ahmed, 2004; Carrier \& Povel, 2003; Mitra, Pal, \& Mitra, 2002; Shaw, Subramaniam, Tan, \& Welge, 2001; Turban et al., 2007). There are numerous machine learning techniques available for each type of data mining model. Choices of data mining techniques should be based on the data characteristics and business requirements (Carrier \& Povel, 2003). Here are some examples of some widely used data mining algorithms: 
+ The above seven models cover the generally mentioned data mining models in various articles (Ahmed, 2004;\cite{ref19} Carrier \& Povel, 2003;\cite{ref18} Mitra, Pal, \& Mitra, 2002;\cite{ref20} Shaw, Subramaniam, Tan, \& Welge, 2001;\cite{ref21} Turban et al., 2007\cite{ref22}). There are numerous machine learning techniques available for each type of data mining model. Choices of data mining techniques should be based on the data characteristics and business requirements\cite{ref18}. Here are some examples of some widely used data mining algorithms: 
  \begin{enumerate}
  \item Association rule; 
  \item Decision tree; 
  \item Genetic algorithm; 
  \item Neural networks; 
  \item K-Nearest neighbour; 
- \item Linear/logistic regression.\cite{ref10}
+ \item Linear/logistic regression.
  \end{enumerate}
  
 \section{Project Plan}
-Initially the project was designed to use official data from AHPRA.\cite{ref8} Due to the sensitivity of the data, the process of applying access of the data is time consuming, and the final decision of AHPRA is uncertain at stage. We will start the project with collecting unofficial data from some medical related forums. The data will be analyzed and a data mining package will be developed. At a later stage with access of official data, the similar process will be applied to the new data set. We will try to identify a link between two different data sets.
+Due to the uncertainty of the availability of the complaint data from AHPRA, we won’t include it in the project plan at this stage. The plan will be based on opinion/story from POA.
 \begin{itemize}
-\item Phase 1 – April, May, Jun 2014\\
-‘Scrape’ data from medical related forums, use a third party tool or develop our own crawler to collecting web data. Some supervised learning algorithm will be used to train the crawler to collect correct data over the forums. Then we will start to analyze once we have handful of data. 
-It will be useful if we can link the crawler and data mining package together to automate the analyze process.
-\item Phase 2 – July, August 2014\\
-Hopefully we got access to the official data from AHPRA at this stage, analyzing this data should be much easier compare to phase 1, the official data could be well formatted and will be less time spend on analyzing free-format text.
-\item Phase 3 – September 2014\\
-A study across official and unofficial data will be conducted
-\item Phase 4 – October 2014\\
+\item Phase 1 – May, Jun 2014\\
+Scrape’ data POA. The data will be stored as XML file with sufficient tags to retain original information. For example: title; specialty; location. Develop a program to efficiently mark each opinion/story as positive or negative and store the extra information on the disk. Develop a program to parse the stored data and output a valid WEKA file.
+\item Phase 2 – July 2014\\
+WEKA will be used to analysing the data from phase 1. Two learning methods will be used to develop the classifier: C4.5 Decision tree and Basic Nearest-neighbor. Select different features as training data to develop a variety of classifiers.
+Experiment the clustering with Expectation Maximization(EM) method.
+\item Phase 3 – August 2014\\
+Develop a program to extract aspect and sentiment from each opinion and calculate the distribution of the opinion across aspects.
+\item Phase 4 – September 2014\\
+Evaluation of the classifiers, aspect-based summarization model.
+\item Phase 5 – October 2014\\
 Finalizing the search and wrap up the thesis.
 \end{itemize}
 
 \subsection{Tools will be used}
 Weka\cite{ref7} - is a collection of machine learning algorithms for data mining tasks. The algorithms can either be applied directly to a dataset or called from your own Java code. Weka contains tools for data pre-processing, classification, regression, clustering, association rules, and visualization. It is also well-suited for developing new machine learning schemes.
 The main programming language will be used is Java, because it’s easy to run on different platforms, and rich resource of libraries to choose from. 
+We will use publicly available English opinion lexicon originally proposed by M Hu\cite{ref23}(www.cs.uic.edu/~liub/FBS/opinion-lexicon-English.rar). The set contains 6800 opinion words. 
+
+\section{Preliminary Work}
+The first phase of the project will be focusing on collecting and post processing data. The data structure of POA is analyzed. The entry page will be www.patientopioion.org.au/opinions, the total number of page could be located from section “<div class=”pagination clearfix”>”, the “<li class=”last”>” item contains a link to the very last page. The page number can be extracted from text string. Each page will be visited to retrieve individual article IDs. 
+Page URL looks like:\\ www.patientopinion.org.au/opinions?page=[PageNumber].
+Article URL looks like:\\  www.patientopinion.org.au/opinions/[ID].
+All the HTML text will be stripped. The useful information will be retained and formatted before store on the disk for future use. The information will be stored include title; story body; author role; service location; submit time and a list of related tags. By today, 629 stories from website had been collected.
 
 \section{Evaluation}
-As stated before, there are not much research been done for this area, we won’t have some existing result to compare to. Basically the result will be evaluated in two ways. First, the result will be compared within same dataset but with different configuration. For example, change the algorithm used to analyze data or change the weight of attributes of input data, for example doctors’ age, gender. Second, compare result between different dataset (official data from AHPRA and unofficial data from forum) with similar configuration, this is the most important and interesting part of the project. By finding the relationship between two dataset, we are able to predict the data accuracy of data from public channel. If the data been approved reliable , it will expend the traditional healthcare feedback system in a cheaper and efficient way. As we are not having any data in hand,  we are not absolutely certain how the data will look like hence we are not able to give detailed evaluation plan at this stage.
+There won’t be existing data from other studies for us to compare to. To evaluate our project, we consider to use 3-fold and 10-fold cross-validation. The data will be divided randomly into 3 parts, each held out in turn and the learning scheme trained on the remaining two-thirds; thus the learning procedure is executed a total of 3 times on different training sets. We will do a quick calculation on the error rate. Then we will perform the 10-fold validation, which is similar to 3-fold but the data set is divided into 10 parts, thus the learning procedure will be executed a total of 10 times. The later process will give a smoother average of error rate.
+
+Patient Opinion established Australian site in 2012, it’s ancestor patientopinion.org.uk was founded in 2005. It has collected more than 80,000 opinions/stories over almost a decade. Both websites use same data structure, so the data mining technique developed for Australian should also work for UK. The distribution of the data for UK will also be analyzed and compared to our first result set of Australian.
 
 \bibliographystyle{plain}
 \bibliography{reference}
