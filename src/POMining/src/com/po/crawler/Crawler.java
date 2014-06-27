@@ -77,7 +77,7 @@ public class Crawler {
 	
 	private void GetSinglePageID(String strURL, String strRegion, int nPageNumber)
 	{
-		String strPageURL = "https://www.patientopinion.org.au/opinions?page=" + nPageNumber;
+		String strPageURL = strBaseURL+strRegion+"/opinions?page=" + nPageNumber;
 		ParseAndStoreIDs(getHTML(strPageURL));
 	}
 	
@@ -112,7 +112,7 @@ public class Crawler {
 		{
 			if(i <= nStartSeq)
 				continue;
-			String strPageURL = "https://www.patientopinion.org.au/opinions?page=" + i;
+			String strPageURL = strBaseURL+strRegion+"/opinions?page=" + i;
 			ParseAndStoreIDs(getHTML(strPageURL));
 			System.out.println("Page[" + i + "] Done!");
 			try {
