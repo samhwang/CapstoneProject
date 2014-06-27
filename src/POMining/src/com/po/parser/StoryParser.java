@@ -2,21 +2,38 @@ package com.po.parser;
 
 public class StoryParser {
 
+	private static StoryParser storyParser = null;
+	
+	protected StoryParser(){}
+	
+	public static StoryParser getInstance()
+	{
+		if(storyParser == null)
+			storyParser = new StoryParser();
+		
+		return storyParser;
+	}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		StoryParser sP = new StoryParser();
+		StoryParser.getInstance().LoadStopWords();
+		StoryParser.getInstance().LoadSentiment();
+		
 		StoryManager sM = new StoryManager();
-		sP.LoadStopWords();
-		sP.LoadSentiment();
 		sM.LoadStory("auStory.txt");
 	}
 
-	void LoadStopWords()
+	public void LoadStopWords()
 	{
 		
 	}
 	
-	void LoadSentiment()
+	public void LoadSentiment()
+	{
+		
+	}
+	
+	public void PreProcessStory(Story story)
 	{
 		
 	}

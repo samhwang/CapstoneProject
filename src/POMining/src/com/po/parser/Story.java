@@ -6,20 +6,25 @@ public class Story {
 
 	private String strID;
 	private String strTitle;
-	private String strStory;
-	private Vector<String> vecPositiveFeature;
-	private Vector<String> vecNegativeFeature;
+	private String strTime;
+	private Vector<String> vecGood;
+	private Vector<String> vecBad;
+	private Vector<String> vecStory;
 	
-	public Story(String strID, String strTitle, String strStory)
+	public Story(String strID, String strTitle, String strStory, String strTime, 
+			String strLocation, String strAuthor, String strRelate, String strGood, String strBad)
 	{
-		this.strID = strID;
-		this.strTitle = strTitle;
-		this.strStory = strStory;
-		vecPositiveFeature = new Vector<String>();
-		vecNegativeFeature = new Vector<String>();
+		this.strID = strID.substring(3);
+		this.strTitle = strTitle.substring(6);
+		this.strTime = strTime.substring(5);
+		vecGood = new Vector<String>();
+		vecBad = new Vector<String>();
 	}
 	
-	String GetID() {return strID;}
-	String GetTitle() {return strTitle;}
-	String GetStory() {return strStory;}
+	public String GetID() {return strID;}
+	public String GetTitle() {return strTitle;}
+	public String GetTime() {return strTime;}
+	public Vector<String> getGood() {return vecGood;}
+	public Vector<String> getBad() {return vecBad;}
+	public Vector<String> getStory() {return vecStory;}
 }

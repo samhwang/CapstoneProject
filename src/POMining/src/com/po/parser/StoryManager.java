@@ -17,7 +17,6 @@ public class StoryManager {
 	public void LoadStory(String strFilePath)
 	{
 		BufferedReader br;
-		String line;
 		try {
 			br = new BufferedReader(new FileReader(strFilePath));
 			while (true) {
@@ -67,7 +66,8 @@ public class StoryManager {
 				if((strBad = br.readLine()) == null)
 					break;
 				
-				Story story = new Story(strID, strTitle, strStory);
+				Story story = new Story(strID, strTitle, strStory, strTime, strLocation, strAuthor, strRelate, strGood, strBad);
+				StoryParser.getInstance().PreProcessStory(story);
 				vecStory.add(story);
 				}
 			br.close();
