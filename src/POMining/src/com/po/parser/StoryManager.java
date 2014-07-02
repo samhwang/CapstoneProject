@@ -3,15 +3,25 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Vector;
 
 public class StoryManager {
 
 	private Vector<Story> vecStory;
+	private Map<String, Integer> mapUserTopics;
+	private Map<String, Integer> mapUserTopicsGood;
+	private Map<String, Integer> mapUserTopicsBad;
+	private Map<String, Integer> mapAuthorRole;
 	
 	public StoryManager()
 	{
 		vecStory = new Vector<Story>();
+		mapUserTopics = new HashMap<String, Integer>();
+		mapUserTopicsGood = new HashMap<String, Integer>();
+		mapUserTopicsBad = new HashMap<String, Integer>();
+		mapAuthorRole = new HashMap<String, Integer>();
 	}
 	
 	public void LoadStory(String strFilePath)
@@ -67,6 +77,7 @@ public class StoryManager {
 					break;
 				
 				Story story = new Story(strID, strTitle, strStory, strTime, strLocation, strAuthor, strRelate, strGood, strBad);
+				PreProcessStory(story);
 				StoryParser.getInstance().PreProcessStory(story);
 				vecStory.add(story);
 				}
@@ -78,5 +89,16 @@ public class StoryManager {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void PreProcessStory(Story story)
+	{
+		
+	}
+	
+	public void PrintStats()
+	{
+		System.out.println("Story Manager Dump Story Info.....");
+		System.out.println("Story Count: " + vecStory.size());
 	}
 }

@@ -14,15 +14,6 @@ public class StoryParser {
 		return storyParser;
 	}
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		StoryParser.getInstance().LoadStopWords();
-		StoryParser.getInstance().LoadSentiment();
-		
-		StoryManager sM = new StoryManager();
-		sM.LoadStory("auStory.txt");
-	}
-
 	public void LoadStopWords()
 	{
 		
