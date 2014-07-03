@@ -21,6 +21,16 @@ public class Story {
 		this.strAuthor = strAuthor.substring(7);
 		vecGood = new Vector<String>();
 		vecBad = new Vector<String>();
+		
+		String[] arrGood = strGood.substring(5).split(";");
+		for(String str : arrGood)
+			if(!str.trim().isEmpty())
+				vecGood.add(str.trim());
+		
+		String[] arrBad = strBad.substring(4).split(";");
+		for(String str : arrBad)
+			if(!str.trim().isEmpty())
+				vecBad.add(str.trim());
 	}
 	
 	public String GetID() {return strID;}
