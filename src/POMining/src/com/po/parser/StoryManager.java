@@ -145,6 +145,43 @@ public class StoryManager {
 		
 	}
 	
+	private Vector<String> SortTopic(Map<String, Integer> mapTopics)
+	{
+		Vector<String> ret = new Vector<String>();
+		
+		for(String key : mapTopics.keySet())
+		{
+			if(ret.isEmpty())
+				ret.add(key);
+	
+			else
+			{
+				if(mapTopics.get(key).intValue() <= mapTopics.get(ret.lastElement()).intValue())
+				{
+					ret.add(key);
+					continue;
+				}
+				
+				if(mapTopics.get(key).intValue() >= mapTopics.get(ret.firstElement()).intValue())
+				{
+					ret.insertElementAt(key, 0);
+					continue;
+				}
+				
+				for(int i = 0; i < ret.size(); i++)
+				{
+					if(mapTopics.get(key).intValue() > mapTopics.get(ret.get(i)).intValue())
+					{
+						ret.insertElementAt(key, i);
+						break;
+					}
+				}
+			}
+		}
+		
+		return ret;
+	}
+	
 	public void PrintStats()
 	{
 		System.out.println("Story Manager Dump Story Info.....");
@@ -152,19 +189,29 @@ public class StoryManager {
 		
 		System.out.println("======================================");
 		System.out.println("Topic Count: " + mapUserTopics.size());
-		for(String key : mapUserTopics.keySet())
-			System.out.println(key + "[" + mapUserTopics.get(key) + "]");
+		Vector<String> vecSort = SortTopic(mapUserTopics);
+		for(String key : vecSort)
+		{
+			System.out.println(key + "," + mapUserTopics.get(key));
+		}
+			
 		System.out.println("======================================");
 		
 		System.out.println("Good Topic Count: " + mapUserTopicsGood.size());
-		for(String key : mapUserTopicsGood.keySet())
-			System.out.println(key + "[" + mapUserTopicsGood.get(key) + "]");
+		vecSort = SortTopic(mapUserTopicsGood);
+		for(String key : vecSort)
+		{
+			System.out.println(key + "," + mapUserTopicsGood.get(key));
+		}
 		
 		
 		System.out.println("======================================");
 		
 		System.out.println("Bad Topic Count: " + mapUserTopicsBad.size());
-		for(String key : mapUserTopicsBad.keySet())
-			System.out.println(key + "[" + mapUserTopicsBad.get(key) + "]");
+		Vector<String> vecSort3 = SortTopic(mapUserTopicsBad);
+		for(String key : vecSort3)
+		{
+			System.out.println(key + "," + mapUserTopicsBad.get(key));
+		}
 	}
 }
