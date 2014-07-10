@@ -25,12 +25,12 @@ public class Story {
 		String[] arrGood = strGood.substring(5).split(";");
 		for(String str : arrGood)
 			if(!str.trim().isEmpty())
-				vecGood.add(str.trim());
+				vecGood.add(str.trim().toLowerCase());
 		
 		String[] arrBad = strBad.substring(4).split(";");
 		for(String str : arrBad)
 			if(!str.trim().isEmpty())
-				vecBad.add(str.trim());
+				vecBad.add(str.trim().toLowerCase());
 	}
 	
 	public String GetID() {return strID;}

@@ -15,6 +15,11 @@ public class StoryManager {
 	private Map<String, Integer> mapUserTopicsBad;
 	private Map<String, Integer> mapAuthorRole;
 	
+	private int nGoodBadCount;
+	private int nGoodCount;
+	private int nBadCount;
+	private int nNotSpecified;
+	
 	public StoryManager()
 	{
 		mapStory = new HashMap<String, Story>();
@@ -22,6 +27,11 @@ public class StoryManager {
 		mapUserTopicsGood = new HashMap<String, Integer>();
 		mapUserTopicsBad = new HashMap<String, Integer>();
 		mapAuthorRole = new HashMap<String, Integer>();
+		
+		nGoodBadCount = 0;
+		nGoodCount = 0;
+		nBadCount = 0;
+		nNotSpecified = 0;
 	}
 	
 	public void LoadStory(String strFilePath)
@@ -93,6 +103,26 @@ public class StoryManager {
 	
 	private void PreProcessStory(Story story)
 	{
+		
+		if(mapAuthorRole.containsKey(story.GetAuthor()))
+		{
+			Integer nCount = mapAuthorRole.get(story.GetAuthor());
+			mapAuthorRole.put(story.GetAuthor(), nCount + 1);
+		}
+		else
+		{
+			mapAuthorRole.put(story.GetAuthor(), 1);
+		}
+		
+		if(story.getGood().size() > 0 && story.getBad().size() > 0)
+			nGoodBadCount++;		
+		else if(story.getGood().size() > 0 && story.getBad().size() <= 0)
+			nGoodCount++;		
+		else if(story.getGood().size() <= 0 && story.getBad().size() > 0)
+			nBadCount++;
+		else if(story.getGood().size() <= 0 && story.getBad().size() <= 0)
+			nNotSpecified++;
+		
 		if(story.getGood().size() > 0)
 		{
 			for(String value : story.getGood())
@@ -208,10 +238,25 @@ public class StoryManager {
 		System.out.println("======================================");
 		
 		System.out.println("Bad Topic Count: " + mapUserTopicsBad.size());
-		Vector<String> vecSort3 = SortTopic(mapUserTopicsBad);
-		for(String key : vecSort3)
+		vecSort = SortTopic(mapUserTopicsBad);
+		for(String key : vecSort)
 		{
 			System.out.println(key + "," + mapUserTopicsBad.get(key));
 		}
+		
+		System.out.println("======================================");
+		
+		System.out.println("Author Count: " + mapAuthorRole.size());
+		vecSort = SortTopic(mapAuthorRole);
+		for(String key : vecSort)
+		{
+			System.out.println(key + "," + mapAuthorRole.get(key));
+		}
+		
+		System.out.println("======================================");
+		System.out.println("Good/Bad Stories: " + nGoodBadCount);
+		System.out.println("Good	 Stories: " + nGoodCount);
+		System.out.println("Bad	 Stories: " + nBadCount);
+		System.out.println("NotSpecified Stories: " + nNotSpecified);
 	}
 }
