@@ -25,12 +25,20 @@ public class Story {
 		String[] arrGood = strGood.substring(5).split(";");
 		for(String str : arrGood)
 			if(!str.trim().isEmpty())
-				vecGood.add(str.trim().toLowerCase());
+			{
+				String newString = StoryParser.getInstance().RemoveSentiment(str.trim().toLowerCase(), " ", StoryParser.nSentimentModeALL);
+				if(!newString.trim().isEmpty())
+					vecGood.add(newString);
+			}
 		
 		String[] arrBad = strBad.substring(4).split(";");
 		for(String str : arrBad)
 			if(!str.trim().isEmpty())
-				vecBad.add(str.trim().toLowerCase());
+			{
+				String newString = StoryParser.getInstance().RemoveSentiment(str.trim().toLowerCase(), " ", StoryParser.nSentimentModeALL);
+				if(!newString.trim().isEmpty())
+					vecBad.add(newString);
+			}
 	}
 	
 	public String GetID() {return strID;}

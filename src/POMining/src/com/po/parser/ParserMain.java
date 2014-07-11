@@ -9,7 +9,7 @@ public class ParserMain {
 		// TODO Auto-generated method stub
 		StoryParser.getInstance().LoadStopWords();
 		StoryParser.getInstance().LoadSentiment();
-		
+		StoryParser.getInstance().LoadWordMapping();
 		StoryManager sM = new StoryManager();
 		sM.LoadStory("data\\auStory.txt");
 		

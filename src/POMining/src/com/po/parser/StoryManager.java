@@ -254,9 +254,9 @@ public class StoryManager {
 		}
 		
 		System.out.println("======================================");
-		System.out.println("Good/Bad Stories: " + nGoodBadCount);
-		System.out.println("Good	 Stories: " + nGoodCount);
-		System.out.println("Bad	 Stories: " + nBadCount);
-		System.out.println("NotSpecified Stories: " + nNotSpecified);
+		System.out.println("Good/Bad Stories," + nGoodBadCount);
+		System.out.println("Good	 Stories," + nGoodCount);
+		System.out.println("Bad	 Stories," + nBadCount);
+		System.out.println("NotSpecified Stories," + nNotSpecified);
 	}
 }

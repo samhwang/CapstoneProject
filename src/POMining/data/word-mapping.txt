@@ -1,0 +1,11 @@
+care,care
+cares,care
+caring,care
+service,service
+services,service
+midwife,midwife
+midwives,midwife
+appointment,appointment
+appointments,appointment
+doctor,doctor
+doctors,doctor
