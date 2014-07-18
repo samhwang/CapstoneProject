@@ -31,7 +31,7 @@ public class Crawler {
 	private final String strPageNumber = "/opinions/searchresults?page=";
 	private final String strOpinions = "/opinions/";
 	
-	private final int SleepTime = 300000;
+	private final int SleepTime = 120000;
 	
 	private String strEntryURL;
 	private String strOutFile;
