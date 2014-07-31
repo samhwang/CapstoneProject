@@ -18,6 +18,7 @@ public class PoMMain {
 		
 		Crawler crawler = new Crawler();
 		crawler.run(nMode, strRegion, nStartSeq);
+		//crawler.run(2, "uk", 0);
 	}
 
 }

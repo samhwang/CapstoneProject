@@ -31,7 +31,7 @@ public class Crawler {
 	private final String strPageNumber = "/opinions/searchresults?page=";
 	private final String strOpinions = "/opinions/";
 	
-	private final int SleepTime = 120000;
+	private final int SleepTime = 60000;
 	
 	private String strEntryURL;
 	private String strOutFile;
@@ -250,12 +250,15 @@ public class Crawler {
 		}
 		
 		Elements related = doc.select("div[class=related clearfix]");
-		if(related != null)
+		if(related != null && related.first() != null)
 		{
 			Elements rel = related.first().getElementsByTag("a");
-			for(Element el : rel)
+			if(rel != null)
 			{
-				vecRelated.add(el.text());
+				for(Element el : rel)
+				{
+					vecRelated.add(el.text());
+				}
 			}
 		}
 		
