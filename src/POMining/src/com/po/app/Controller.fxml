@@ -1,39 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
 <?import java.net.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane fx:controller="com.po.app.AppController" 
-    xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10" 
-    styleClass="root">
-  <padding><Insets top="25" right="25" bottom="10" left="25" /></padding>
-  
-  <Text id="welcome-text" text="Welcome" 
-      GridPane.columnIndex="0" GridPane.rowIndex="0" 
-      GridPane.columnSpan="2"/>
-  
-  <Label text="User Name:" 
-      GridPane.columnIndex="0" GridPane.rowIndex="1" />
-  
-  <TextField 
-      GridPane.columnIndex="1" GridPane.rowIndex="1" />
-  
-  <Label text="Password:" 
-      GridPane.columnIndex="0" GridPane.rowIndex="2" />
-  
-  <PasswordField fx:id="passwordField" 
-      GridPane.columnIndex="1" GridPane.rowIndex="2" />
-  
-  <HBox spacing="10" alignment="bottom_right" 
-      GridPane.columnIndex="1" GridPane.rowIndex="4">
-      <Button text="Sign In" 
-       onAction="#handleSubmitButtonAction" />
-  </HBox>
-  
-  <Text fx:id="actiontarget" 
-      GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="6" />
-   <stylesheets>
-    <URL value="@Controller.css" />
-  </stylesheets>
-</GridPane>
+<Pane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@Controller.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.po.app.AppController">
+   <children>
+      <TabPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Basic">
+            <content>
+              <AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0">
+                     <children>
+                        <ListView fx:id="StoryIDList" layoutX="14.0" layoutY="46.0" onMouseClicked="#OnStoryIDClicked" prefHeight="316.0" prefWidth="85.0" />
+                        <Label fx:id="StoryCount" alignment="CENTER" layoutX="15.0" layoutY="29.0" prefHeight="17.0" prefWidth="84.0" text="0" />
+                        <TextArea fx:id="StoryBody" layoutX="116.0" layoutY="78.0" maxHeight="280.0" maxWidth="476.0" minHeight="280.0" minWidth="450.0" prefHeight="280.0" prefWidth="476.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Advance">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</Pane>
