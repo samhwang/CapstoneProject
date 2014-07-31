@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.Vector;
 
 public class StoryManager {
@@ -210,6 +211,25 @@ public class StoryManager {
 		}
 		
 		return ret;
+	}
+	
+	public Set<String> GetStoryIDs()
+	{
+		return mapStory.keySet();
+	}
+	
+	public String GetStoryBody(String strID)
+	{
+		String ret = "";
+		if(!mapStory.containsKey(strID))
+			return "";
+		
+		 for(String line : mapStory.get(strID).getStory())
+		 {
+			 ret += line;
+		 }
+		 
+		 return ret;
 	}
 	
 	public void PrintStats()
