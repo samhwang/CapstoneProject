@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
@@ -15,6 +16,11 @@ public class StoryManager {
 	private Map<String, Integer> mapUserTopicsGood;
 	private Map<String, Integer> mapUserTopicsBad;
 	private Map<String, Integer> mapAuthorRole;
+	private Map<String, Set<String>> mapTotalTopicIndex;
+	private Map<String, Set<String>> mapGoodTopicIndex;
+	private Map<String, Set<String>> mapBadTopicIndex;
+	private Set<String> setGood;
+	private Set<String> setBad;
 	
 	private int nGoodBadCount;
 	private int nGoodCount;
@@ -24,15 +30,52 @@ public class StoryManager {
 	public StoryManager()
 	{
 		mapStory = new HashMap<String, Story>();
+		setGood = new HashSet<String>();
+		setBad = new HashSet<String>();
+		
 		mapUserTopics = new HashMap<String, Integer>();
 		mapUserTopicsGood = new HashMap<String, Integer>();
 		mapUserTopicsBad = new HashMap<String, Integer>();
 		mapAuthorRole = new HashMap<String, Integer>();
 		
+		mapTotalTopicIndex = new HashMap<String, Set<String>>();
+		mapGoodTopicIndex = new HashMap<String, Set<String>>();
+		mapBadTopicIndex = new HashMap<String, Set<String>>();
+		
 		nGoodBadCount = 0;
 		nGoodCount = 0;
 		nBadCount = 0;
 		nNotSpecified = 0;
+	}
+	
+	public Map<String, Integer> GetUserTopicTotal() { return mapUserTopics; }
+	public Map<String, Integer> GetUserTopicGood() { return mapUserTopicsGood; }
+	public Map<String, Integer> GetUserTopicBad() { return mapUserTopicsBad; }
+	
+	public Set<String> GetIDsByTopic(String strGoodBad, String strTopic)
+	{
+		if(strGoodBad.equalsIgnoreCase("All"))
+		{
+			if(strTopic.equalsIgnoreCase("All"))
+				return mapStory.keySet();
+			else
+				return mapTotalTopicIndex.get(strTopic);
+		}
+		else if(strGoodBad.equalsIgnoreCase("Good"))
+		{
+			if(strTopic.equalsIgnoreCase("All"))
+				return setGood;
+			else
+				return mapGoodTopicIndex.get(strTopic);
+		}
+		else if(strGoodBad.equalsIgnoreCase("Bad"))
+		{
+			if(strTopic.equalsIgnoreCase("All"))
+				return setBad;
+			else
+				return mapBadTopicIndex.get(strTopic);
+		}
+		else return null;
 	}
 	
 	public void LoadStory(String strFilePath)
@@ -47,6 +90,7 @@ public class StoryManager {
 				if((strID = br.readLine()) == null)
 					break;
 				
+				strID = strID.replace("ID:", "").trim();
 				//Title
 				String strTitle;
 				if((strTitle = br.readLine()) == null)
@@ -116,28 +160,38 @@ public class StoryManager {
 		}
 		
 		if(story.getGood().size() > 0 && story.getBad().size() > 0)
-			nGoodBadCount++;		
+		{
+			setGood.add(story.GetID());
+			setBad.add(story.GetID());
+			nGoodBadCount++;
+		}
 		else if(story.getGood().size() > 0 && story.getBad().size() <= 0)
+		{
+			setGood.add(story.GetID());
 			nGoodCount++;		
+		}
 		else if(story.getGood().size() <= 0 && story.getBad().size() > 0)
+		{
+			setBad.add(story.GetID());
 			nBadCount++;
+		}
 		else if(story.getGood().size() <= 0 && story.getBad().size() <= 0)
 			nNotSpecified++;
 		
 		if(story.getGood().size() > 0)
 		{
 			for(String value : story.getGood())
-				ProcessUserTopic(value, true);
+				ProcessUserTopic(value, true, story.GetID());
 		}
 		
 		if(story.getBad().size() > 0)
 		{
 			for(String value : story.getBad())
-				ProcessUserTopic(value, false);
+				ProcessUserTopic(value, false, story.GetID());
 		}
 	}
 	
-	private void ProcessUserTopic(String strTopic, boolean bIsGood)
+	private void ProcessUserTopic(String strTopic, boolean bIsGood, String strID)
 	{
 		if(mapUserTopics.containsKey(strTopic))
 		{
@@ -147,7 +201,9 @@ public class StoryManager {
 		else
 		{
 			mapUserTopics.put(strTopic, 1);
+			mapTotalTopicIndex.put(strTopic, new HashSet<String>());
 		}
+		mapTotalTopicIndex.get(strTopic).add(strID);
 		
 		if(bIsGood)
 		{
@@ -159,7 +215,9 @@ public class StoryManager {
 			else
 			{
 				mapUserTopicsGood.put(strTopic, 1);
+				mapGoodTopicIndex.put(strTopic, new HashSet<String>());
 			}
+			mapGoodTopicIndex.get(strTopic).add(strID);
 		}
 		else
 		{
@@ -171,12 +229,14 @@ public class StoryManager {
 			else
 			{
 				mapUserTopicsBad.put(strTopic, 1);
+				mapBadTopicIndex.put(strTopic, new HashSet<String>());
 			}
+			mapBadTopicIndex.get(strTopic).add(strID);
 		}
 		
 	}
 	
-	private Vector<String> SortTopic(Map<String, Integer> mapTopics)
+	public static Vector<String> SortTopic(Map<String, Integer> mapTopics)
 	{
 		Vector<String> ret = new Vector<String>();
 		
@@ -224,12 +284,12 @@ public class StoryManager {
 		if(!mapStory.containsKey(strID))
 			return "";
 		
-		 for(String line : mapStory.get(strID).getStory())
-		 {
-			 ret += line;
-		 }
+		for(String line : mapStory.get(strID).getStory())
+		{
+			ret += line + ".";
+		}
 		 
-		 return ret;
+		return ret;
 	}
 	
 	public void PrintStats()
