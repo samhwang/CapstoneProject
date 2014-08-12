@@ -1,5 +1,7 @@
 package com.po.parser;
 
+import java.io.File;
+
 public class ParserMain {
 
 	/**
@@ -11,7 +13,7 @@ public class ParserMain {
 		StoryParser.getInstance().LoadSentiment();
 		StoryParser.getInstance().LoadWordMapping();
 		StoryManager sM = new StoryManager();
-		sM.LoadStory("data\\auStory.txt");
+		sM.LoadStory("data" + File.separator + "auStory.txt");
 		
 		sM.PrintStats();
 	}

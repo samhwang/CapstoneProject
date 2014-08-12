@@ -1,5 +1,6 @@
 package com.po.app;
 
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -62,7 +63,7 @@ public class AppController implements Initializable{
 		StoryParser.getInstance().LoadSentiment();
 		StoryParser.getInstance().LoadWordMapping();
 		sM = new StoryManager();
-		sM.LoadStory("data\\auStory.txt");
+		sM.LoadStory("data" + File.separator + "auStory.txt");
 	}
 	
 	private void InitListeners()
