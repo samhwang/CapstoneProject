@@ -22,12 +22,14 @@ public class StoryParser {
 	private Set<String> setPositive; 
 	private Set<String> setNegative;
 	private Map<String, String> mapWordMapping;
+	private Map<String, String> mapStateMapping;
 	
 	protected StoryParser()
 	{
 		setPositive = new HashSet<String>();
 		setNegative = new HashSet<String>();
 		mapWordMapping = new HashMap<String, String>();
+		mapStateMapping = new HashMap<String, String>();
 	}
 	
 	public static StoryParser getInstance()
@@ -79,6 +81,27 @@ public class StoryParser {
 				setNegative.add(strWord);
 				}
 			br.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void LoadStateMapping(String strCountry)
+	{
+		BufferedReader br;
+		try {
+			br = new BufferedReader(new FileReader("data" + File.separator + "auState.txt"));
+			String strLine;
+			while ((strLine = br.readLine()) != null) {
+				String[] arrStr = strLine.split(",");
+				mapStateMapping.put(arrStr[0], arrStr[1]);
+				}
+			br.close();
+			
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -151,5 +174,13 @@ public class StoryParser {
 			}
 		}
 		return strRet.trim();
+	}
+	
+	public String LookupState(String strKey)
+	{
+		if(mapStateMapping.containsKey(strKey))
+			return mapStateMapping.get(strKey);
+		
+		return "";
 	}
 }
