@@ -120,6 +120,7 @@ public class StoryManager {
 				String strRelate;
 				if((strRelate = br.readLine()) == null)
 					break;
+				strRelate = strRelate.replace("Relate:", "").trim();
 				
 				//Good
 				String strGood;
@@ -131,7 +132,8 @@ public class StoryManager {
 				if((strBad = br.readLine()) == null)
 					break;
 				
-				Story story = new Story(strID, strTitle, strStory, strTime, strLocation, strAuthor, strRelate, strGood, strBad);
+				String strCountry = "AU";
+				Story story = new Story(strID, strTitle, strStory, strTime, strLocation, strAuthor, strRelate, strGood, strBad, strCountry);
 				PreProcessStory(story);
 				StoryParser.getInstance().PreProcessStory(story);
 				mapStory.put(strID, story);
@@ -284,12 +286,20 @@ public class StoryManager {
 		if(!mapStory.containsKey(strID))
 			return "";
 		
+		ret += "Location: " + mapStory.get(strID).GetState() + "\n";
+		ret += "=============\n\n";
+		
 		for(String line : mapStory.get(strID).getStory())
 		{
 			ret += line + ".";
 		}
-		 
+		
 		return ret;
+	}
+	
+	public int GetStoryStateFlag(String strID)
+	{
+		return mapStory.get(strID).GetStateFlag();
 	}
 	
 	public void PrintStats()

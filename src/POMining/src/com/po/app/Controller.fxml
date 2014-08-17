@@ -20,6 +20,13 @@
                         <TextArea fx:id="StoryBody" layoutX="280.0" layoutY="82.0" maxHeight="280.0" maxWidth="476.0" minHeight="280.0" minWidth="303.0" prefHeight="280.0" prefWidth="303.0" wrapText="true" />
                         <ListView fx:id="TopicList" layoutX="14.0" layoutY="46.0" prefHeight="316.0" prefWidth="161.0" />
                         <ChoiceBox fx:id="SentimentChoice" layoutX="14.0" layoutY="17.0" prefHeight="25.0" prefWidth="102.0" />
+                        <CheckBox fx:id="cbNSW" layoutX="255.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="NSW" />
+                        <CheckBox fx:id="cbVIC" layoutX="315.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="VIC" />
+                        <CheckBox fx:id="cbACT" layoutX="364.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="ACT" />
+                        <CheckBox fx:id="cbTAS" layoutX="414.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="TAS" />
+                        <CheckBox fx:id="cbQLD" layoutX="463.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="QLD" />
+                        <CheckBox fx:id="cbSA" layoutX="513.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="SA" />
+                        <CheckBox fx:id="cbNT" layoutX="557.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="NT" />
                      </children>
                   </AnchorPane>
             </content>

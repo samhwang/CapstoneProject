@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.Vector;
 
+import com.po.parser.Story;
 import com.po.parser.StoryManager;
 import com.po.parser.StoryParser;
 
@@ -18,6 +19,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView; 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -31,6 +33,13 @@ public class AppController implements Initializable{
     @FXML private Label StoryCount;
     @FXML private TextArea StoryBody;
     @FXML private ChoiceBox<String> SentimentChoice;
+    @FXML private CheckBox cbNSW;
+    @FXML private CheckBox cbVIC;
+    @FXML private CheckBox cbACT;
+    @FXML private CheckBox cbTAS;
+    @FXML private CheckBox cbQLD;
+    @FXML private CheckBox cbSA;
+    @FXML private CheckBox cbNT;
     
     final ObservableList<String> listItems = FXCollections.observableArrayList();
     final ObservableList<String> topicListItems = FXCollections.observableArrayList();
@@ -38,6 +47,7 @@ public class AppController implements Initializable{
     
     private String strMode;
     private String strCurrentTopic;
+    private int nStateSelection;
     
 	public void initialize(URL arg0, ResourceBundle arg1) {
 	
@@ -45,6 +55,15 @@ public class AppController implements Initializable{
 		InitStory();
 		InitListeners();
 		//ReloadData();
+//		cbNSW.fire();
+//		cbVIC.fire();
+//		cbACT.fire();
+//		cbTAS.fire();
+//		cbQLD.fire();
+//		cbSA.fire();
+//		cbNT.fire();
+		
+		RefreshStateFlag();
 		SentimentChoice.getSelectionModel().selectFirst();
 	}
 	
@@ -98,6 +117,62 @@ public class AppController implements Initializable{
 		        }
 		    }
 		});
+		
+		cbNSW.selectedProperty().addListener(new ChangeListener<Boolean>() {
+	        public void changed(ObservableValue<? extends Boolean> ov,
+	                Boolean old_val, Boolean new_val) {
+	                    RefreshStateFlag();
+	                    LoadStoryIDList();
+	            }
+	        });
+		
+		cbVIC.selectedProperty().addListener(new ChangeListener<Boolean>() {
+	        public void changed(ObservableValue<? extends Boolean> ov,
+	                Boolean old_val, Boolean new_val) {
+	                    RefreshStateFlag();
+	                    LoadStoryIDList();
+	            }
+	        });
+		
+		cbTAS.selectedProperty().addListener(new ChangeListener<Boolean>() {
+	        public void changed(ObservableValue<? extends Boolean> ov,
+	                Boolean old_val, Boolean new_val) {
+	                    RefreshStateFlag();
+	                    LoadStoryIDList();
+	            }
+	        });
+		
+		cbACT.selectedProperty().addListener(new ChangeListener<Boolean>() {
+	        public void changed(ObservableValue<? extends Boolean> ov,
+	                Boolean old_val, Boolean new_val) {
+	                    RefreshStateFlag();
+	                    LoadStoryIDList();
+	            }
+	        });
+		
+		cbQLD.selectedProperty().addListener(new ChangeListener<Boolean>() {
+	        public void changed(ObservableValue<? extends Boolean> ov,
+	                Boolean old_val, Boolean new_val) {
+	                    RefreshStateFlag();
+	                    LoadStoryIDList();
+	            }
+	        });
+		
+		cbSA.selectedProperty().addListener(new ChangeListener<Boolean>() {
+	        public void changed(ObservableValue<? extends Boolean> ov,
+	                Boolean old_val, Boolean new_val) {
+	                    RefreshStateFlag();
+	                    LoadStoryIDList();
+	            }
+	        });
+		
+		cbNT.selectedProperty().addListener(new ChangeListener<Boolean>() {
+	        public void changed(ObservableValue<? extends Boolean> ov,
+	                Boolean old_val, Boolean new_val) {
+	                    RefreshStateFlag();
+	                    LoadStoryIDList();
+	            }
+	        });
 	}
 	
 	private void LoadTopicList()
@@ -129,12 +204,52 @@ public class AppController implements Initializable{
 	{
 		listItems.clear();
 		Set<String> setID = new HashSet<String>();
-		
 		setID = sM.GetIDsByTopic(strMode, strCurrentTopic);
-		StoryCount.setText(String.format("Total: %d", setID.size()));
+		
 		for(String id : setID)
 		{
-			listItems.add(id.replace("ID:", "").trim());
+			if((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & nStateSelection) > 0)
+				listItems.add(id.replace("ID:", "").trim());
 		}
+		
+		StoryCount.setText(String.format("Total: %d", listItems.size()));
+	}
+	
+	private void RefreshStateFlag()
+	{
+		if(cbNSW.isSelected())
+			nStateSelection |= Story.AU_STATE_FLAG_NSW;
+		else
+			nStateSelection &= ~Story.AU_STATE_FLAG_NSW;
+		
+		if(cbVIC.isSelected())
+			nStateSelection |= Story.AU_STATE_FLAG_VIC;
+		else
+			nStateSelection &= ~Story.AU_STATE_FLAG_VIC;
+		
+		if(cbACT.isSelected())
+			nStateSelection |= Story.AU_STATE_FLAG_ACT;
+		else
+			nStateSelection &= ~Story.AU_STATE_FLAG_ACT;
+		
+		if(cbQLD.isSelected())
+			nStateSelection |= Story.AU_STATE_FLAG_QLD;
+		else
+			nStateSelection &= ~Story.AU_STATE_FLAG_QLD;
+		
+		if(cbTAS.isSelected())
+			nStateSelection |= Story.AU_STATE_FLAG_TAS;
+		else
+			nStateSelection &= ~Story.AU_STATE_FLAG_TAS;
+		
+		if(cbSA.isSelected())
+			nStateSelection |= Story.AU_STATE_FLAG_SA;
+		else
+			nStateSelection &= ~Story.AU_STATE_FLAG_SA;
+		
+		if(cbNSW.isSelected())
+			nStateSelection |= Story.AU_STATE_FLAG_NT;
+		else
+			nStateSelection &= ~Story.AU_STATE_FLAG_NT;
 	}
 }
