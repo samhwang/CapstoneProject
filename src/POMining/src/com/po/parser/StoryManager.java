@@ -286,7 +286,11 @@ public class StoryManager {
 		if(!mapStory.containsKey(strID))
 			return "";
 		
-		ret += "Location: " + mapStory.get(strID).GetState() + "\n";
+		if(!mapStory.get(strID).GetState().isEmpty())
+			ret += "Location: " + mapStory.get(strID).GetState() + "\n";
+		else
+			ret += "NO Location Key Word Found! Full Relate Field:\n" + mapStory.get(strID).GetRelate() + "\n";
+		
 		ret += "=============\n\n";
 		
 		for(String line : mapStory.get(strID).getStory())

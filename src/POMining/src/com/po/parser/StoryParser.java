@@ -48,7 +48,8 @@ public class StoryParser {
 	{
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader("data" + File.separator + "word-mapping.txt"));
+			//br = new BufferedReader(new FileReader("data" + File.separator + "word-mapping.txt"));
+			br = new BufferedReader(new FileReader("word-mapping.txt"));
 			String strLine;
 			while ((strLine = br.readLine()) != null) {
 				String[] arrStr = strLine.split(",");
@@ -69,14 +70,16 @@ public class StoryParser {
 	{
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader("data" + File.separator + "positive-words.txt"));
+			//br = new BufferedReader(new FileReader("data" + File.separator + "positive-words.txt"));
+			br = new BufferedReader(new FileReader("positive-words.txt"));
 			String strWord;
 			while ((strWord = br.readLine()) != null) {
 				setPositive.add(strWord);
 				}
 			br.close();
 			
-			br = new BufferedReader(new FileReader("data" + File.separator + "negative-words.txt"));
+			//br = new BufferedReader(new FileReader("data" + File.separator + "negative-words.txt"));
+			br = new BufferedReader(new FileReader("negative-words.txt"));
 			while ((strWord = br.readLine()) != null) {
 				setNegative.add(strWord);
 				}

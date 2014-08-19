@@ -1,6 +1,5 @@
 package com.po.app;
 
-import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,6 +39,7 @@ public class AppController implements Initializable{
     @FXML private CheckBox cbQLD;
     @FXML private CheckBox cbSA;
     @FXML private CheckBox cbNT;
+    @FXML private CheckBox cbWA;
     
     final ObservableList<String> listItems = FXCollections.observableArrayList();
     final ObservableList<String> topicListItems = FXCollections.observableArrayList();
@@ -54,14 +54,6 @@ public class AppController implements Initializable{
 		InitUI();
 		InitStory();
 		InitListeners();
-		//ReloadData();
-//		cbNSW.fire();
-//		cbVIC.fire();
-//		cbACT.fire();
-//		cbTAS.fire();
-//		cbQLD.fire();
-//		cbSA.fire();
-//		cbNT.fire();
 		
 		RefreshStateFlag();
 		SentimentChoice.getSelectionModel().selectFirst();
@@ -82,7 +74,8 @@ public class AppController implements Initializable{
 		StoryParser.getInstance().LoadSentiment();
 		StoryParser.getInstance().LoadWordMapping();
 		sM = new StoryManager();
-		sM.LoadStory("data" + File.separator + "auStory.txt");
+		//sM.LoadStory("data" + File.separator + "auStory.txt");
+		sM.LoadStory("auStory.txt");
 	}
 	
 	private void InitListeners()
@@ -173,6 +166,14 @@ public class AppController implements Initializable{
 	                    LoadStoryIDList();
 	            }
 	        });
+		
+		cbWA.selectedProperty().addListener(new ChangeListener<Boolean>() {
+	        public void changed(ObservableValue<? extends Boolean> ov,
+	                Boolean old_val, Boolean new_val) {
+	                    RefreshStateFlag();
+	                    LoadStoryIDList();
+	            }
+	        });
 	}
 	
 	private void LoadTopicList()
@@ -208,7 +209,7 @@ public class AppController implements Initializable{
 		
 		for(String id : setID)
 		{
-			if((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & nStateSelection) > 0)
+			if(((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & nStateSelection) > 0) || (sM.GetStoryStateFlag(id.replace("ID:", "").trim()) == 0))
 				listItems.add(id.replace("ID:", "").trim());
 		}
 		
@@ -247,9 +248,14 @@ public class AppController implements Initializable{
 		else
 			nStateSelection &= ~Story.AU_STATE_FLAG_SA;
 		
-		if(cbNSW.isSelected())
+		if(cbNT.isSelected())
 			nStateSelection |= Story.AU_STATE_FLAG_NT;
 		else
 			nStateSelection &= ~Story.AU_STATE_FLAG_NT;
+		
+		if(cbWA.isSelected())
+			nStateSelection |= Story.AU_STATE_FLAG_WA;
+		else
+			nStateSelection &= ~Story.AU_STATE_FLAG_WA;
 	}
 }

@@ -9,8 +9,9 @@ public class Story {
 	private String strTime;
 	private String strAuthor;
 	private String strState;
-	private int nStateFlag;
 	private String strCountry;
+	private String strRelate;
+	private int nStateFlag;
 	private Vector<String> vecGood;
 	private Vector<String> vecBad;
 	private Vector<String> vecStory;
@@ -22,6 +23,7 @@ public class Story {
 	public static final int AU_STATE_FLAG_QLD = 0x10;
 	public static final int AU_STATE_FLAG_SA = 0x20;
 	public static final int AU_STATE_FLAG_NT = 0x40;
+	public static final int AU_STATE_FLAG_WA = 0x80;
 	
 	private final String AU_STATE_NSW = "NSW";
 	private final String AU_STATE_VIC = "VIC";
@@ -30,6 +32,7 @@ public class Story {
 	private final String AU_STATE_QLD = "QLD";
 	private final String AU_STATE_SA = "SA";
 	private final String AU_STATE_NT = "NT";
+	private final String AU_STATE_WA = "WA";
 	
 	public Story(String strID, String strTitle, String strStory, String strTime, 
 			String strLocation, String strAuthor, String strRelate, String strGood, String strBad, String strCountry)
@@ -37,6 +40,7 @@ public class Story {
 		strState = "";
 		this.strID = strID;
 		this.strCountry = strCountry;
+		this.strRelate = strRelate;
 		this.strTitle = strTitle.substring(6);
 		this.strTime = strTime.substring(5);
 		this.strAuthor = strAuthor.substring(7);
@@ -94,9 +98,10 @@ public class Story {
 					||str.equalsIgnoreCase(AU_STATE_TAS)
 					||str.equalsIgnoreCase(AU_STATE_QLD)
 					||str.equalsIgnoreCase(AU_STATE_SA)
-					||str.equalsIgnoreCase(AU_STATE_NT))
+					||str.equalsIgnoreCase(AU_STATE_NT)
+					||str.equalsIgnoreCase(AU_STATE_WA))
 				{
-					strState = str;
+					strState = str.toUpperCase();
 					return;
 				}
 			}
@@ -131,19 +136,23 @@ public class Story {
 		case AU_STATE_NT:
 			nStateFlag = AU_STATE_FLAG_NT;
 			break;
+		case AU_STATE_WA:
+			nStateFlag = AU_STATE_FLAG_WA;
+			break;
 		default:
 			nStateFlag = 0;
 		}
 	}
 	
-	public String GetID() {return strID;}
-	public String GetTitle() {return strTitle;}
-	public String GetTime() {return strTime;}
-	public String GetAuthor() {return strAuthor;}
-	public String GetCountry() {return strCountry;}
-	public String GetState() {return strState; }
+	public String GetID() 		{ return strID; }
+	public String GetTitle() 	{ return strTitle; }
+	public String GetTime() 	{ return strTime; }
+	public String GetAuthor() 	{ return strAuthor; }
+	public String GetCountry() 	{ return strCountry; }
+	public String GetState() 	{ return strState; }
+	public String GetRelate() 	{ return strRelate; }
 	public Vector<String> getGood() {return vecGood;}
-	public Vector<String> getBad() {return vecBad;}
+	public Vector<String> getBad() 	{return vecBad;}
 	public Vector<String> getStory() {return vecStory;}
-	public int GetStateFlag() { return nStateFlag; }
+	public int GetStateFlag() 	{ return nStateFlag; }
 }
