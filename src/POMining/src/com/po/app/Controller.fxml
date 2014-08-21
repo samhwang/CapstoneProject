@@ -7,18 +7,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@Controller.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.po.app.AppController">
+<Pane maxHeight="400.0" maxWidth="600.0" minHeight="600.0" minWidth="800.0" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@Controller.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.po.app.AppController">
    <children>
-      <TabPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" styleClass="root" tabClosingPolicy="UNAVAILABLE">
+      <TabPane maxHeight="400.0" maxWidth="600.0" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="800.0" styleClass="root" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Basic">
             <content>
-              <AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0">
+              <AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="600.0" minWidth="800.0" prefHeight="400.0" prefWidth="600.0">
                      <children>
-                        <ListView fx:id="StoryIDList" layoutX="186.0" layoutY="46.0" prefHeight="316.0" prefWidth="85.0" />
+                        <ListView fx:id="StoryIDList" layoutX="186.0" layoutY="46.0" prefHeight="508.0" prefWidth="85.0" />
                         <Label fx:id="StoryCount" alignment="CENTER" layoutX="187.0" layoutY="29.0" prefHeight="17.0" prefWidth="84.0" text="0" />
-                        <TextArea fx:id="StoryBody" layoutX="280.0" layoutY="82.0" maxHeight="280.0" maxWidth="476.0" minHeight="280.0" minWidth="303.0" prefHeight="280.0" prefWidth="303.0" wrapText="true" />
-                        <ListView fx:id="TopicList" layoutX="14.0" layoutY="46.0" prefHeight="316.0" prefWidth="161.0" />
+                        <TextArea fx:id="StoryBody" layoutX="280.0" layoutY="48.0" maxHeight="314.0" maxWidth="476.0" minHeight="280.0" minWidth="303.0" prefHeight="292.0" prefWidth="303.0" wrapText="true" />
+                        <ListView fx:id="TopicList" layoutX="14.0" layoutY="46.0" prefHeight="507.0" prefWidth="161.0" />
                         <ChoiceBox fx:id="SentimentChoice" layoutX="14.0" layoutY="17.0" prefHeight="25.0" prefWidth="102.0" />
                         <CheckBox fx:id="cbNSW" layoutX="194.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="NSW" />
                         <CheckBox fx:id="cbVIC" layoutX="254.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="VIC" />
