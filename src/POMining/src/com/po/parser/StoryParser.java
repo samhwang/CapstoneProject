@@ -21,6 +21,7 @@ public class StoryParser {
 	
 	private Set<String> setPositive; 
 	private Set<String> setNegative;
+	private Set<String> setStopWord;
 	private Map<String, String> mapWordMapping;
 	private Map<String, String> mapStateMapping;
 	
@@ -28,6 +29,7 @@ public class StoryParser {
 	{
 		setPositive = new HashSet<String>();
 		setNegative = new HashSet<String>();
+		setStopWord = new HashSet<String>();
 		mapWordMapping = new HashMap<String, String>();
 		mapStateMapping = new HashMap<String, String>();
 	}
@@ -42,8 +44,38 @@ public class StoryParser {
 	
 	public void LoadStopWords()
 	{
-		
+		BufferedReader br;
+		try {
+			//br = new BufferedReader(new FileReader("data" + File.separator + "word-mapping.txt"));
+			br = new BufferedReader(new FileReader("english.txt"));
+			String strLine;
+			while ((strLine = br.readLine()) != null) {
+				setStopWord.add(strLine);
+				}
+			br.close();
+			
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+	
+	public boolean IsStopWord(String strWord)
+	{
+		return setStopWord.contains(strWord);
+	}
+	
+	public String RemoveStopWord(String strWord)
+	{
+		if(setStopWord.contains(strWord.toLowerCase()))
+			return "";
+		
+		return strWord;
+	}
+	
 	public void LoadWordMapping()
 	{
 		BufferedReader br;

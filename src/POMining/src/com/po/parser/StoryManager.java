@@ -295,10 +295,18 @@ public class StoryManager {
 		
 		for(String line : mapStory.get(strID).getStory())
 		{
-			ret += line + ".";
+			ret += line + ". ";
 		}
 		
 		return ret;
+	}
+	
+	public Vector<String> GetStoryBodyAsVector(String strID)
+	{
+		if(!mapStory.containsKey(strID))
+			return null;
+		
+		return mapStory.get(strID).getStory();
 	}
 	
 	public int GetStoryStateFlag(String strID)
