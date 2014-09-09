@@ -11,6 +11,7 @@ public class Story {
 	private String strState;
 	private String strCountry;
 	private String strRelate;
+	private String strRawStory;
 	private int nStateFlag;
 	private Vector<String> vecGood;
 	private Vector<String> vecBad;
@@ -70,6 +71,7 @@ public class Story {
 			}
 		}
 		
+		strRawStory = strStory;
 		String[] arrStory = strStory.substring(6).split("\\. ");
 		for(String str : arrStory)
 		{
@@ -151,6 +153,7 @@ public class Story {
 	public String GetCountry() 	{ return strCountry; }
 	public String GetState() 	{ return strState; }
 	public String GetRelate() 	{ return strRelate; }
+	public String GetRawStory()	{ return strRawStory; }
 	public Vector<String> getGood() {return vecGood;}
 	public Vector<String> getBad() 	{return vecBad;}
 	public Vector<String> getStory() {return vecStory;}

@@ -3,6 +3,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -51,6 +52,8 @@ public class StoryManager {
 	public Map<String, Integer> GetUserTopicTotal() { return mapUserTopics; }
 	public Map<String, Integer> GetUserTopicGood() { return mapUserTopicsGood; }
 	public Map<String, Integer> GetUserTopicBad() { return mapUserTopicsBad; }
+
+	public Collection<Story> getAllStories() { return mapStory.values(); }
 	
 	public Set<String> GetIDsByTopic(String strGoodBad, String strTopic)
 	{
