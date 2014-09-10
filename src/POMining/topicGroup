@@ -1,88 +1,88 @@
-time:1 operation:1
-hospital:96 referral:2 situation:1
-hospital:96 flight:2
-staff:87 caring:31 ward:6
-received:1 care:185 attention:20
-listen:3 counsellor:6 kate:1
-waiting:8 wait:5 reception:4 time:1 er:1
-hospital:96 admission:6 accommodation:2 sleep:1 staff:87 environment:2
-time:1 consultant:2 professional:13 empathetic:2
-tests:1 reassuring:4 results:2
-bed:1 care:185 staff:87 time:1
-ambulance:12 hospital:96
-kind:3 experience:10 caring:31
-situation:1 therapy:1 control:1
-referred:3 stressed:1
-exercise:1
-wait:5
-busy:3 radiologist:2 listened:4
-surgery:2 staff:87 surgical:1
-health:4 community:5 sarah:2 medicare:1
-informed:1
-clinic:1 ed:1 diagnosis:6
-care:185 services:10 environment:2
-psychiatrist:3
-assessment:10
-procedure:1
-professional:13 attention:20 assistance:3
-nsw:1 received:1
-surgery:2 surgeon:6 rehabilitation:2
-dentist:4 control:1
-service:114 care:185 cleaning:5 bathroom:2 informed:1 cleaners:2
-neck:1
-waiting:8
-nurse:9
-time:1 psychology:6
-ward:6 bed:1
-doctor:15 diagnosis:6 referral:2
-service:114 receptionist:11 referred:3
-informed:1 time:1
-hospital:96 discharge:9 triage:1
-staff:87 assessment:10 professional:13
-clinic:1 referred:3 orthopaedic:1
-doctors:46 training:1
-brisbane:1 hospital:96 booking:2 health:4
-health:4 information:56
-physio:1 gp:48 hospital:96 physiotherapist:2 neck:1
-control:1 management:1
-nurses:32 doctors:46 alternative:3 reception:4
-ipswich:1
-icu:1 visiting:2
-efforts:1
-time:1
-psychologist:11 access:23 professional:13 assistance:3
-medication:1 discharged:6 understanding:18
-child:1 jean:2 understanding:18 knowledge:5 school:2 minds:2 behaviour:3
-information:56 informative:2 anaesthetist:2
-food:11 eating:2 letter:3
-nurse:9 registrar:1
-doctor:15
-treatment:8 specialist:3
-gp:48 records:1
-results:2 pressure:1 tests:1 testing:3 appointments:12
-doctor:15 examination:3
-services:10 transport:3
-cost:2 transport:3 ultrasound:1
-experience:10 nurse:9 records:1
-appointments:12
-listened:4
-feeling:2 feedback:3 explanation:9 situation:1
-ed:1 treatment:8
-medication:1
-nurse:9 triage:1 listening:5
-program:3 kate:1 lifestyle:1
-process:2
-melbourne:2
-experience:10 baby:4 midwives:7 midwife:3
-health:4 process:2
-social:1
-hospital:96 private:3 advice:13 attitude:11 knowledge:5
-appointment:25 letter:3 outpatients:1
-staff:87 caring:31 welcoming:7 counselling:5 assistance:3
-management:1
-hospital:96 department:9
-extremely:1 facilities:5 treatment:8
 beds:7
+management:1
+social:1
+melbourne:2
+process:2
+medication:1
+listened:4
+appointments:12
+doctor:15
+time:1
+efforts:1
+ipswich:1
+nurse:9
+waiting:8
+neck:1
+procedure:1
+assessment:10
+psychiatrist:3
+informed:1
+wait:5
+exercise:1
+hospital:96 department:9
+health:4 process:2
+ed:1 treatment:8
+services:10 transport:3
+doctor:15 examination:3
+gp:48 records:1
+treatment:8 specialist:3
+nurse:9 registrar:1
+icu:1 visiting:2
+control:1 management:1
+health:4 information:56
+doctors:46 training:1
+informed:1 time:1
+ward:6 bed:1
+time:1 psychology:6
+dentist:4 control:1
+nsw:1 received:1
+referred:3 stressed:1
+ambulance:12 hospital:96
+hospital:96 flight:2
+time:1 operation:1
 care:185 education:19 families:1
-time:1 sleep:1 feelings:1 humanity:1
+extremely:1 facilities:5 treatment:8
+appointment:25 letter:3 outpatients:1
+program:3 kate:1 lifestyle:1
+nurse:9 triage:1 listening:5
+experience:10 nurse:9 records:1
+cost:2 transport:3 ultrasound:1
+food:11 eating:2 letter:3
+information:56 informative:2 anaesthetist:2
+medication:1 discharged:6 understanding:18
+clinic:1 referred:3 orthopaedic:1
+staff:87 assessment:10 professional:13
+hospital:96 discharge:9 triage:1
+service:114 receptionist:11 referred:3
+doctor:15 diagnosis:6 referral:2
+surgery:2 surgeon:6 rehabilitation:2
+professional:13 attention:20 assistance:3
+care:185 services:10 environment:2
+clinic:1 ed:1 diagnosis:6
+surgery:2 staff:87 surgical:1
+busy:3 radiologist:2 listened:4
+situation:1 therapy:1 control:1
+kind:3 experience:10 caring:31
+tests:1 reassuring:4 results:2
+listen:3 counsellor:6 kate:1
+received:1 care:185 attention:20
+staff:87 caring:31 ward:6
+hospital:96 referral:2 situation:1
 experience:10 er:1 skills:1 building:1
+time:1 sleep:1 feelings:1 humanity:1
+experience:10 baby:4 midwives:7 midwife:3
+feeling:2 feedback:3 explanation:9 situation:1
+psychologist:11 access:23 professional:13 assistance:3
+nurses:32 doctors:46 alternative:3 reception:4
+brisbane:1 hospital:96 booking:2 health:4
+health:4 community:5 sarah:2 medicare:1
+bed:1 care:185 staff:87 time:1
+time:1 consultant:2 professional:13 empathetic:2
+staff:87 caring:31 welcoming:7 counselling:5 assistance:3
+hospital:96 private:3 advice:13 attitude:11 knowledge:5
+results:2 pressure:1 tests:1 testing:3 appointments:12
+physio:1 gp:48 hospital:96 physiotherapist:2 neck:1
+waiting:8 wait:5 reception:4 time:1 er:1
+service:114 care:185 cleaning:5 bathroom:2 informed:1 cleaners:2
+hospital:96 admission:6 accommodation:2 sleep:1 staff:87 environment:2
+child:1 jean:2 understanding:18 knowledge:5 school:2 minds:2 behaviour:3

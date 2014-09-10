@@ -136,7 +136,23 @@ public class RankedLDA {
 					}
 				}
 				if(!vecWord.isEmpty())
-					vecTopic.add(vecWord);
+				{
+					int i = 0;
+					boolean bFound = false;
+					for(Vector<String> vec : vecTopic)
+					{
+						if(vec.size()>=vecWord.size())
+						{
+							vecTopic.insertElementAt(vecWord, i);
+							bFound = true;
+							break;
+						}
+						i++;
+					}
+					
+					if(!bFound)
+						vecTopic.add(vecWord);
+				}
 			}
 			br.close();
 			
