@@ -109,16 +109,48 @@ public class RankedLDA {
 	
 	void LDAScore()
 	{
+		StoryParser.getInstance().LoadStopWords();
+		StoryParser.getInstance().LoadSentiment();
+		StoryParser.getInstance().LoadWordMapping();
+		StoryManager sM = new StoryManager();
+		//sM.LoadStory("data" + File.separator + "auStory.txt");
+		sM.LoadStory("auStory.txt");
+		
 		BufferedReader br;
 		try {
+			Vector<Vector<String>> vecTopic = new Vector<Vector<String>>();
+			Vector<String> vecUnTopic = new Vector<String>();
 			//br = new BufferedReader(new FileReader("data" + File.separator + "word-mapping.txt"));
 			br = new BufferedReader(new FileReader("all_keys100.txt"));
 			String strLine;
-			while ((strLine = br.readLine()) != null) {
-				System.out.println(strLine);
+			while ((strLine = br.readLine()) != null) 
+			{
+				String[] arrWords = (strLine.split("\t")[2]).split(" ");
+				Vector<String> vecWord = new Vector<String>();
+				for(String strWord : arrWords)
+				{
+					if(sM.HasTopic("ALL", strWord))
+					{
+						strWord += ":"+sM.GetUserTopicTotal().get(strWord);
+						vecWord.add(strWord);
+					}
 				}
+				if(!vecWord.isEmpty())
+					vecTopic.add(vecWord);
+			}
 			br.close();
 			
+			int nCount = 0;
+			for(Vector<String> vec : vecTopic)
+			{
+				String strOut = "";
+				for(String strWord : vec)
+				{
+					strOut += strWord + " ";
+				}
+				System.out.println(strOut.trim());
+				nCount++;
+			}
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

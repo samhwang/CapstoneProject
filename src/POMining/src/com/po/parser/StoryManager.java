@@ -317,6 +317,17 @@ public class StoryManager {
 		return mapStory.get(strID).GetStateFlag();
 	}
 	
+	public boolean HasTopic(String strGoodBad, String strTopic)
+	{
+		
+		if(strGoodBad.compareToIgnoreCase("GOOD") == 0)
+			return mapGoodTopicIndex.keySet().contains(strTopic);
+		else if(strGoodBad.compareToIgnoreCase("BAD") == 0)
+			return mapBadTopicIndex.keySet().contains(strTopic);
+		else
+			return mapTotalTopicIndex.keySet().contains(strTopic);
+	}
+	
 	public void PrintStats()
 	{
 		System.out.println("Story Manager Dump Story Info.....");
