@@ -9,7 +9,7 @@
 \newcommand{\SubmissionDate}{\today}
 \newcommand{\student}{Bin Lu}
 \newcommand{\supervisor}{Dr Jenny Zhang, Dr Daryl D'Souza, Dr Amanda Kimpton}
-\newcommand{\topic}{Topic Modeling of Patient Opinion}
+\newcommand{\topic}{Topic Modelling of Patient Opinion}
 \newcommand{\school}{School of Computer Science and Information Technology}
 \newcommand{\program}{Masters of Computer Science}
 \newcommand{\institution}{Royal Melbourne Institute of Technology}
@@ -94,115 +94,62 @@ TODO:THANKS!
 \chapter{Introduction}
 
 
-\citet{Bloggs:1994,Somebody:2001} say that this is important.  On the
-other hand, some others say this is actually not important at
-all~\citep{Doe:2003}.
 
-Figure~\ref{fig-MyImportantGraph} illustrates how this occurs.  I learnt
-some of this by searcing the Web using
-\remark{Should we say this?}
-Google\footnote{\url{http://www.google.com}}.
+Publicly available opinions and service feedback provide valuable informations for decision making for both service providers and consumers. With the help of websites, blogs, forums and social networks, it is never been so easy to express opinions and leave feedback. Analyzing the opinions becomes a challenge, not just because of the quantity of the data, most opinion from general users are free form text. The massive quantity of the data won’t be effectively used until there is a systematically approach of analyzing and summarizing. Many techniques have been proposed to solve this problem. MDK-LDA model proposed by Chen\cite{ref24} , the method extends the Latent Dirichlet Allocation\cite{ref25}, the later one becoming the standard method in topic modelling and been extended in variety ways. The basic idea of LDA is treat each document in a collection as a vector of word count, each document is represented as a probability distribution over a number of topics, while each topic is represented as a probability distribution over a number of words. MDK-LDA introduces a new latent variable s in LDA to model s-sets. Each document is an admixture of latent topics while each topic is a probability distribution over s-sets. Another approach is Aspect-based Summarization\cite{ref11}, it is usually composed of three main tasks: aspect identification, sentiment classification, and aspect rating. Generally this model is used to analyzing product review, it is designed to effectively retrieve features and sentiment for products.
+
+Most previous studies focus on analyzing product reviews. We are interested to discover some model that suite service reviews. More specifically, reviews relate to healthcare. Study shows the effective governance is increasingly recognized as pivotal to improvements in healthcare quality\cite{ref6}, moreover current issue of effectiveness of the authority is affected by insufficient resource and inadequate information received\cite{ref5}.
+The object we are going to study is www.patientopinion.org.au, it is a publicly available healthcare forum. It allows user to post their own healthcare related story, the stories are not restricted from patient, it can also from hospital workers, nurses or doctors. The story can be positive or negative or a bit from both side. Although the story body is free form text, user still has to follow a certain template while submit the story.
 
 \begin{figure}[tp]
     \begin{center}
-    \epsfig{figure=Figs/anni005_no_slope.jgr.ps,width=16.7cm}
+    \epsfig{figure=Figs/story_sample.jpg,width=16.7cm}
     \caption
-    [Short title to appear in List of Figures]
+    [Patient Opinion Story Sample]
     {
-    Long title to appear in the caption
-    \label{fig-MyImportantGraph}
+    Patient Opinion Story Sample
+    \label{fig-story_sample}
     }
     \end{center}
 \end{figure}
 
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+\begin{figure}[h]
+    \begin{center}
+    \epsfig{figure=Figs/story_sample_source1,width=16.7cm}
+    \caption
+    [Patient Opinion Story Sample]
+    {
+    Patient Opinion Story Sample
+    \label{fig-story_sample}
+    }
+    \end{center}
+\end{figure}
 
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+\begin{figure}[h]
+    \begin{center}
+    \epsfig{figure=Figs/story_sample_source2,width=16.7cm}
+    \caption
+    [Patient Opinion Story Sample]
+    {
+    Patient Opinion Story Sample
+    \label{fig-story_sample}
+    }
+    \end{center}
+\end{figure}
 
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
-blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah
+Due to the unique characteristic of the data from ‘Patient Opinion’, the existing models of topic modelling may not give the best result, on other hand LDA has been approved a very effective  model, and been used as a based model in many topic modelling studies. We choose LDA as our base model, and incorporate unique feature in ‘Patient Opinion’, specifically the section of ‘What’s Good’ and ‘What could be improved’. These two sections are filled in by user while submitting the story, the template is provided by the website. Generally this will be the main topic or features user want to give feedback about in the story. And we assume user labeled story 100% accurate. The question we aim to answer in this thesis:
+\begin{itemize}
+\item How to use user specified features to improve the performance and accuracy in topic modelling.
+\item What is the distribution of topics over locations (State level).
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Background}
+\chapter{Related Works}
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~
-\section{A Section}
+\section{LDA}
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~
-\section{Another Section}
+\section{MDK-LDA}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{The Approach}
