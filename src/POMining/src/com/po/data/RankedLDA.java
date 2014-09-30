@@ -13,28 +13,44 @@ import java.util.Vector;
 import com.po.parser.Story;
 import com.po.parser.StoryManager;
 import com.po.parser.StoryParser;
+import com.po.parser.TFIDFWorker;
 
 public class RankedLDA {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		RankedLDA rLDA = new RankedLDA();
-		System.out.println("Start RankedLDA...");
-		//rLDA.GenerateMidFile("");
-		rLDA.LDAScore();
-		System.out.println("End RankedLDA...");
-
-	}
-
-	void GenerateMidFile(String strTopic)
+	protected StoryManager sM;
+	public RankedLDA()
 	{
 		StoryParser.getInstance().LoadStopWords();
 		StoryParser.getInstance().LoadSentiment();
 		StoryParser.getInstance().LoadWordMapping();
-		StoryManager sM = new StoryManager();
+		sM = new StoryManager();
 		//sM.LoadStory("data" + File.separator + "auStory.txt");
 		sM.LoadStory("auStory.txt");
+	}
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		RankedLDA rLDA = new RankedLDA();
+		System.out.println("Start RankedLDA...");
 		
+		//rLDA.GenerateMidFile("");
+		//rLDA.LDAScore();
+		rLDA.CalculateTFIDF("doctor");
+		
+		System.out.println("End RankedLDA...");
+
+	}
+
+	void CalculateTFIDF(String strWord)
+	{
+		sM.LoadWordStats();
+		
+		TFIDFWorker.GetInstance().PrintWordStats(strWord);
+	}
+	
+	void GenerateMidFile(String strTopic)
+	{
+
 		if(strTopic.isEmpty())
 		{
 			int nLabel = 0;
@@ -109,12 +125,6 @@ public class RankedLDA {
 	
 	void LDAScore()
 	{
-		StoryParser.getInstance().LoadStopWords();
-		StoryParser.getInstance().LoadSentiment();
-		StoryParser.getInstance().LoadWordMapping();
-		StoryManager sM = new StoryManager();
-		//sM.LoadStory("data" + File.separator + "auStory.txt");
-		sM.LoadStory("auStory.txt");
 		
 		BufferedReader br;
 		try {

@@ -328,6 +328,14 @@ public class StoryManager {
 			return mapTotalTopicIndex.keySet().contains(strTopic);
 	}
 	
+	public void LoadWordStats()
+	{
+		for(Story story : mapStory.values())
+		{
+			TFIDFWorker.GetInstance().AddWordAsStory(story.GetRawStory(), story.GetID());
+		}
+	}
+	
 	public void PrintStats()
 	{
 		System.out.println("Story Manager Dump Story Info.....");
