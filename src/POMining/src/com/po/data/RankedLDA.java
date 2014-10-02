@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
@@ -26,6 +27,7 @@ public class RankedLDA {
 		sM = new StoryManager();
 		//sM.LoadStory("data" + File.separator + "auStory.txt");
 		sM.LoadStory("auStory.txt");
+		sM.LoadWordStats();
 	}
 	
 	public static void main(String[] args) {
@@ -35,20 +37,21 @@ public class RankedLDA {
 		
 		//rLDA.GenerateMidFile("");
 		//rLDA.LDAScore();
-		rLDA.CalculateTFIDF("doctor");
+		//rLDA.CalculateTFIDF("jean");
+		
+		rLDA.LDAScoreEX();
 		
 		System.out.println("End RankedLDA...");
 
 	}
 
-	void CalculateTFIDF(String strWord)
+	private void CalculateTFIDF(String strWord)
 	{
-		sM.LoadWordStats();
 		
 		TFIDFWorker.GetInstance().PrintWordStats(strWord);
 	}
 	
-	void GenerateMidFile(String strTopic)
+	private void GenerateMidFile(String strTopic)
 	{
 
 		if(strTopic.isEmpty())
@@ -123,7 +126,127 @@ public class RankedLDA {
 
 	}
 	
-	void LDAScore()
+	private void LDAScoreEX()
+	{
+		BufferedReader br;
+		try {
+			Vector<Vector<String>> vecTopic = new Vector<Vector<String>>();
+			Vector<Vector<String>> vecTopicToDocIDs = new Vector<Vector<String>>();
+			Vector<Vector<String>> vecTopicTFIDF = new Vector<Vector<String>>();
+			Vector<String> vecUnTopic = new Vector<String>();
+			br = new BufferedReader(new FileReader("all_keys100.txt"));
+			String strLine;
+			while ((strLine = br.readLine()) != null) 
+			{
+				String strTopicID = strLine.split("\t")[0];
+				String[] arrWords = (strLine.split("\t")[2]).split(" ");
+				Vector<String> vecWord = new Vector<String>();
+				Vector<String> vecDocIDs = new Vector<String>();
+				Vector<String> vecAllWord = new Vector<String>();
+				for(String strWord : arrWords)
+				{
+					//vecAllWord.add(strWord);
+					if(sM.HasTopic("ALL", strWord))
+					{
+						//strWord += ":"+sM.GetUserTopicTotal().get(strWord);
+						vecWord.add(strWord);
+					}
+					
+					//Set<String> ids = new HashSet<String>();
+					Set<String> ids = sM.GetTopicSet(strWord);
+					if(ids != null)
+					{
+						for(String id : ids)
+						{
+							if(!vecDocIDs.contains(id))
+								vecDocIDs.add(id);
+						}
+					}
+				}
+				
+				for(String strWord : arrWords)
+				{
+					double dTFIDF = 0;
+					if(vecDocIDs != null && vecDocIDs.size() > 0)
+						dTFIDF = TFIDFWorker.GetInstance().GetTFIDF(strWord, vecDocIDs);
+					
+					vecAllWord.add(strWord + ":" + dTFIDF);
+				}
+				
+				vecTopicTFIDF.add(vecAllWord);
+		
+				vecTopicToDocIDs.add(vecDocIDs);
+				
+				if(!vecWord.isEmpty())
+				{
+					vecWord.add(0, strTopicID);
+					int i = 0;
+					boolean bFound = false;
+					for(Vector<String> vec : vecTopic)
+					{
+						if(vec.size()>=vecWord.size())
+						{
+							vecTopic.insertElementAt(vecWord, i);
+							bFound = true;
+							break;
+						}
+						i++;
+					}
+					
+					if(!bFound)
+						vecTopic.add(vecWord);
+				}
+				else
+					vecUnTopic.add(strTopicID);
+			}
+			br.close();
+			
+			System.out.println("TF-IDF:");
+			System.out.println("*******************************************");
+			for(Vector<String> vecStr : vecTopicTFIDF)
+			{
+				for(String str : vecStr)
+				{
+					System.out.print(str + "; ");
+				}
+				System.out.println();
+			}
+			
+			System.out.println("*******************************************");
+			
+			System.out.println("Un-matched topics:");
+			System.out.println("*******************************************");
+			for(String strID : vecUnTopic)
+			{
+				System.out.print(strID + "; ");
+			}
+			System.out.println();
+			System.out.println("*******************************************");
+			
+			System.out.println("Matched Toics:");
+			System.out.println("*******************************************");
+			for(Vector<String> vec : vecTopic)
+			{
+				String strOut = "";
+				for(String strWord : vec)
+				{
+					strOut += strWord + "; ";
+				}
+				System.out.println(strOut.trim());
+			}
+			System.out.println("*******************************************");
+			
+
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private void LDAScore()
 	{
 		
 		BufferedReader br;

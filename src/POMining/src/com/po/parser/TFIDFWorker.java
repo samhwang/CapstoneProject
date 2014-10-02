@@ -11,11 +11,13 @@ public class TFIDFWorker {
 	{
 		public Vector<Integer> vecCountInDoc;
 		public Vector<String>	vecDocID;
+		public double dIDF;
 		
 		public WordStats()
 		{
 			vecCountInDoc = new Vector<Integer>();
 			vecDocID = new Vector<String>();
+			dIDF = 0;
 		}
 	}
 	
@@ -67,10 +69,42 @@ public class TFIDFWorker {
 		String[] arrStory = strStory.substring(6).split(" ");
 		for(String strTemp : arrStory)
 		{
-			String tempOut = StoryParser.getInstance().RemoveStopWord(strTemp);
-			if(!tempOut.isEmpty())
-				AddWord(tempOut, strDocID);
+//			String tempOut = StoryParser.getInstance().RemoveStopWord(strTemp);
+//			if(!tempOut.isEmpty())
+				AddWord(strTemp, strDocID);
 		}
+	}
+	
+	public void PostProcess(int nTotalNumberOfStory)
+	{
+		CalculateAllIDF(nTotalNumberOfStory);
+	}
+	
+	private void CalculateAllIDF(int nTotalNumberOfStory)
+	{
+		for(WordStats stats : mapWordStats.values())
+		{
+			//stats.dIDF = Math.log(nTotalNumberOfStory/stats.vecDocID.size());
+			stats.dIDF = Math.log10(nTotalNumberOfStory/stats.vecDocID.size());
+		}
+	}
+	
+	public double GetTFIDF(String strWord, Vector<String> docIDs)
+	{
+		double dRet = 0.0;
+		WordStats stats = mapWordStats.get(strWord);
+		if(stats == null)
+			return 0;
+		for(String docID : docIDs)
+		{
+			if(stats == null || stats.vecDocID == null)
+				continue;
+			if(stats.vecDocID.contains(docID))
+				dRet += stats.vecCountInDoc.get(stats.vecDocID.indexOf(docID));
+		}
+		
+		
+		return dRet * stats.dIDF;
 	}
 	
 	public void PrintWordStats(String strWord)
@@ -82,10 +116,10 @@ public class TFIDFWorker {
 		}
 		
 		WordStats stats = mapWordStats.get(strWord);
-		System.out.println("Stats for word [" + strWord + "]:");
-		for(int i = 0; i < stats.vecCountInDoc.size(); i++)
-		{
-			System.out.println("DocID: [" + stats.vecDocID.get(i) + "]" + " Count: [" + stats.vecCountInDoc.get(i) + "]");
-		}
+		System.out.println("Stats for word [" + strWord + "]: " + stats.dIDF);
+//		for(int i = 0; i < stats.vecCountInDoc.size(); i++)
+//		{
+//			System.out.println("DocID: [" + stats.vecDocID.get(i) + "]" + " Count: [" + stats.vecCountInDoc.get(i) + "]");
+//		}
 	}
 }

@@ -71,13 +71,13 @@ public class Story {
 			}
 		}
 		
-		strRawStory = strStory;
+		strRawStory = strStory.toLowerCase();
 		String[] arrStory = strStory.substring(6).split("\\. ");
 		for(String str : arrStory)
 		{
 			if(!str.trim().isEmpty())
 			{
-				vecStory.add(str.trim());
+				vecStory.add(str.trim().toLowerCase());
 			}
 		}
 		

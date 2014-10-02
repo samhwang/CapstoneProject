@@ -334,6 +334,18 @@ public class StoryManager {
 		{
 			TFIDFWorker.GetInstance().AddWordAsStory(story.GetRawStory(), story.GetID());
 		}
+		
+		TFIDFWorker.GetInstance().PostProcess(mapStory.size());
+	}
+	
+	public Set<String> GetTopicSet(String strTopic)
+	{
+		if(mapTotalTopicIndex.keySet().contains(strTopic))
+		{
+			return mapTotalTopicIndex.get(strTopic);
+		}
+		else
+			return null;
 	}
 	
 	public void PrintStats()
