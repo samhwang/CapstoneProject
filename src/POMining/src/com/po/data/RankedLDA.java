@@ -164,15 +164,17 @@ public class RankedLDA {
 					}
 				}
 				
+				double dTotalTFIDF = 0;
 				for(String strWord : arrWords)
 				{
 					double dTFIDF = 0;
 					if(vecDocIDs != null && vecDocIDs.size() > 0)
 						dTFIDF = TFIDFWorker.GetInstance().GetTFIDF(strWord, vecDocIDs);
-					
+					dTotalTFIDF += dTFIDF;
 					vecAllWord.add(strWord + ":" + dTFIDF);
 				}
 				
+				vecAllWord.add(0, String.format("%f", dTotalTFIDF));
 				vecTopicTFIDF.add(vecAllWord);
 		
 				vecTopicToDocIDs.add(vecDocIDs);
@@ -203,13 +205,16 @@ public class RankedLDA {
 			
 			System.out.println("TF-IDF:");
 			System.out.println("*******************************************");
+			int nCount = 0;
 			for(Vector<String> vecStr : vecTopicTFIDF)
 			{
+				System.out.print(nCount + "  ");
 				for(String str : vecStr)
 				{
 					System.out.print(str + "; ");
 				}
 				System.out.println();
+				nCount++;
 			}
 			
 			System.out.println("*******************************************");

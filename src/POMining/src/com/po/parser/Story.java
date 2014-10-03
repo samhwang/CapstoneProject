@@ -56,7 +56,15 @@ public class Story {
 			{
 				String newString = StoryParser.getInstance().RemoveSentiment(str.trim().toLowerCase(), " ", StoryParser.nSentimentModeALL);
 				if(!newString.trim().isEmpty())
-					vecGood.add(newString);
+				{
+					String[] arrStr = newString.split(" ");
+					for(String word : arrStr)
+					{
+						if(!word.trim().isEmpty())
+							vecGood.add(word);
+					}
+					
+				}
 			}
 		}
 		
@@ -67,7 +75,14 @@ public class Story {
 			{
 				String newString = StoryParser.getInstance().RemoveSentiment(str.trim().toLowerCase(), " ", StoryParser.nSentimentModeALL);
 				if(!newString.trim().isEmpty())
-					vecBad.add(newString);
+				{
+					String[] arrStr = newString.split(" ");
+					for(String word : arrStr)
+					{
+						if(!word.trim().isEmpty())
+							vecBad.add(word);
+					}
+				}
 			}
 		}
 		
