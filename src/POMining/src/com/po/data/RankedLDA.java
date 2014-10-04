@@ -131,9 +131,11 @@ public class RankedLDA {
 		BufferedReader br;
 		try {
 			Vector<Vector<String>> vecTopic = new Vector<Vector<String>>();
+			Vector<Vector<String>> vecUnsortedTopic = new Vector<Vector<String>>();
 			Vector<Vector<String>> vecTopicToDocIDs = new Vector<Vector<String>>();
 			Vector<Vector<String>> vecTopicTFIDF = new Vector<Vector<String>>();
 			Vector<String> vecUnTopic = new Vector<String>();
+			Vector<Double> vecNewTFIDF = new Vector<Double>();
 			br = new BufferedReader(new FileReader("all_keys100.txt"));
 			String strLine;
 			while ((strLine = br.readLine()) != null) 
@@ -182,6 +184,13 @@ public class RankedLDA {
 				if(!vecWord.isEmpty())
 				{
 					vecWord.add(0, strTopicID);
+					double dTFIDF = 0;
+					for(String str : vecWord)
+					{
+						dTFIDF += TFIDFWorker.GetInstance().GetTFIDF(str, vecDocIDs);
+					}
+					vecNewTFIDF.add(dTFIDF);
+					vecUnsortedTopic.add(vecWord);
 					int i = 0;
 					boolean bFound = false;
 					for(Vector<String> vec : vecTopic)
@@ -241,7 +250,22 @@ public class RankedLDA {
 			}
 			System.out.println("*******************************************");
 			
-
+			int i = 0;
+			System.out.println("Unsorted Toics:");
+			System.out.println("*******************************************");
+			for(Vector<String> vec : vecUnsortedTopic)
+			{
+				System.out.print(String.format("%f; ", vecNewTFIDF.get(i)));
+				i++;
+				String strOut = "";
+				for(String strWord : vec)
+				{
+					strOut += strWord + "; ";
+				}
+				System.out.println(strOut.trim());
+			}
+			System.out.println("*******************************************");
+			
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

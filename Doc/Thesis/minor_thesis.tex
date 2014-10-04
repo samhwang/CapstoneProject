@@ -95,9 +95,9 @@ TODO:THANKS!
 
 
 
-Publicly available opinions and service feedback provide valuable informations for decision making for both service providers and consumers. With the help of websites, blogs, forums and social networks, it is never been so easy to express opinions and leave feedback. Analyzing the opinions becomes a challenge, not just because of the quantity of the data, most opinion from general users are free form text. The massive quantity of the data won’t be effectively used until there is a systematically approach of analyzing and summarizing. Many techniques have been proposed to solve this problem. MDK-LDA model proposed by Chen(\cite{ref24}) , the method extends the Latent Dirichlet Allocation(\cite{ref25}), the later one becoming the standard method in topic modelling and been extended in variety ways. The basic idea of LDA is treat each document in a collection as a vector of word count, each document is represented as a probability distribution over a number of topics, while each topic is represented as a probability distribution over a number of words. MDK-LDA introduces a new latent variable s in LDA to model s-sets. Each document is an admixture of latent topics while each topic is a probability distribution over s-sets. Another approach is Aspect-based Summarization(\cite{ref11}), it is usually composed of three main tasks: aspect identification, sentiment classification, and aspect rating. Generally this model is used to analyzing product review, it is designed to effectively retrieve features and sentiment for products.
+Publicly available opinions and service feedback provide valuable informations for decision making for both service providers and consumers. With the help of websites, blogs, forums and social networks, it is never been so easy to express opinions and leave feedback. Analysing the opinions becomes a challenge, not just because of the quantity of the data, most opinion from general users are free form text. The massive quantity of the data won’t be effectively used until there is a systematically approach of analysing and summarizing. Many techniques have been proposed to solve this problem. MDK-LDA model proposed by Chen(\cite{ref24}) , the method extends the Latent Dirichlet Allocation(\cite{ref25}), the later one becoming the standard method in topic modelling and been extended in variety ways. The basic idea of LDA is treat each document in a collection as a vector of word count, each document is represented as a probability distribution over a number of topics, while each topic is represented as a probability distribution over a number of words. MDK-LDA introduces a new latent variable s in LDA to model s-sets. Each document is an admixture of latent topics while each topic is a probability distribution over s-sets. Another approach is Aspect-based Summarization(\cite{ref11}), it is usually composed of three main tasks: aspect identification, sentiment classification, and aspect rating. Generally this model is used to analysing product review, it is designed to effectively retrieve features and sentiment for products.
 
-Most previous studies focus on analyzing product reviews. We are interested to discover some model that suite service reviews. More specifically, reviews relate to healthcare. Study shows the effective governance is increasingly recognized as pivotal to improvements in healthcare quality(\cite{ref6}), moreover current issue of effectiveness of the authority is affected by insufficient resource and inadequate information received(\cite{ref5}).
+Most previous studies focus on analysing product reviews. We are interested to discover some model that suite service reviews. More specifically, reviews relate to healthcare. Study shows the effective governance is increasingly recognized as pivotal to improvements in healthcare quality(\cite{ref6}), moreover current issue of effectiveness of the authority is affected by insufficient resource and inadequate information received(\cite{ref5}).
 The object we are going to study is www.patientopinion.org.au, it is a publicly available healthcare forum. It allows user to post their own healthcare related story, the stories are not restricted from patient, it can also from hospital workers, nurses or doctors. The story can be positive or negative or a bit from both side. Although the story body is free form text, user still has to follow a certain template while submit the story.
 
 \begin{figure}[tp]
@@ -107,7 +107,7 @@ The object we are going to study is www.patientopinion.org.au, it is a publicly 
     [Patient Opinion Story Sample]
     {
     Patient Opinion Story Sample
-    \label{fig-story_sample}
+    \label{Figure1}
     }
     \end{center}
 \end{figure}
@@ -119,7 +119,7 @@ The object we are going to study is www.patientopinion.org.au, it is a publicly 
     [Patient Opinion Story Sample Source 1]
     {
     Patient Opinion Story Sample Source 1
-    \label{fig-story_sample_source1}
+    \label{Figure2}
     }
     \end{center}
 \end{figure}
@@ -131,12 +131,12 @@ The object we are going to study is www.patientopinion.org.au, it is a publicly 
     [Patient Opinion Story Sample Source 2]
     {
     Patient Opinion Story Sample Source 2
-    \label{fig-story_sample_source2}
+    \label{Figure3}
     }
     \end{center}
 \end{figure}
 
-Due to the unique characteristic of the data from ‘Patient Opinion’, the existing models of topic modelling may not give the best result, on other hand LDA has been approved a very effective  model, and been used as a based model in many topic modelling studies. We choose LDA as our base model, and incorporate unique feature in ‘Patient Opinion’, specifically the section of ‘What’s Good’ and ‘What could be improved’. These two sections are filled in by user while submitting the story, the template is provided by the website. Generally this will be the main topic or features user want to give feedback about in the story. And we assume user labeled story 100\% accurate. The question we aim to answer in this thesis:
+Due to the unique characteristic of the data from ‘Patient Opinion’, the existing models of topic modelling may not give the best result, on other hand LDA has been approved a very effective  model, and been used as a based model in many topic modelling studies. We choose LDA as our base model, and incorporate unique feature in ‘Patient Opinion’, specifically the section of ‘What’s Good’ and ‘What could be improved’. These two sections are filled in by user while submitting the story, the template is provided by the website. Generally this will be the main topic or features user want to give feedback about in the story. And we assume user labelled story 100\% accurate. The question we aim to answer in this thesis:
 \begin{itemize}
 \item How to use user specified features to improve the performance and accuracy in topic modelling.
 \item What is the distribution of topics over locations (State level).
@@ -154,20 +154,93 @@ Due to the unique characteristic of the data from ‘Patient Opinion’, the exi
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{The Approach}
 
-% ~~~~~~~~~~~~~~~~~~~~~~~~~~
-\section{A Section}
+Although LDA provides a powerful framework for extracting latent topics in text document, but sometimes learned topics are lists of words that do not convey much useful information (\cite{ref26}). Some extrinsic evaluation has been used to demonstrate the effectiveness of the learned topic in the application domain, but standardly, no attempt has been made to perform intrinsic evaluation of the topics themselves, either qualitatively or quantitatively (\cite{ref27}). To solve the problem, base LDA model had been extended either by incorporating human judgement in to the model-learning framework or creating a computational proxy that simulates human judgements (\cite{ref28}), for example the MDK-LDA model (\cite{ref24}) we introduced in section 2.
+Due to the unique characteristic of the data of Patient Opinion, we use user input to simulate human judgement, hence to produce a better quality topic modelling result.
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~
-\section{Another Section}
+\section{Description of Data}
+
+Data from Patient Opinion contains many informations, however we only interested in few parts of them in our project Figure 1: 1) The title of the story, it’s the summary of story by the user. 2) The author role and time of the post, the role could be the patient, patient’s relative, carer or doctor. 3) The more about section is from website moderator, it inserts relevant tags to the story. 4) \& 5) are the most important fields to our project, these field are inserted by the user, the fields indicate what user thinks the story is about, and we use these fields to simulate user judgement in topic modelling….
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~
+\section{Preprocessing of Data}
+
+Everything been converted to lower-case, collect all unique words in user specified field. This collection is used to filter out the words in each topic that generated by LDA. A list of related document ID to each word also collected, see Figure4.
+
+\begin{figure}[tp]
+    \begin{center}
+    \epsfig{figure=Figs/data_sample1.jpg,width=16.7cm}
+    \caption
+    [Patient Opinion Story Sample]
+    {
+    Patient Opinion Story Sample
+    \label{Figure4}
+    }
+    \end{center}
+\end{figure}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~
+\section{Using user input to improve topic modelling result}
+
+Topics learned from LDA sometimes don’t convey much useful information, sometime it is caused by overfeeding the result set, for example it will include top 20 words for each topic (based on the settings, the total number in each topic can be configured), some words may not make any sense in current topic but statistically significant to the topic. Our goal  is try to use user input to reduce the noise while retaining as much information as possible to describe or label the topic. The generative process is given as follows: 
+\begin{enumerate}
+\item Collect unique words from user specified field as \textit{S} set.
+\item Generate a set of topics \textit{T} with LDA model.
+\item Calculate result set \textit{R} as: for each topic $t\in{1,...,T}, r_n = t_n \cap S$
+%\item Calculate tr-idf for each term
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Experiments}
+\chapter{Experiments and Result}
+
+We collected all 624 stories from Patient Opinion by August 2014. The count of unique user specified term is 700+?. 100 topics was generated using Mallet \footnote{http://mallet.cs.umass.edu/} with setting of optimize interval equals to 20. A small sample of the original topics and filtered topics  can be found in Table1. 
+\begin{table}[ht]
+\caption{Sample of original and filtered topics}
+\centering
+\begin{tabular}{c|c}
+\hline\hline
+Original & Filtered
+\hline
+time operation good cancer signs today bowel removed quick met smoking operations theatre imagine prostate throat annoying pick workers & time; operation; quick; theatre; workers; \\
+mother died seemingly attended brother attending notes tumour ran requiring corridor called aware group expectations uncaring complain port daily & mother; attending; group;\\
+left due find area put light cubicle finger understand karen remove nice brought pap curtain maree realized ambo carried & area; put; pap;\\
+hospital royal adelaide referral rah admitted wanted country horrible specialists home period man remove acute situation picked takes drive & hospital; royal; adelaide; referral; home; acute; situation;\\
+hospital home days return sick ended cold requested pick awful experiencing allergy pharmacy show looked patient cough flight urinary & hospital; home; days; pharmacy; looked; flight;\\
+
+\hline
+\end{tabular}
+\label{table:Sample of original and filtered topics}
+\end{table}
+
+The total number of terms in the result set \textit{R} is 527, compare to 2000 in original \textit{T} set.
+Table2 shows the sum of tf-idf score for each term in the topic in set  \textit{R} and \textit{T}
+\begin{table}[ht]
+\caption{Sample of td-idf}
+\centering
+\begin{tabular}{c c c}
+\hline\hline
+Doc Index & Original & Filtered
+\hline
+1 & 44.255061 & 26.715446
+2 & 7.310657 & 5.471808
+3 & 25.029969 & 18.133856
+4 & 251.162174 & 189.851251
+5 & 248.397162 & 173.849457
+\hline
+\end{tabular}
+\label{table:Sample of original and filtered topics}
+\end{table}
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~
-\section{A Section}
+\section{Topic Coherence Evaluation}
+Apart from quantitative and qualitative evaluation as above, evaluating topic coherence is a component of the larger question of what are good topics, what characteristics of a document collection make it more amenable to to topic modelling, and how can the potential of topic modellling be harnessed for human consumption (\cite{ref27}). The topic coherence is measured as
+\begin{equation}
+score(\omega_i, \omega_j) = log\frac{D(\omega_i, \omega_j) + 1}{D(\omega_i}
+\end{equation}
+The average is calculated over number of term-pairs.
 
-% ~~~~~~~~~~~~~~~~~~~~~~~~~~
-\section{Another Section}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Conclusion and Future Work}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix
