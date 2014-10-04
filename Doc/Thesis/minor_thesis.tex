@@ -2,13 +2,13 @@
 % Minor thesis template
 % S.M.M. (Saied) Tahaghoghi, 2004
 \documentclass[11pt,twoside]{report}
-\usepackage{a4wide,caption,epsfig,fancyheadings,natbib,url}
+\usepackage{a4wide,caption,epsfig,fancyheadings,natbib,url,multirow,makecell}
 
 % Place the correct values here
 %Set to the original submission date when submitted amended thesis
 \newcommand{\SubmissionDate}{\today}
 \newcommand{\student}{Bin Lu}
-\newcommand{\supervisor}{Dr Jenny Zhang, Dr Daryl D'Souza, Dr Amanda Kimpton}
+\newcommand{\supervisor}{Dr Jenny Zhang, Dr Amanda Kimpton, Dr Daryl D'Souza}
 \newcommand{\topic}{Topic Modelling of Patient Opinion}
 \newcommand{\school}{School of Computer Science and Information Technology}
 \newcommand{\program}{Masters of Computer Science}
@@ -169,7 +169,7 @@ Everything been converted to lower-case, collect all unique words in user specif
 
 \begin{figure}[tp]
     \begin{center}
-    \epsfig{figure=Figs/data_sample1.jpg,width=16.7cm}
+    \epsfig{figure=Figs/data_sample1.jpg,width=8cm}
     \caption
     [Patient Opinion Story Sample]
     {
@@ -186,26 +186,49 @@ Topics learned from LDA sometimes don’t convey much useful information, someti
 \begin{enumerate}
 \item Collect unique words from user specified field as \textit{S} set.
 \item Generate a set of topics \textit{T} with LDA model.
-\item Calculate result set \textit{R} as: for each topic $t\in{1,...,T}, r_n = t_n \cap S$
+\item Calculate result set \textit{R} as: for each topic $t\in\{1,...,T\}, r_n = t_n \cap S$
 %\item Calculate tr-idf for each term
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Experiments and Result}
 
-We collected all 624 stories from Patient Opinion by August 2014. The count of unique user specified term is 700+?. 100 topics was generated using Mallet \footnote{http://mallet.cs.umass.edu/} with setting of optimize interval equals to 20. A small sample of the original topics and filtered topics  can be found in Table1. 
+We collected all 624 stories from Patient Opinion by August 2014. The count of unique user specified term is 659. 100 topics are generated using Mallet \footnote{http://mallet.cs.umass.edu/} with setting of optimize interval equals to 20. A small sample of the original topics and filtered topics  can be found in Table1. 
 \begin{table}[ht]
 \caption{Sample of original and filtered topics}
 \centering
-\begin{tabular}{c|c}
+\begin{tabular}{|c|c|}
 \hline\hline
-Original & Filtered
+Original & Filtered\\
 \hline
-time operation good cancer signs today bowel removed quick met smoking operations theatre imagine prostate throat annoying pick workers & time; operation; quick; theatre; workers; \\
-mother died seemingly attended brother attending notes tumour ran requiring corridor called aware group expectations uncaring complain port daily & mother; attending; group;\\
-left due find area put light cubicle finger understand karen remove nice brought pap curtain maree realized ambo carried & area; put; pap;\\
-hospital royal adelaide referral rah admitted wanted country horrible specialists home period man remove acute situation picked takes drive & hospital; royal; adelaide; referral; home; acute; situation;\\
-hospital home days return sick ended cold requested pick awful experiencing allergy pharmacy show looked patient cough flight urinary & hospital; home; days; pharmacy; looked; flight;\\
+\makecell{time operation good cancer \\
+signs today bowel removed quick met\\
+smoking operations theatre imagine \\
+prostate throat annoying pick workers} & time operation quick theatre workers \\
+\hline
+
+\makecell{mother died seemingly attended\\
+ brother attending notes tumour ran\\ 
+ requiring corridor called aware group \\
+expectations uncaring complain port daily} & mother; attending; group;\\
+\hline
+
+\makecell{left due find area put light\\
+ cubicle finger understand karen \\
+ remove nice brought pap curtain\\
+  maree realized ambo carried} & area; put; pap;\\
+\hline
+
+\makecell{hospital royal adelaide referral \\
+rah admitted wanted country horrible\\
+ specialists home period man remove\\
+  acute situation picked takes drive} & hospital; royal; adelaide; referral; home; acute; situation;\\
+\hline
+  
+\makecell{hospital home days return \\
+sick ended cold requested pick\\
+ awful experiencing allergy pharmacy\\
+ show looked patient cough flight urinary} & hospital; home; days; pharmacy; looked; flight;\\
 
 \hline
 \end{tabular}
@@ -219,13 +242,13 @@ Table2 shows the sum of tf-idf score for each term in the topic in set  \textit{
 \centering
 \begin{tabular}{c c c}
 \hline\hline
-Doc Index & Original & Filtered
+Doc Index & Original & Filtered\\
 \hline
-1 & 44.255061 & 26.715446
-2 & 7.310657 & 5.471808
-3 & 25.029969 & 18.133856
-4 & 251.162174 & 189.851251
-5 & 248.397162 & 173.849457
+1 & 44.255061 & 26.715446\\
+2 & 7.310657 & 5.471808\\
+3 & 25.029969 & 18.133856\\
+4 & 251.162174 & 189.851251\\
+5 & 248.397162 & 173.849457\\
 \hline
 \end{tabular}
 \label{table:Sample of original and filtered topics}
