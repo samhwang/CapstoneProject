@@ -28,6 +28,8 @@ public class RankedLDA {
 		//sM.LoadStory("data" + File.separator + "auStory.txt");
 		sM.LoadStory("auStory.txt");
 		sM.LoadWordStats();
+		
+		TopicCompostion.getInstance().init();
 	}
 	
 	public static void main(String[] args) {
@@ -38,7 +40,6 @@ public class RankedLDA {
 		//rLDA.GenerateMidFile("");
 		//rLDA.LDAScore();
 		//rLDA.CalculateTFIDF("jean");
-		
 		rLDA.LDAScoreEX();
 		
 		System.out.println("End RankedLDA...");
@@ -136,6 +137,7 @@ public class RankedLDA {
 			Vector<Vector<String>> vecTopicTFIDF = new Vector<Vector<String>>();
 			Vector<String> vecUnTopic = new Vector<String>();
 			Vector<Double> vecNewTFIDF = new Vector<Double>();
+			Vector<Float> vecDocWeighting = new Vector<Float>();
 			br = new BufferedReader(new FileReader("all_keys100.txt"));
 			String strLine;
 			while ((strLine = br.readLine()) != null) 
@@ -180,6 +182,7 @@ public class RankedLDA {
 				vecTopicTFIDF.add(vecAllWord);
 		
 				vecTopicToDocIDs.add(vecDocIDs);
+				vecDocWeighting.add(TopicCompostion.getInstance().GetWeighting(vecDocIDs, Integer.valueOf(strTopicID)));
 				
 				if(!vecWord.isEmpty())
 				{
@@ -255,7 +258,7 @@ public class RankedLDA {
 			System.out.println("*******************************************");
 			for(Vector<String> vec : vecUnsortedTopic)
 			{
-				System.out.print(String.format("%f; ", vecNewTFIDF.get(i)));
+				System.out.print(String.format("%f; ", vecDocWeighting.get(i)));
 				i++;
 				String strOut = "";
 				for(String strWord : vec)
