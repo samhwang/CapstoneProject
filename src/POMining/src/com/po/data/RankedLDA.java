@@ -40,6 +40,8 @@ public class RankedLDA {
 		//rLDA.GenerateMidFile("");
 		//rLDA.LDAScore();
 		//rLDA.CalculateTFIDF("jean");
+		
+		
 		rLDA.LDAScoreEX();
 		
 		System.out.println("End RankedLDA...");
@@ -168,17 +170,28 @@ public class RankedLDA {
 					}
 				}
 				
-				double dTotalTFIDF = 0;
+				double dTotalScore = 0;
+				Vector<String> vecStr = new Vector<String>();
 				for(String strWord : arrWords)
 				{
-					double dTFIDF = 0;
-					if(vecDocIDs != null && vecDocIDs.size() > 0)
-						dTFIDF = TFIDFWorker.GetInstance().GetTFIDF(strWord, vecDocIDs);
-					dTotalTFIDF += dTFIDF;
-					vecAllWord.add(strWord + ":" + dTFIDF);
+					Set<String> setStr = sM.GetFullContextTopicSet(strWord);
+					if(setStr!=null)
+					{
+						for(String s : setStr)
+						{
+							if(!vecStr.contains(s))
+								vecStr.add(s);
+						}
+					}
+					else
+					{
+						System.out.println("NULL topic set for :" + strWord);
+					}
+					vecAllWord.add(strWord);
 				}
 				
-				vecAllWord.add(0, String.format("%f", dTotalTFIDF));
+				dTotalScore = TopicCompostion.getInstance().GetWeighting(vecStr, Integer.valueOf(strTopicID));
+				vecAllWord.add(0, String.format("%f", dTotalScore));
 				vecTopicTFIDF.add(vecAllWord);
 		
 				vecTopicToDocIDs.add(vecDocIDs);

@@ -20,6 +20,9 @@ public class StoryManager {
 	private Map<String, Set<String>> mapTotalTopicIndex;
 	private Map<String, Set<String>> mapGoodTopicIndex;
 	private Map<String, Set<String>> mapBadTopicIndex;
+	
+	private Map<String, Set<String>> mapALLWordsCount;
+	
 	private Set<String> setGood;
 	private Set<String> setBad;
 	
@@ -42,6 +45,8 @@ public class StoryManager {
 		mapTotalTopicIndex = new HashMap<String, Set<String>>();
 		mapGoodTopicIndex = new HashMap<String, Set<String>>();
 		mapBadTopicIndex = new HashMap<String, Set<String>>();
+		
+		mapALLWordsCount = new HashMap<String, Set<String>>();
 		
 		nGoodBadCount = 0;
 		nGoodCount = 0;
@@ -138,6 +143,7 @@ public class StoryManager {
 				String strCountry = "AU";
 				Story story = new Story(strID, strTitle, strStory, strTime, strLocation, strAuthor, strRelate, strGood, strBad, strCountry);
 				PreProcessStory(story);
+				CountAllWords(story);
 				StoryParser.getInstance().PreProcessStory(story);
 				mapStory.put(strID, story);
 				}
@@ -148,6 +154,22 @@ public class StoryManager {
 		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	private void CountAllWords(Story story)
+	{
+		Vector<String> vecStory = story.getStory();
+		for(String str : vecStory)
+		{
+			String[] s1 = str.replaceAll("[^a-zA-Z ]", "").split("\\s+");
+			for(String s : s1)
+			{
+				if(!mapALLWordsCount.containsKey(s))
+					mapALLWordsCount.put(s, new HashSet<String>());
+				
+				mapALLWordsCount.get(s).add(story.GetID());
+			}
 		}
 	}
 	
@@ -344,6 +366,14 @@ public class StoryManager {
 		{
 			return mapTotalTopicIndex.get(strTopic);
 		}
+		else
+			return null;
+	}
+	
+	public Set<String> GetFullContextTopicSet(String strTopic)
+	{
+		if(mapALLWordsCount.keySet().contains(strTopic))
+			return mapALLWordsCount.get(strTopic);
 		else
 			return null;
 	}
