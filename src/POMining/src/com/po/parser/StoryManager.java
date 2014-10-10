@@ -60,6 +60,32 @@ public class StoryManager {
 
 	public Collection<Story> getAllStories() { return mapStory.values(); }
 	
+	public int getDocFrequency (String strTerm)
+	{
+		int nRet = 0;
+		
+		if(mapALLWordsCount.containsKey(strTerm))
+			return mapALLWordsCount.get(strTerm).size();
+		
+		return nRet;
+	}
+	
+	public int getDocCoFrequency (String strTerm1, String strTerm2)
+	{
+		int nRet = 0;
+		
+		if(mapALLWordsCount.containsKey(strTerm1) && mapALLWordsCount.containsKey(strTerm2))
+		{
+			for(String str : mapALLWordsCount.get(strTerm2))
+			{
+				if(mapALLWordsCount.get(strTerm1).contains(str))
+					nRet++;
+			}
+		}
+		
+		return nRet;
+	}
+	
 	public Set<String> GetIDsByTopic(String strGoodBad, String strTopic)
 	{
 		if(strGoodBad.equalsIgnoreCase("All"))
@@ -159,17 +185,18 @@ public class StoryManager {
 	
 	private void CountAllWords(Story story)
 	{
-		Vector<String> vecStory = story.getStory();
-		for(String str : vecStory)
+
+		String[] s1 = story.GetRawStory().substring(6).replaceAll("[^a-zA-Z ]", "").split("\\s+");
+		for(String s : s1)
 		{
-			String[] s1 = str.replaceAll("[^a-zA-Z ]", "").split("\\s+");
-			for(String s : s1)
-			{
-				if(!mapALLWordsCount.containsKey(s))
-					mapALLWordsCount.put(s, new HashSet<String>());
+			s = s.trim();
+			if(s.isEmpty())
+				continue;
+			
+			if(!mapALLWordsCount.containsKey(s))
+				mapALLWordsCount.put(s, new HashSet<String>());
 				
-				mapALLWordsCount.get(s).add(story.GetID());
-			}
+			mapALLWordsCount.get(s).add(story.GetID());
 		}
 	}
 	

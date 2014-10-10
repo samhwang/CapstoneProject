@@ -156,16 +156,14 @@ public class RankedLDA {
 					{
 						//strWord += ":"+sM.GetUserTopicTotal().get(strWord);
 						vecWord.add(strWord);
-					}
-					
-					//Set<String> ids = new HashSet<String>();
-					Set<String> ids = sM.GetTopicSet(strWord);
-					if(ids != null)
-					{
-						for(String id : ids)
+						Set<String> ids = sM.GetFullContextTopicSet(strWord);
+						if(ids != null)
 						{
-							if(!vecDocIDs.contains(id))
-								vecDocIDs.add(id);
+							for(String id : ids)
+							{
+								if(!vecDocIDs.contains(id))
+									vecDocIDs.add(id);
+							}
 						}
 					}
 				}
@@ -199,13 +197,14 @@ public class RankedLDA {
 				
 				if(!vecWord.isEmpty())
 				{
+					CalculateTopicCoherence(vecWord);
 					vecWord.add(0, strTopicID);
-					double dTFIDF = 0;
-					for(String str : vecWord)
-					{
-						dTFIDF += TFIDFWorker.GetInstance().GetTFIDF(str, vecDocIDs);
-					}
-					vecNewTFIDF.add(dTFIDF);
+//					double dTFIDF = 0;
+//					for(String str : vecWord)
+//					{
+//						dTFIDF += TFIDFWorker.GetInstance().GetTFIDF(str, vecDocIDs);
+//					}
+//					vecNewTFIDF.add(dTFIDF);
 					vecUnsortedTopic.add(vecWord);
 					int i = 0;
 					boolean bFound = false;
@@ -289,6 +288,46 @@ public class RankedLDA {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	private void CalculateTopicCoherence(Vector<String> vecWords)
+	{
+		Vector<String> vecTempString = new Vector<String>();
+		for(String s : vecWords)
+		{
+			if(vecTempString.isEmpty())
+				vecTempString.add(s);
+			else
+			{
+				boolean bFound = false;
+				for(String s1 : vecTempString)
+				{
+					if(sM.getDocFrequency(s) >= sM.getDocFrequency(s1))
+					{
+						vecTempString.add(vecTempString.indexOf(s1), s);
+						bFound = true;
+						break;
+					}
+				}
+				
+				if(!bFound)
+					vecTempString.add(s);
+			}
+		}
+		
+		double dTopicCoherence = 0;
+		//System.out.println();
+		for(int i = 0; i < vecTempString.size() - 1; i++)
+		{
+			//System.out.print(vecTempString.get(i) + " " + sM.getDocFrequency(vecTempString.get(i)) + " ");
+			
+			for(int j = i + 1; j < vecTempString.size(); j++)
+			{
+				dTopicCoherence += Math.log10(((double)sM.getDocCoFrequency(vecTempString.get(i), vecTempString.get(j)) + 1)/(double)sM.getDocFrequency(vecTempString.get(i)));
+			}
+		}
+		//System.out.println();
+		vecWords.add(0, String.format("[%f]", dTopicCoherence));
 	}
 	
 	private void LDAScore()
