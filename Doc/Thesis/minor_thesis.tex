@@ -147,9 +147,16 @@ Due to the unique characteristic of the data from ‘Patient Opinion’, the exi
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~
 \section{LDA}
-
+Also known as Latent Dirichlet Allocation or discrete PCA is a Bayesian graphical model for text document collections represented by bags-of-words (\cite{ref26}, \cite{ref25}, \cite{ref30}, \cite{ref31}). The model allows sets of observations to be explained by unobserved groups that explain why some parts of the data are similar. Generally, only a small number of words have high likelihood in each topic and each document only presents certain number of topics. Following is the equation of collapsed Gibbs sampling:
+\begin{equation}
+p(z_{id}=t\mid x_{id}=w,Z^{\neg id}) \alpha
+\end{equation}
+\begin{equation}
+\frac{N_{wt}^{\neg id} + \beta}{\sum_{w}N_{wt}^{\neg id} + W\beta} \frac{N_{wt}^{\neg id} + \alpha}{\sum_{w}N_{wt}^{\neg id} + T\alpha}
+\end{equation}
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~
 \section{MDK-LDA}
+As mentioned before, LDA is a powerful topic modeling framework, however recent studies found that these unsupervised models may not produce topics that conform to the user's existing knowledge(\cite{ref24}). Chen et al (\cite{ref24}) proposed a novel knowledge-based model, called MDK-LDA, which is capable of using prior knowledge from multiple domains to help topic modeling in the new domain. A new latent variable 's' is added to model the s-set, each document represent admixture of latent topics while each topic is a probability distribution over s-set. MDK-LDA uses s-set to distinguish topics in multiple senses. For example the world light can be represented by two s-set: {light, heavy, weight} and {light, bright, luminance}, if light co-occurs with bright or luminance it will be assigned to s-set {light, bright, luminance}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{The Approach}
@@ -267,22 +274,29 @@ Original & Filtered\\
 \end{table}
 
 The total number of terms in the result set \textit{R} is 527, compare to 2000 in original \textit{T} set.
-Table4.1 shows the sum of tf-idf score for each term in the topic in set  \textit{R} and \textit{T}
+Table4.1 shows the sum of composition for each term in the topic in set  \textit{R} and \textit{T}
 \begin{table}[ht]
-\caption{Sample of td-idf}
+\caption{Sum of Composition}
 \centering
 \begin{tabular}{c c c}
 \hline\hline
-Doc Index & Original Compostion & Filtered Compostion\\
+Doc Index & Original Composition & Filtered Composition\\
 \hline
-1 & 44.255061 & 26.715446\\
-2 & 7.310657 & 5.471808\\
-3 & 25.029969 & 18.133856\\
-4 & 251.162174 & 189.851251\\
-5 & 248.397162 & 173.849457\\
+1 & 3.920362 & 3.382284\\
+2 & 3.742091 & 3.275150\\
+3 & 4.396231 & 3.930039\\
+4 & 4.275353 & 3.603821\\
+5 & 4.569670 & 4.444751\\
+6 & 3.153133 & 2.775077\\
+7 & 3.368214 & 2.622281\\
+8 & 4.541646 & 4.018145\\
+9 & 5.399709 & 5.194911\\
+10 & 4.498450 & 3.711763\\
+11 & 4.255079 & 4.101976\\
+12 & 6.755018 & 6.489172\\
 \hline
 \end{tabular}
-\label{table:Sample of original and filtered topics}
+\label{table:Topic Composition}
 \end{table}
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -291,7 +305,30 @@ Apart from quantitative and qualitative evaluation as above, evaluating topic co
 \begin{equation}
 score(\omega_i, \omega_j) = log\frac{D(\omega_i, \omega_j) + 1}{D(\omega_i}
 \end{equation}
-The average is calculated over number of term-pairs.
+\begin{table}[ht]
+\caption{Sum of Composition}
+\centering
+\begin{tabular}{c c c}
+\hline\hline
+Doc Index & Original Topic Coherence & Filtered Topic Coherence\\
+\hline
+1 & 0 & -25.093878\\
+2 & 0 & -32.617172\\
+3 & 0 & -27.143555\\
+4 & 0 & -26.677283\\
+5 & 0 & -28.104525\\
+6 & 0 & -31.384130\\
+7 & 0 & -38.548792\\
+8 & 0 & -41.019321\\
+9 & 0 & -31.220371\\
+10 & 0 & -45.495693\\
+11 & 0 & -52.946951\\
+12 & 0 & -57.020165\\
+\hline
+\end{tabular}
+\label{table:Topic Coherence}
+\end{table}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Conclusion and Future Work}
