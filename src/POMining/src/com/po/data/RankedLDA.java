@@ -188,6 +188,7 @@ public class RankedLDA {
 					vecAllWord.add(strWord);
 				}
 				
+				CalculateTopicCoherence(vecAllWord);
 				dTotalScore = TopicCompostion.getInstance().GetWeighting(vecStr, Integer.valueOf(strTopicID));
 				vecAllWord.add(0, String.format("%f", dTotalScore));
 				vecTopicTFIDF.add(vecAllWord);
@@ -327,7 +328,7 @@ public class RankedLDA {
 			}
 		}
 		//System.out.println();
-		vecWords.add(0, String.format("[%f]", dTopicCoherence));
+		vecWords.add(0, String.format("[%f : %f]", dTopicCoherence, dTopicCoherence/(float)vecWords.size()));
 	}
 	
 	private void LDAScore()
