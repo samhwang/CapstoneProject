@@ -29,7 +29,7 @@ public class RankedLDA {
 		sM.LoadStory("auStory.txt");
 		sM.LoadWordStats();
 		
-		TopicCompostion.getInstance().init();
+		//TopicCompostion.getInstance().init();
 	}
 	
 	public static void main(String[] args) {
@@ -42,7 +42,9 @@ public class RankedLDA {
 		//rLDA.CalculateTFIDF("jean");
 		
 		
-		rLDA.LDAScoreEX();
+		//rLDA.LDAScoreEX();
+		
+		rLDA.CalculatePMI();
 		
 		System.out.println("End RankedLDA...");
 
@@ -127,6 +129,63 @@ public class RankedLDA {
 			}
 		}
 
+	}
+	
+	private void CalculatePMI()
+	{
+		BufferedReader br;
+		try {
+			Vector<Vector<String>> vecTopic = new Vector<Vector<String>>();
+			Vector<String> vecUnTopic = new Vector<String>();
+			//br = new BufferedReader(new FileReader("data" + File.separator + "word-mapping.txt"));
+			br = new BufferedReader(new FileReader("all_keys100.txt"));
+			String strLine;
+			int n = 0;
+			while ((strLine = br.readLine()) != null) 
+			{
+				String[] arrWords = (strLine.split("\t")[2]).split(" ");
+				Vector<String> vecWord = new Vector<String>();
+				Vector<String> vecAllWord = new Vector<String>();
+				for(String strWord : arrWords)
+				{
+					if(sM.HasTopic("ALL", strWord))
+					{
+						vecWord.add(strWord);
+					}
+					vecAllWord.add(strWord);
+				}
+				
+				System.out.println(String.format("%d, %f, %f", n, GetPMIScore(vecAllWord), GetPMIScore(vecWord)));
+				n++;
+			}
+			br.close();
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	private float GetPMIScore(Vector<String> vecStr)
+	{
+		float fRet = 0;
+		
+		int i = 1;
+		for(String str : vecStr)
+		{
+			for(int n = i; n < vecStr.size(); n++)
+			{
+				if(sM.getDocFrequency(str) == 0 || sM.getDocFrequency(vecStr.get(n)) == 0)
+					continue;
+				fRet += Math.log10(((float)sM.getDocCoFrequency(str, vecStr.get(n))+1)/((float)(sM.getDocFrequency(str)*(float)(sM.getDocFrequency(vecStr.get(n))))));
+			}
+			i++;
+		}
+		
+		fRet = fRet/(float)(vecStr.size()*(vecStr.size() -1)/2);
+		return fRet;
 	}
 	
 	private void LDAScoreEX()
@@ -328,7 +387,7 @@ public class RankedLDA {
 			}
 		}
 		//System.out.println();
-		vecWords.add(0, String.format("[%f : %f]", dTopicCoherence, dTopicCoherence/(float)vecWords.size()));
+		vecWords.add(0, String.format("[%f : %f]", dTopicCoherence, dTopicCoherence/((float)vecWords.size()*((float)vecWords.size()-1)/2)));
 	}
 	
 	private void LDAScore()
