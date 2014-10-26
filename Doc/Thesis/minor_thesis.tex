@@ -120,8 +120,8 @@ p(z_{id}=t\mid x_{id}=w,Z^{\neg id}) \alpha
 \frac{N_{wt}^{\neg id} + \beta}{\sum_{w}N_{wt}^{\neg id} + W\beta} \frac{N_{wt}^{\neg id} + \alpha}{\sum_{w}N_{wt}^{\neg id} + T\alpha}
 \end{equation}
 
-where z_{id}=t assigns topic t with i^{th} word in document d, and word w currently observed indicated by x_{id}=w.
-Z^{\neg id} is the vector of all topic assignments not including the current word. N_{wt} represent integer count arrays, and \alpha is the parameter of the Dirichlet prior on the per-document topic distributions, \beta is the per-topic word distribution.
+where $z_{id}=t$ assigns topic t with $i^{th}$ word in document d, and word w currently observed indicated by $x_{id}=w$.
+$Z^{\neg id}$ is the vector of all topic assignments not including the current word. $N_{wt}$ represent integer count arrays, and $\alpha$ is the parameter of the Dirichlet prior on the per-document topic distributions, $\beta$ is the per-topic word distribution.
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~
 \section{Multi-Domain Prior Knowledge in Topic Modelling}
@@ -280,7 +280,7 @@ Topic Index & Original Composition & Filtered Composition\\
 \label{table:Topic Composition}
 \end{table}
 
-1116 out of original 1440 terms appears once in T set. So more than half of the term has the highest idf value 2 in the data set. 236 terms appear twice with idf=1.7 and 55 terms appear 3 times with idf = 1.5. There are significant variance in the result topics. Some topics may remain the existing order or only have one word shifted, some may look very differently.  For example, \{program, kate, lifestle, meet, included, learnt, learning, relationship\}, only idf_{kate} = 1.7, the idf for the rest equals to 2. So the new topic becomes \{program, kate, meet, included, learnt, learning, relationship\}. Another example \{bed, family, care, staff, time, attending, unit, palliative\}, idf_{care}=1.3, idf_{staff}=1.2 and idf_{palliative}=2, the rest has idf equals to 1.7, then the new topic should look like \{palliative, bed, family, time, attending, unit, care, staff\}. 
+1116 out of original 1440 terms appears once in T set. So more than half of the term has the highest idf value 2 in the data set. 236 terms appear twice with idf=1.7 and 55 terms appear 3 times with idf = 1.5. There are significant variance in the result topics. Some topics may remain the existing order or only have one word shifted, some may look very differently.  For example, \{program, kate, lifestle, meet, included, learnt, learning, relationship\}, only $idf_{kate} = 1.7$, the idf for the rest equals to 2. So the new topic becomes \{program, kate, meet, included, learnt, learning, relationship\}. Another example \{bed, family, care, staff, time, attending, unit, palliative\}, $idf_{care}=1.3, idf_{staff}=1.2 and idf_{palliative}=2$, the rest has idf equals to 1.7, then the new topic should look like \{palliative, bed, family, time, attending, unit, care, staff\}. 
 
 \begin{table}[h]
 \tiny
