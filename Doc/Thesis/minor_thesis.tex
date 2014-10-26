@@ -66,7 +66,7 @@ This thesis contains work that has not been submitted previously, in
 whole or in part, for any other academic award and is solely my
 original research, except where acknowledged.
 
-This work has been carried out since TODO:MONTH TODO:YEAR, under the
+This work has been carried out since March 2014, under the
 supervision of {\supervisor}.
 
 \paragraph{}
@@ -89,14 +89,57 @@ TODO:THANKS!
 \pagenumbering{arabic}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter*{Abstract}
+Topic models have been widely used to identify topics in text collections. Many studies tried to fit variety of data with existing model or extension of existing model. Since each type of the data has its own characteristic, it is not possible to find a solution to suite all. Current studies cover consumer reviews, blogs, or even twitter. It left few missing pieces, for example healthcare reviews. We study the data from a website called Patient Opinion, it's unique data structure gives us advantage to improve the topic modelling result without modifying baseline model. To achieve this objective, particular fields from user input from Patient Opinion are retrieved, this collection of terms is used to filter out noise from baseline model. Also each term in topic will get ranked by \textit{tf-idf} score in the scope of result topic. Our evaluation demonstrate the effectiveness of topic coherence improvement by reducing the noise. The effectiveness of ranking is overlooked due to the limitation of evaluation method.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Introduction}
-Publicly available opinions and service feedback provide valuable information for decision making for both service providers and consumers. With the help of websites, blogs, forums and social networks, it is never been so easy to express opinions and leave feedback. Analyzing the opinions becomes a challenge, not just because of the quantity of the data, most opinion from general users are free form text. The massive quantity of the data won’t be effectively used until there is a systematically approach of analyzing and summarizing, in this project we focus on topic modeling side, aiming to discover a set of terms that can form a topic, hence with the topics the collection of document can be easily categorized or summarized. Many techniques have been proposed to solve this problem. Most previous studies focus on analyzing product reviews. We are interested to discover a model that suite service reviews. More specifically, reviews relate to healthcare. Study shows the effective governance is increasingly recognized as pivotal to improvements in healthcare quality\cite{ref6}, moreover current issue of effectiveness of the authority is affected by insufficient resource and inadequate information received\cite{ref5}. The object we are going to study is www.patientopinion.org.au, it is a publicly available healthcare forum. It allows user to post their own healthcare related story,  the story can be positive or negative or a bit from both side. Although the story body is free form text, user still has to follow a certain template while submit the story. There is a unique feature of the data from Patient Opinion, user could specify the key word while submitting the story, which we could treat as pre-defined terms for topics, and they will be used weight the terms that generate by the topic model algorithm. 
+Publicly available opinions and service feedback provide valuable information for decision making for both service providers and consumers. With the help of websites, blogs, forums and social networks, it is never been so easy to express opinions and leave feedback. Analyzing the opinions becomes a challenge, not just because of the quantity of the data, most opinion from general users are free form text. The massive quantity of the data won’t be effectively used until there is a systematically approach of analyzing and summarizing, in this project we focus on topic modelling side, aiming to discover a set of terms that can form a topic, hence with the topics the collection of document can be easily categorized or summarized. Many techniques have been proposed to solve this problem. Most previous studies focus on analyzing product reviews. We are interested to discover a model that suite service reviews. More specifically, reviews relate to healthcare. Study shows the effective governance is increasingly recognized as pivotal to improvements in healthcare quality (\cite{ref6}), moreover current issue of effectiveness of the authority is affected by insufficient resource and inadequate information received (\cite{ref5}). The object we are going to study is www.patientopinion.org.au, it is a publicly available healthcare forum. It allows user to post their own healthcare related story,  the story can be positive or negative or a bit from both side. Although the story body is free form text, user still has to follow a certain template while submit the story. There is a unique feature of the data from Patient Opinion, user could specify the key word while submitting the story, which we could treat as pre-defined terms for topics, and they will be used weight the terms that generate by the topic model algorithm. 
 
-MDK-LDA model proposed by Chen\cite{ref24} , the method extends the Latent Dirichlet Allocation (\cite{ref25}), the later one becoming the standard method in topic modelling and been extended in variety ways. The basic idea of LDA is treat each document in a collection as a vector of word count, each document is represented as a probability distribution over a number of topics, while each topic is represented as a probability distribution over a number of words. MDK-LDA introduces a new latent variable s in LDA to model s-sets. Each document is an admixture of latent topics while each topic is a probability distribution over s-sets. Another approach is Aspect-based Summarization (\cite{ref11}), it is usually composed of three main tasks: aspect identification, sentiment classification, and aspect rating. Generally this model is used to analyzing product review, it is designed to effectively retrieve features and sentiment for products.
+MDK-LDA model proposed by Chen (\cite{ref24}) , the method extends the Latent Dirichlet Allocation (\cite{ref25}), the later one becoming the standard method in topic modelling and been extended in variety ways. The basic idea of LDA is treat each document in a collection as a vector of word count, each document is represented as a probability distribution over a number of topics, while each topic is represented as a probability distribution over a number of words. MDK-LDA introduces a new latent variable s in LDA to model s-sets. Each document is an admixture of latent topics while each topic is a probability distribution over s-sets. Another approach is Aspect-based Summarization (\cite{ref11}), it is usually composed of three main tasks: aspect identification, sentiment classification, and aspect rating. Generally this model is used to analyzing product review, it is designed to effectively retrieve features and sentiment for products.
 
-\begin{figure}[tp]
+Due to the unique characteristic of the data from ‘Patient Opinion’, we could improve existing algorithm with the additional information from the data set. LDA has been approved a very effective  model, and been used as a based model in many topic modelling studies. We choose LDA as our base model, and incorporate unique feature in ‘Patient Opinion’, specifically the section of ‘What’s Good’ and ‘What could be improved’. These two sections are filled in by user while submitting the story, the template is provided by the website. Generally this will be the main topic or features user want to give feedback about in the story. And we assume user labelled story 100% accurate.
+\section{Research Question}
+\begin{itemize}
+\item How to use user specified key words to improve the performance and accuracy in topic modelling.
+\end{itemize}
+
+\section{Research Contribution}
+The project has made the following contribution to the field of topic modelling by using the LDA as base framework:
+By introducing the user specified terms, the number of term that form each topic could be reduced significantly while retain the quality of the topic.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Related Works}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~
+\section{Topic Modelling}
+Also known as Latent Dirichlet Allocation or discrete PCA is a Bayesian graphical model for text document collections represented by bags-of-words (\cite{ref26}, \cite{ref25}, \cite{ref30}, \cite{ref31}). The model allows sets of observations to be explained by unobserved groups that explain why some parts of the data are similar. Generally, only a small number of words have high likelihood in each topic and each document only presents certain number of topics. Following is the equation of collapsed Gibbs sampling:
+\begin{equation}
+p(z_{id}=t\mid x_{id}=w,Z^{\neg id}) \alpha
+\end{equation}
+\begin{equation}
+\frac{N_{wt}^{\neg id} + \beta}{\sum_{w}N_{wt}^{\neg id} + W\beta} \frac{N_{wt}^{\neg id} + \alpha}{\sum_{w}N_{wt}^{\neg id} + T\alpha}
+\end{equation}
+
+where z_{id}=t assigns topic t with i^{th} word in document d, and word w currently observed indicated by x_{id}=w.
+Z^{\neg id} is the vector of all topic assignments not including the current word. N_{wt} represent integer count arrays, and \alpha is the parameter of the Dirichlet prior on the per-document topic distributions, \beta is the per-topic word distribution.
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~
+\section{Multi-Domain Prior Knowledge in Topic Modelling}
+As mentioned before, LDA is a powerful topic modelling framework, however recent studies found that these unsupervised models may not produce topics that conform to the user's existing knowledge(\cite{ref24}). Chen et al (\cite{ref24}) proposed a novel knowledge-based model, called MDK-LDA, which is capable of using prior knowledge from multiple domains to help topic modelling in the new domain. A new latent variable 's' is added to model the s-set, each document represent admixture of latent topics while each topic is a probability distribution over s-set. MDK-LDA uses s-set to distinguish topics in multiple senses. For example the word light can be represented by two s-set: S1 \{light, heavy, weight\} and S2 \{light, bright, luminance\}, if light co-occurs with bright or luminance it will be assigned to S2.
+In conclusion, MDK-LDA outperforms base LDA model, in other word, the extra information improved the quality of result. 
+ccurs with bright or luminance it will be assigned to s-set {light, bright, luminance}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Improve topic coherence by using user input}
+
+Although LDA provides a powerful framework for extracting latent topics in text document, but sometimes learned topics are lists of words that do not convey much useful information (\cite{ref26}). Some extrinsic evaluation has been used to demonstrate the effectiveness of the learned topic in the application domain, but standardly, no attempt has been made to perform intrinsic evaluation of the topics themselves, either qualitatively or quantitatively (\cite{ref27}). To solve the problem, base LDA model had been extended either by incorporating human judgement in to the model-learning framework or creating a computational proxy that simulates human judgements (\cite{ref28}), for example the MDK-LDA model (\cite{ref24}) we introduced in section 2.
+Due to the unique characteristic of the data of Patient Opinion, we use user input to simulate human judgement, hence to produce a better quality topic modelling result.
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~
+\section{Description of Data}
+
+Data from Patient Opinion contains many informations, however we only interested in few parts of them in our project Figure 1: 1) The title of the story, it’s the summary of story by the user. 2) The author role and time of the post, the role could be the patient, patient’s relative, carer or doctor. 3) The more about section is from website moderator, it inserts relevant tags to the story. 4) \& 5) are the most important fields to our project, these field are inserted by the user, the fields indicate what user thinks the story is about, and we use these fields to simulate user judgement in topic modelling….
+\begin{figure}[h]
     \begin{center}
     \epsfig{figure=Figs/story_sample.jpg,width=16.7cm}
     \caption
@@ -132,42 +175,6 @@ MDK-LDA model proposed by Chen\cite{ref24} , the method extends the Latent Diric
     \end{center}
 \end{figure}
 
-Due to the unique characteristic of the data from ‘Patient Opinion’, we could improve existing algorithm with the additional information from the data set. LDA has been approved a very effective  model, and been used as a based model in many topic modelling studies. We choose LDA as our base model, and incorporate unique feature in ‘Patient Opinion’, specifically the section of ‘What’s Good’ and ‘What could be improved’. These two sections are filled in by user while submitting the story, the template is provided by the website. Generally this will be the main topic or features user want to give feedback about in the story. And we assume user labeled story 100% accurate. 
-\begin{itemize}
-\item How to use user specified key words to improve the performance and accuracy in topic modelling.
-\end{itemize}
-
-\section{Research Contribution}
-The project has made the following contribution to the field of topic modeling by using the LDA as base framework:
-By introducing the user specified key words, the number of term to form each topic could be reduced significantly while retain the quality of the topic,
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{Related Works}
-
-% ~~~~~~~~~~~~~~~~~~~~~~~~~~
-\section{LDA}
-Also known as Latent Dirichlet Allocation or discrete PCA is a Bayesian graphical model for text document collections represented by bags-of-words (\cite{ref26}, \cite{ref25}, \cite{ref30}, \cite{ref31}). The model allows sets of observations to be explained by unobserved groups that explain why some parts of the data are similar. Generally, only a small number of words have high likelihood in each topic and each document only presents certain number of topics. Following is the equation of collapsed Gibbs sampling:
-\begin{equation}
-p(z_{id}=t\mid x_{id}=w,Z^{\neg id}) \alpha
-\end{equation}
-\begin{equation}
-\frac{N_{wt}^{\neg id} + \beta}{\sum_{w}N_{wt}^{\neg id} + W\beta} \frac{N_{wt}^{\neg id} + \alpha}{\sum_{w}N_{wt}^{\neg id} + T\alpha}
-\end{equation}
-% ~~~~~~~~~~~~~~~~~~~~~~~~~~
-\section{MDK-LDA}
-As mentioned before, LDA is a powerful topic modeling framework, however recent studies found that these unsupervised models may not produce topics that conform to the user's existing knowledge(\cite{ref24}). Chen et al (\cite{ref24}) proposed a novel knowledge-based model, called MDK-LDA, which is capable of using prior knowledge from multiple domains to help topic modeling in the new domain. A new latent variable 's' is added to model the s-set, each document represent admixture of latent topics while each topic is a probability distribution over s-set. MDK-LDA uses s-set to distinguish topics in multiple senses. For example the world light can be represented by two s-set: {light, heavy, weight} and {light, bright, luminance}, if light co-occurs with bright or luminance it will be assigned to s-set {light, bright, luminance}.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\chapter{The Approach}
-
-Although LDA provides a powerful framework for extracting latent topics in text document, but sometimes learned topics are lists of words that do not convey much useful information (\cite{ref26}). Some extrinsic evaluation has been used to demonstrate the effectiveness of the learned topic in the application domain, but standardly, no attempt has been made to perform intrinsic evaluation of the topics themselves, either qualitatively or quantitatively (\cite{ref27}). To solve the problem, base LDA model had been extended either by incorporating human judgement in to the model-learning framework or creating a computational proxy that simulates human judgements (\cite{ref28}), for example the MDK-LDA model (\cite{ref24}) we introduced in section 2.
-Due to the unique characteristic of the data of Patient Opinion, we use user input to simulate human judgement, hence to produce a better quality topic modelling result.
-
-% ~~~~~~~~~~~~~~~~~~~~~~~~~~
-\section{Description of Data}
-
-Data from Patient Opinion contains many informations, however we only interested in few parts of them in our project Figure 1: 1) The title of the story, it’s the summary of story by the user. 2) The author role and time of the post, the role could be the patient, patient’s relative, carer or doctor. 3) The more about section is from website moderator, it inserts relevant tags to the story. 4) \& 5) are the most important fields to our project, these field are inserted by the user, the fields indicate what user thinks the story is about, and we use these fields to simulate user judgement in topic modelling….
-
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~
 \section{Preprocessing of Data}
 
@@ -193,16 +200,91 @@ Topics learned from LDA sometimes don’t convey much useful information, someti
 \item Collect unique words from user specified field as \textit{S} set.
 \item Generate a set of topics \textit{T} with LDA model.
 \item Calculate result set \textit{R} as: for each topic $t\in\{1,...,T\}, r_n = t_n \cap S$
-%\item Calculate tr-idf for each term
+\item Treat the result T as collection of document, calculate idf for each term with $idf(t, D) = log\frac{N}{\mid \{d\in D : t\in D\}\mid}$, where N = 100 represent the 100 topics generated with LDA. The original tf-idf method is not used, for each term the tf for current document always equals to 1. 
+\item Re-arrange terms in set R with idf score, so the more significant word appear in front of each topic.
 \end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Experiments and Result}
 
-We collected all 624 stories from Patient Opinion by August 2014. The count of unique user specified term is 659. 100 topics are generated using Mallet \footnote{http://mallet.cs.umass.edu/} with setting of optimize interval equals to 20. Table4.1 shows top 12 topics. The rank is measured by the number of term matched between user specified terms and Mallet generated topic terms.
-\begin{table}[ht]
+We collected all 624 stories from Patient Opinion by August 2014. The count of unique user specified term is 659. 100 topics are generated using Mallet \footnote{http://mallet.cs.umass.edu/} with setting of optimize interval equals to 20.  The number of unique terms in the result set R is 527, compare to 1440 in the original T set. 
+Table 4.1 Shows the topic composition, which is the per topic probability distribution over documents. Rows represent documents with document ID in first column and the remaining columns represent topic probability distributions over current document. 
+\begin{table}[h]
 \tiny
-\caption{Top 12 topics}
+\caption{Example of Composition}
+\centering
+\begin{tabular}{| c | c | c | c | c | c | c | c | c | c |}
+\hline\hline
+Doc ID & Topic Index & Composition & Topic Index & Composition & ... & Topic Index & Composition & Topic Index & Composition\\
+\hline
+58954 & 61 & 0.1171875 & 91 & 0.0390625 &...& 78 & 0.0234375 & 72 & 0.0234375\\
+\hline
+58832 & 83 & 0.076388889 & 78 & 0.048611111 &...& 10 & 0.048611111 & 71 & 0.034722222\\
+\hline
+58953 & 83 & 0.077380952 & 65 & 0.053571429 &...& 29 & 0.041666667 & 60 & 0.029761905\\
+\hline
+58956 & 78 & 0.025 & 76 & 0.025 &...& 65 & 0.025 & 62 & 0.025\\
+\hline
+58834 & 42 & 0.065517241 & 11 & 0.065517241 &...& 58 & 0.037931034 & 44 & 0.037931034\\
+\hline
+58710 & 12 & 0.108208955 & 18 & 0.063432836 &...& 90 & 0.041044776 & 71 & 0.041044776\\
+\hline
+58952 & 91 & 0.044642857 & 73 & 0.026785714 &...& 59 & 0.026785714 & 36 & 0.026785714\\
+\hline
+58830 & 94 & 0.108490566 & 80 & 0.051886792 &...& 99 & 0.04245283 & 71 & 0.04245283\\
+\hline
+58951 & 93 & 0.0625 & 81 & 0.052884615 &...& 0 & 0.052884615 & 79 & 0.043269231\\
+\hline
+58719 & 51 & 0.27238806 & 27 & 0.063432836 &...& 42 & 0.026119403 & 22 & 0.026119403\\
+\hline
+58716 & 77 & 0.041666667 & 90 & 0.025 &...& 73 & 0.025 & 62 & 0.025\\
+\hline
+58718 & 83 & 0.242307692 & 47 & 0.05 &...& 71 & 0.042307692 & 11 & 0.034615385\\
+\hline
+58839 & 25 & 0.070512821 & 63 & 0.032051282 &...& 59 & 0.032051282 & 58 & 0.032051282\\
+\hline
+58717 & 43 & 0.050660793 & 57 & 0.046255507 &...& 92 & 0.04185022 & 72 & 0.04185022\\
+\hline
+58723 & 91 & 0.028301887 & 68 & 0.028301887 &...& 35 & 0.028301887 & 99 & 0.009433962\\
+\hline
+58965 & 83 & 0.097014925 & 1 & 0.037313433 &...& 77 & 0.02238806 & 72 & 0.02238806\\
+\hline
+\end{tabular}
+\label{table:Example of Composition}
+\end{table}
+
+
+The total composition score for each topic is calculate with the help from term to document ID index we build before. 
+Clearly, the total composition of T is expected to greater than it's subset R. The average difference of composition between T and R over 100 topics is 1.0829, there are 58 topics has the difference below the average, we consider the probability of distribution of the topic over the documents still significant in that 58 topics. A sample of the topics are selected from remaining topics, see Table4.2. 
+\begin{table}[h]
+\caption{Sum of Composition}
+\centering
+\begin{tabular}{c c c}
+\hline\hline
+Topic Index & Original Composition & Filtered Composition\\
+\hline
+1 & 3.920362 & 3.382284\\
+2 & 3.742091 & 3.275150\\
+3 & 4.396231 & 3.930039\\
+4 & 4.275353 & 3.603821\\
+5 & 4.569670 & 4.444751\\
+6 & 3.153133 & 2.775077\\
+7 & 3.368214 & 2.622281\\
+8 & 4.541646 & 4.018145\\
+9 & 5.399709 & 5.194911\\
+10 & 4.498450 & 3.711763\\
+11 & 4.255079 & 4.101976\\
+12 & 6.755018 & 6.489172\\
+\hline
+\end{tabular}
+\label{table:Topic Composition}
+\end{table}
+
+1116 out of original 1440 terms appears once in T set. So more than half of the term has the highest idf value 2 in the data set. 236 terms appear twice with idf=1.7 and 55 terms appear 3 times with idf = 1.5. There are significant variance in the result topics. Some topics may remain the existing order or only have one word shifted, some may look very differently.  For example, \{program, kate, lifestle, meet, included, learnt, learning, relationship\}, only idf_{kate} = 1.7, the idf for the rest equals to 2. So the new topic becomes \{program, kate, meet, included, learnt, learning, relationship\}. Another example \{bed, family, care, staff, time, attending, unit, palliative\}, idf_{care}=1.3, idf_{staff}=1.2 and idf_{palliative}=2, the rest has idf equals to 1.7, then the new topic should look like \{palliative, bed, family, time, attending, unit, care, staff\}. 
+
+\begin{table}[h]
+\tiny
+\caption{Sample topics}
 \centering
 \begin{tabular}{|c|c|}
 \hline\hline
@@ -269,142 +351,65 @@ Original & Filtered\\
 	part clients topics art groups guest} & \makecell{health community sarah local primary medicare rural\\ group people murrumbidgee clients guest}\\
 \hline
 \end{tabular}
-\label{table:Sample of top 20 original and filtered topics}
-\end{table}
-
-The total number of terms in the result set \textit{R} is 527, compare to 1900 in original \textit{T} set.
-Table 4.1 Shows the topic composition, which is the per topic probability distribution over documents. Rows represent documents with document ID in first column and the remaining columns represent topic probability distributions. 
-We calculate the total composition for each topic over related documents.\\
-\begin{table}[ht]
-\tiny
-\caption{Example of Composition}
-\centering
-\begin{tabular}{| c | c | c | c | c | c | c | c | c | c |}
-\hline\hline
-Doc ID & Topic Index & Composition & Topic Index & Composition & ... & Topic Index & Composition & Topic Index & Composition\\
-\hline
-58954 & 61 & 0.1171875 & 91 & 0.0390625 &...& 78 & 0.0234375 & 72 & 0.0234375\\
-\hline
-58832 & 83 & 0.076388889 & 78 & 0.048611111 &...& 10 & 0.048611111 & 71 & 0.034722222\\
-\hline
-58953 & 83 & 0.077380952 & 65 & 0.053571429 &...& 29 & 0.041666667 & 60 & 0.029761905\\
-\hline
-58956 & 78 & 0.025 & 76 & 0.025 &...& 65 & 0.025 & 62 & 0.025\\
-\hline
-58834 & 42 & 0.065517241 & 11 & 0.065517241 &...& 58 & 0.037931034 & 44 & 0.037931034\\
-\hline
-58710 & 12 & 0.108208955 & 18 & 0.063432836 &...& 90 & 0.041044776 & 71 & 0.041044776\\
-\hline
-58952 & 91 & 0.044642857 & 73 & 0.026785714 &...& 59 & 0.026785714 & 36 & 0.026785714\\
-\hline
-58830 & 94 & 0.108490566 & 80 & 0.051886792 &...& 99 & 0.04245283 & 71 & 0.04245283\\
-\hline
-58951 & 93 & 0.0625 & 81 & 0.052884615 &...& 0 & 0.052884615 & 79 & 0.043269231\\
-\hline
-58719 & 51 & 0.27238806 & 27 & 0.063432836 &...& 42 & 0.026119403 & 22 & 0.026119403\\
-\hline
-58716 & 77 & 0.041666667 & 90 & 0.025 &...& 73 & 0.025 & 62 & 0.025\\
-\hline
-58718 & 83 & 0.242307692 & 47 & 0.05 &...& 71 & 0.042307692 & 11 & 0.034615385\\
-\hline
-58839 & 25 & 0.070512821 & 63 & 0.032051282 &...& 59 & 0.032051282 & 58 & 0.032051282\\
-\hline
-58717 & 43 & 0.050660793 & 57 & 0.046255507 &...& 92 & 0.04185022 & 72 & 0.04185022\\
-\hline
-58723 & 91 & 0.028301887 & 68 & 0.028301887 &...& 35 & 0.028301887 & 99 & 0.009433962\\
-\hline
-58965 & 83 & 0.097014925 & 1 & 0.037313433 &...& 77 & 0.02238806 & 72 & 0.02238806\\
-\hline
-\end{tabular}
-\label{table:Example of Composition}
-\end{table}
-
-Table4.2 shows the sum of composition for each term in the topic in set  \textit{R} and \textit{T}
-\begin{table}[ht]
-\caption{Sum of Composition}
-\centering
-\begin{tabular}{c c c}
-\hline\hline
-Topic Index & Original Composition & Filtered Composition\\
-\hline
-1 & 3.920362 & 3.382284\\
-2 & 3.742091 & 3.275150\\
-3 & 4.396231 & 3.930039\\
-4 & 4.275353 & 3.603821\\
-5 & 4.569670 & 4.444751\\
-6 & 3.153133 & 2.775077\\
-7 & 3.368214 & 2.622281\\
-8 & 4.541646 & 4.018145\\
-9 & 5.399709 & 5.194911\\
-10 & 4.498450 & 3.711763\\
-11 & 4.255079 & 4.101976\\
-12 & 6.755018 & 6.489172\\
-\hline
-\end{tabular}
-\label{table:Topic Composition}
+\label{table:Sample of original and filtered topics}
 \end{table}
 
 % ~~~~~~~~~~~~~~~~~~~~~~~~~~
 \section{Topic Coherence Evaluation}
-Apart from quantitative and qualitative evaluation as above, evaluating topic coherence is a component of the larger question of what are good topics, what characteristics of a document collection make it more amenable to to topic modelling, and how can the potential of topic modellling be harnessed for human consumption (\cite{ref27}). The topic coherence is measured as
+Apart from quantitative and qualitative evaluation as above, evaluating topic coherence is a component of the larger question of what are good topics, what characteristics of a document collection make it more amenable to topic modelling, and how can the potential of topic modelling be harnessed for human consumption (\cite{ref27}). The topic coherence is measured with Pointwise Mutual Information (\cite{ref32}) (PMI) score:
 \begin{equation}
-score(\omega_i, \omega_j) = log\frac{D(\omega_i, \omega_j) + 1}{D(\omega_i}
+PMI-Score(w) = (\frac{N^{2}-N}{2})^{-1}\sum PMI(w_{i}, w_{j}), ij\in \{1...N\}
 \end{equation}
-\begin{table}[ht]
-\caption{Topic Coherence}
+\begin{equation}
+where PMI(w_{i}, w_{j}) = log \frac{P(w_{i}, w{j})}{P(w_{i})P(w_{j})},
+\end{equation}
+Since the number of term that form each topic isn't normalized, we calculate the average of the topic, where N is the number of terms in that topic. $(\frac{N^{2}-N}{2})^{-1}$ gives the number of distinct pairs in N.
+The measure is symmetric $P(w_{i}, w{j}) = P(w_{j}, w{i})$, which means we only measure the difference of topic coherence between original topic and filtered topic.
+
+Table4.? Shows some samples of the PMI scores, plus the difference between two PMI in last column. As we can see from the result, the majority of the topics result in improvement of coherence, and the overall average is 0.297. A paired-t test shows the $P=3.76e^{-22}$, which means the filtered topic is significant from the original one.
+
+\begin{table}[h]
+\caption{PMI Scores}
 \centering
-\begin{tabular}{c c c}
+\begin{tabular}{c c c c}
 \hline\hline
-Topic Index & Original Topic Coherence & Filtered Topic Coherence\\
+Topic Index & Original Topic PMI Scores & Filtered Topic PMI Scores & Difference\\
 \hline
-1 & -141.543730 & -25.093878\\
-2 & -171.938911 & -32.617172\\
-3 & -168.657472 & -27.143555\\
-4 & -167.205805 & -26.677283\\
-5 & -171.837855 & -28.104525\\
-6 & -168.936407 & -31.384130\\
-7 & -180.175893 & -38.548792\\
-8 & -186.410325 & -41.019321\\
-9 & -172.185313 & -31.220371\\
-10 & -172.321256 & -45.495693\\
-11 & -182.101604 & -52.946951\\
-12 & -151.804997 & -57.020165\\
+1 & 1.864771 & 2.040466 & 0.175695\\
+2 & 1.844573 & 2.305665 & 0.461092\\
+3 & 1.543335 & 1.928804 & 0.385469\\
+4 & 2.145729 & 2.333656 & 0.187927\\
+5 & 1.912059 & 2.195632 & 0.283573\\
+6 & 1.854318 & 2.341428 & 0.48711\\
+7 & 1.748795 & 2.33346 & 0.584665\\
+8 & 1.899982 & 2.624272 & 0.72429\\
+9 & 1.752184 & 1.80262 & 0.050436\\
+10 & 2.152952 & 2.371954 & 0.219002\\
+11 & 1.986177 & 2.120463 & 0.134286\\
+12 & 1.776924 & 2.030256 & 0.253332\\
 \hline
 \end{tabular}
-\label{table:Topic Coherence}
+\label{table:PMI Scores}
 \end{table}
 
-Since the number of term that form each topic isn't normalized, we calculate the average of the topic coherence with:
-\begin{table}[ht]
-\caption{Average Topic Coherence}
-\centering
-\begin{tabular}{c c c}
-\hline\hline
-Topic Index & Original Topic Coherence & Filtered Topic Coherence\\
-\hline
-1 & -7.449670 & -3.136735\\
-2 & -9.049416 & -4.077146\\
-3 & -8.876709 & -3.392944\\
-4 & -8.800306 & -3.334660\\
-5 & -9.044098 & -3.513066\\
-6 & -8.891390 & -3.923016\\
-7 & -9.482942 & -4.283199\\
-8 & -9.811070 & -4.557702\\
-9 & -9.062385 & -3.468930\\
-10 & -9.069540 & -4.549569\\
-11 & -9.584295 & -5.294695\\
-12 & -7.989737 & -4.751680\\
-\hline
-\end{tabular}
-\label{table:Average Topic Coherence}
-\end{table}
+\begin{figure}[tp]
+    \begin{center}
+    \epsfig{figure=Figs/pmi.jpg,width=8cm}
+    \caption
+    [PMI-Score]
+    {
+    PMI-Score
+    \label{Figure5}
+    }
+    \end{center}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Conclusion and Future Work}
+This study shows the possibility of using user input to improve topic coherence in topic modelling of healthcare related blogs. To the best of our knowledge, this has not been done before. We proposed a method that use user input words as a filter for the result from baseline LDA model. We successfully reduced the number terms in each topic while still keep the topic meaningful, the terms that been omitted can be considered as noise, which means the documents they associate to do not significantly contribute to the possibility distribution over the topic, this is evaluated by the total composition score. Hence the overall topic coherence is improved as less noise in the topic. Furthermore, we experiment using tf-idf to re-rank the terms in each topic. Unfortunately, PMI-score evaluation is symmetric, which means the order of each term in topic isn't taken in count. We couldn't find an existing statistical model to fit in the evaluation. 
+Our method of ranking the terms by idf isn't ideal, since the term frequency for each term for in a topic always equals to 1, this approach is reasonable for step 1. With more resources in the future work, this approach could be expended to count term frequency in the scope of whole collection of documents, and idf still from the topic list. If the scope of the factor expended to the whole collection, it is also reasonable to rank the topics not only the terms in each topic, hence the model could make suggestions of which topic is more likely an important one.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\appendix
-\chapter{Testbed Configuration}
 
 \bibliographystyle{abbrvnat}
 \bibliography{Bib/strings,Bib/main}
