@@ -233,11 +233,11 @@ As most topic modeling studies, MDK-LDA studies data of product reviews. The dat
 \section{Intrinsic qualitative evaluation of learned topics}
 With the strong interest within computational linguistics in techniques for learning topics which capture the latent semantics of a document collection, many models have been proposed for example, LDA and MDK-LDA we mentioned above. Extrinsic evaluation has been used to demonstrate the effectiveness of the learned topic in the application domain but, no attempt has been made to perform intrinsic evaluation of the topics themselves either qualitatively or quantitatively, Newman (\cite{ref27}) introduces the novel task of topic coherence evaluation. A range of topic scoring models to the evaluation task are applied, drawing on WordNet, Wikipedia and the Google search engine and compared with human scores for a set of learned topics. The evaluation metrics:
 \begin{equation}
-Mean-D-Score(t) =  mean{D(w_{i}, w_{j}, ij\in 1…10, i<j)}
+Mean-D-Score(t) =  mean\{D(w_{i}, w_{j}), ij\in 1\cdots 10, i<j)\}
 \end{equation}
 
 \begin{equation}
-Median-D-Score(t) =  median{D(w_{i}, w_{j}, ij\in 1…10, i<j)}
+Median-D-Score(t) =  median\{D(w_{i}, w_{j}), ij\in 1\cdots 10, i<j)\}
 \end{equation}
 
 Given the topic t based on the component terms $(w_{1}…w_{10}$ and word-similarity measure $D(w_{i}, w_{j})$, the total number of word-pair over 10 words is 45. The experiment collected 55,000 news articles from English Gigaword, and the collection of 12,000 books was downloaded from the Internet Archive. 200 and 400 topics are learned from topic modeling for news and books respectively. Then a total of 237 topics are select from two collection for user scoring. 9 users scored 237 topics on a 3-point scale where 3=``useful'' (coherent) and 1 = ``useless''(less coherent). The inter-annotator agreement (IAA) score is treated as the ``Gold-standard'', of all the topic scoring methods tested, Pointwise Mutual Information (PMI) is the most consistent performer, achieving the best or near-best results over both datasets. 
@@ -249,13 +249,13 @@ Due to the consistency of PMI, we will use this method to measure topic coherenc
 \section{Best Topic Word Selection for Topic Labelling}
 Naturally, not all topics are equally coherent, and the higher the topic coherence, the easier the label selection task becomes. Lau (\cite{ref33}) proposed a method to select best topic word for topic labelling based on word probability model. The conditional probability used in the study:
 \begin{equation}
-P(w_{i}\mid w_{j} = \frac{P(w_{i}, w_{j})}{P(w_{j})}
+P(w_{i}\mid w_{j}) = \frac{P(w_{i}, w_{j})}{P(w_{j})}
 \end{equation}
-where $i\neq j$ and $P(w_{i}, w_{j})$ is the probability of observing both $w_{i}$ and $w_{j}$ in the same sliding window, and $P(w_{i}$ is the overall probability of word $w_{i}$ in the corpus. Then average of conditional probability for word $w_{i}$ is calculated by:
+where $i\neq j$ and $P(w_{i}, w_{j})$ is the probability of observing both $w_{i}$ and $w_{j}$ in the same sliding window, and $P(w_{i})$ is the overall probability of word $w_{i}$ in the corpus. Then average of conditional probability for word $w_{i}$ is calculated by:
 \begin{equation}
 avg-CP1(w_{i}) = \frac{1}{9} \sum_{j}P(w_{i} \mid w_{j})
 \end{equation}
-for j = 1 … 1, $j \neq i$, as the study focus on top 10 topic words. The flipped situation also tested, where the most representative word may evoke (rather than be evoked by) other words in the list of ten word, the equation becomes:
+for $j = 1\cdots 10$, $j \neq i$, as the study focus on top 10 topic words. The flipped situation also tested, where the most representative word may evoke (rather than be evoked by) other words in the list of ten word, the equation becomes:
 \begin{equation}
 avg-CP1(w_{i}) = \frac{1}{9} \sum_{j}P(w_{j} \mid w_{i})
 \end{equation}
@@ -438,7 +438,7 @@ When collect unique user specified keywords the phrase is break down to words, b
 We collected all 624 stories from Patient Opinion by August 2014. The count of unique user specified term is 659. One hundred topics are generated using Mallet \footnote{http://mallet.cs.umass.edu/} with setting of optimize interval equals to 20.  The number of unique terms in the overall topic set and also in user specified keywords set is 527, compare to 1440 unique terms in the overall topic set. One of the metrics Mallet provide is Topic Composition which is per topic probability distributions over current document ( $P(T \mid D)$ ) which in other word the probability of T given document D. For each document the sum of composition over total topic should always be 1:
 
 \begin{equation}
-\sum_{t=1}^100 P(t\mid D) = 1
+\sum_{t=1}^{100} P(t\mid D) = 1
 \end{equation}
 
 Table \ref{table:Composition} includes the topic composition. Rows represent documents with document identification (the document ID is the unique number from Patient Opinion Australia, the number can be used to retrieve the original document, not the index of document as by today there are only 624 stories in total) in first column and the remaining columns represent topic probability distributions over current document. 
