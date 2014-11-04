@@ -223,7 +223,7 @@ admixture of latent topics while each topic is a probability distribution over s
 MDK-LDA uses s-set to distinguish topics in multiple senses. 
 For example the word light can be represented by two s-set: S1 \{light, heavy, weight\} and S2 \{light, bright, luminance\}, if light co-occurs with bright or 
 luminance it will be assigned to S2.
-The words in each topic are ranked by per-topic word distribution $\pi _{t}(w) = \sum_{s=1}^s (\psi_{t}(s)\cdot \eta_{t,s}(w) )$ where \psi_t{s} is a per topic distribution over s-sets and \eta_{t,s}(w) is per topic, per s-set distribution over word. To evaluate the discovered topics, two human domain experts are employed, top 20 words from each topic are selected based one previous ranking. Each word in a topic is considered correct if both experts agree, otherwise the word is labelled as incorrect. A natural way to evaluated these rankings is to use Precision @ n ( or p@n), where n is the rank position. The MDK-LDA was measured against base model with settings p@n for n = 5, 10, 15 and 20. As a result MDK-LDA outperforms base LDA model in each test, the overall average precision score is 0.67 and 0.88 for LDA and MDK-LDA respectively, a paired t-test also conducted with the result of $p < 0.0001$ which means a statistically significance  between LDA and MDK-LDA. The study concluded Multi-Domain Prior Knowledge can be used to improve topic modeling. 
+The words in each topic are ranked by per-topic word distribution $\pi _{t}(w) = \sum_{s=1}^s (\psi_{t}(s)\cdot \eta_{t,s}(w) )$ where $\psi_t{s}$ is a per topic distribution over s-sets and $\eta_{t,s}(w)$ is per topic, per s-set distribution over word. To evaluate the discovered topics, two human domain experts are employed, top 20 words from each topic are selected based one previous ranking. Each word in a topic is considered correct if both experts agree, otherwise the word is labelled as incorrect. A natural way to evaluated these rankings is to use Precision @ n ( or p@n), where n is the rank position. The MDK-LDA was measured against base model with settings p@n for n = 5, 10, 15 and 20. As a result MDK-LDA outperforms base LDA model in each test, the overall average precision score is 0.67 and 0.88 for LDA and MDK-LDA respectively, a paired t-test also conducted with the result of $p < 0.0001$ which means a statistically significance  between LDA and MDK-LDA. The study concluded Multi-Domain Prior Knowledge can be used to improve topic modeling. 
 As most topic modeling studies, MDK-LDA studies data of product reviews. The data is from six domains from Amazon.com. And for this model to work, a prior domain knowledge set (or s-set) need to be generated. The process of generating the s-set involves certain level of human interaction. Our study focuses on Australia healthcare reviews which to the best of our knowledge there hasn't any topic modeling studies tried to exploring this area. We also proposed a new approach called user-driven topic modeling.
 
 \section{Intrinsic qualitative evaluation of learned topics}
@@ -263,7 +263,7 @@ The testing data used in this study is exactly same as Newman's (\cite{ref27}) w
 \begin{equation}
 Best-N score = \frac{\sum_{i=1}^{N}n(w_{rev_{i}})}{\sum_{i=1}^{N}n(w_{i})}
 \end{equation}
-where $w_{rev_{i}}$ is the $i^{th}$ term ranked by the system and $w_i$ is the i^{th} most popular term selected by annotators; $rev_{i}$ gives the index of the word $w_i$ in the annotator's list; and n(w) is the number of votes given by annotators for word w. As a result, each approach shows the strength in certain topics against base model, the performance isn't consistent across 3 approaches, however, in combination as inputs to a re-ranking model, the result is consistent and shows improvement against baseline. In our study of Patient Opinion Australia, PMI-scores for topics are used to evaluate topic coherence and it is measured by average of number of word-pairs, the reason is we produce topics with variable number of terms. To rank the words in each topic, we use Inverse Document Frequency given by:
+where $w_{rev_{i}}$ is the $i^{th}$ term ranked by the system and $w_i$ is the $i^{th}$ most popular term selected by annotators; $rev_{i}$ gives the index of the word $w_i$ in the annotator's list; and n(w) is the number of votes given by annotators for word w. As a result, each approach shows the strength in certain topics against base model, the performance isn't consistent across 3 approaches, however, in combination as inputs to a re-ranking model, the result is consistent and shows improvement against baseline. In our study of Patient Opinion Australia, PMI-scores for topics are used to evaluate topic coherence and it is measured by average of number of word-pairs, the reason is we produce topics with variable number of terms. To rank the words in each topic, we use Inverse Document Frequency given by:
 \begin{equation}
 idf(t, D) = log\frac{N}{\mid \{d\in D : t\in D\}\mid}
 \end{equation}
@@ -329,6 +329,7 @@ Each number we had showed so far is individual case for example, we assumed the 
 
 
 \begin{table}[h]
+\tiny
 \caption{Overall Term Count Over States}
 \centering
 \begin{tabular}{| c | c | c | c | c | c | c | c |c | c | c |}
@@ -350,6 +351,7 @@ doctor & 102 & 84 & 16 & 7 & 2 & 1 & 40 & 6 & 1 & 0 \\
 \end{table}
 
 \begin{table}[h]
+\tiny
 \caption{Group ``Good" Term Count Over States}
 \centering
 \begin{tabular}{| c | c | c | c | c | c | c | c |c | c | c |}
@@ -373,6 +375,7 @@ doctor & 46 & 40 & 11 & 2 & 1 & 0 & 17 & 4 & 1 & 0 \\
 \end{table}
 
 \begin{table}[h]
+\tiny
 \caption{Group ``Need to Improve" Term Count Over States}
 \centering
 \begin{tabular}{| c | c | c | c | c | c | c | c |c | c | c |}
