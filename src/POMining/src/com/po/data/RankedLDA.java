@@ -7,14 +7,35 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.Vector;
 
 import com.po.parser.Story;
 import com.po.parser.StoryManager;
 import com.po.parser.StoryParser;
 import com.po.parser.TFIDFWorker;
+
+class ValueComparator implements Comparator<String> {
+
+    Map<String, Double> base;
+    public ValueComparator(Map<String, Double> base) {
+        this.base = base;
+    }
+
+    // Note: this comparator imposes orderings that are inconsistent with equals.    
+    public int compare(String a, String b) {
+        if (base.get(a) >= base.get(b)) {
+            return -1;
+        } else {
+            return 1;
+        } // returning 0 would merge keys
+    }
+}
 
 public class RankedLDA {
 
@@ -44,8 +65,8 @@ public class RankedLDA {
 		
 		//rLDA.LDAScoreEX();
 		
-		rLDA.CalculatePMI();
-		
+		//rLDA.CalculatePMI();
+		rLDA.TopicIDF();
 		System.out.println("End RankedLDA...");
 
 	}
@@ -129,6 +150,53 @@ public class RankedLDA {
 			}
 		}
 
+	}
+	
+	private void TopicIDF()
+	{
+		BufferedReader br;
+		try {
+			Map<String, Double> mapTerms = new HashMap<String, Double>();
+			ValueComparator bvc =  new ValueComparator(mapTerms);
+			TreeMap<String,Double> sorted_map = new TreeMap<String,Double>(bvc);
+
+			//br = new BufferedReader(new FileReader("data" + File.separator + "word-mapping.txt"));
+			br = new BufferedReader(new FileReader("all_keys100.txt"));
+			String strLine;
+			int n = 0;
+			while ((strLine = br.readLine()) != null) 
+			{
+				String[] arrWords = (strLine.split("\t")[2]).split(" ");
+				for(String strWord : arrWords)
+				{
+					if(mapTerms.containsKey(strWord))
+					{
+						double count = mapTerms.get(strWord) + 1;
+						mapTerms.put(strWord, count);
+					}
+					else
+						mapTerms.put(strWord, 1.0);
+				}
+				
+				n++;
+			}
+			br.close();
+			
+			System.out.println(mapTerms.size());
+			sorted_map.putAll(mapTerms);
+			for(String key : sorted_map.keySet())
+			{
+				double fValue = (double)100/mapTerms.get(key);
+				System.out.println(String.format("%s,%f,%f", key, mapTerms.get(key), Math.log10(fValue)));
+			}
+			
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void CalculatePMI()
