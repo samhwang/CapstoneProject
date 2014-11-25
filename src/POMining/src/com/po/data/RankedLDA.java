@@ -185,7 +185,7 @@ public class RankedLDA {
 		}
 		
 		fRet = fRet/(float)(vecStr.size()*(vecStr.size() -1)/2);
-		return fRet;
+		return Math.abs(fRet);
 	}
 	
 	private void LDAScoreEX()
