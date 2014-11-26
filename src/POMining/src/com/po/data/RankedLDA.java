@@ -278,6 +278,8 @@ public class RankedLDA {
 				Vector<String> vecWord = new Vector<String>();
 				Vector<String> vecDocIDs = new Vector<String>();
 				Vector<String> vecAllWord = new Vector<String>();
+				Vector<String> vecExcluded = new Vector<String>();
+				
 				for(String strWord : arrWords)
 				{
 					//vecAllWord.add(strWord);
@@ -295,6 +297,8 @@ public class RankedLDA {
 							}
 						}
 					}
+					else
+						vecExcluded.add(strWord);
 				}
 				
 				double dTotalScore = 0;
@@ -354,6 +358,8 @@ public class RankedLDA {
 				}
 				else
 					vecUnTopic.add(strTopicID);
+				
+				CalculateTopicCoherence(vecExcluded);
 			}
 			br.close();
 			
@@ -414,8 +420,8 @@ public class RankedLDA {
 			System.out.println("#################################");
 			for(int k = 0; k < vecScoreOnly.size(); k++)
 			{
-				System.out.println(String.format("%f,%f", vecScoreOnly.get(k), vecScoreOnly.get(k+1)));
-				k++;
+				System.out.println(String.format("%f,%f,%f", vecScoreOnly.get(k), vecScoreOnly.get(k+1), vecScoreOnly.get(k+2)));
+				k+=2;
 			}
 			
 		} catch (FileNotFoundException e1) {
