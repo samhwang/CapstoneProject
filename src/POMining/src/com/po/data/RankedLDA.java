@@ -40,6 +40,7 @@ class ValueComparator implements Comparator<String> {
 public class RankedLDA {
 
 	protected StoryManager sM;
+	Vector<Double> vecScoreOnly = new Vector<Double>(); 
 	public RankedLDA()
 	{
 		StoryParser.getInstance().LoadStopWords();
@@ -63,10 +64,10 @@ public class RankedLDA {
 		//rLDA.CalculateTFIDF("jean");
 		
 		
-		//rLDA.LDAScoreEX();
+		rLDA.LDAScoreEX();
 		
 		//rLDA.CalculatePMI();
-		rLDA.TopicIDF();
+		//rLDA.TopicIDF();
 		System.out.println("End RankedLDA...");
 
 	}
@@ -259,6 +260,7 @@ public class RankedLDA {
 	private void LDAScoreEX()
 	{
 		BufferedReader br;
+		
 		try {
 			Vector<Vector<String>> vecTopic = new Vector<Vector<String>>();
 			Vector<Vector<String>> vecUnsortedTopic = new Vector<Vector<String>>();
@@ -409,6 +411,13 @@ public class RankedLDA {
 			}
 			System.out.println("*******************************************");
 			
+			System.out.println("#################################");
+			for(int k = 0; k < vecScoreOnly.size(); k++)
+			{
+				System.out.println(String.format("%f,%f", vecScoreOnly.get(k), vecScoreOnly.get(k+1)));
+				k++;
+			}
+			
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -456,6 +465,7 @@ public class RankedLDA {
 		}
 		//System.out.println();
 		vecWords.add(0, String.format("[%f : %f]", dTopicCoherence, dTopicCoherence/((float)vecWords.size()*((float)vecWords.size()-1)/2)));
+		vecScoreOnly.add(dTopicCoherence/((float)vecWords.size()*((float)vecWords.size()-1)/2));
 	}
 	
 	private void LDAScore()
@@ -512,6 +522,7 @@ public class RankedLDA {
 				System.out.println(strOut.trim());
 				nCount++;
 			}
+			
 		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
