@@ -64,7 +64,9 @@ public class RankedLDA {
 		//rLDA.CalculateTFIDF("jean");
 		
 		
-		rLDA.LDAScoreEX();
+		//rLDA.LDAScoreEX();
+		
+		rLDA.RandomTopicLDA();
 		
 		//rLDA.CalculatePMI();
 		//rLDA.TopicIDF();
@@ -431,6 +433,132 @@ public class RankedLDA {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	private void RandomTopicLDA()
+	{
+BufferedReader br;
+		
+		try {
+			Vector<Vector<String>> vecTopic = new Vector<Vector<String>>();
+			Vector<Vector<String>> vecUnsortedTopic = new Vector<Vector<String>>();
+			Vector<Vector<String>> vecTopicToDocIDs = new Vector<Vector<String>>();
+			Vector<Vector<String>> vecTopicTFIDF = new Vector<Vector<String>>();
+			Vector<String> vecUnTopic = new Vector<String>();
+			Vector<Double> vecNewTFIDF = new Vector<Double>();
+			Vector<Float> vecDocWeighting = new Vector<Float>();
+			br = new BufferedReader(new FileReader("all_keys100.txt"));
+			String strLine;
+			while ((strLine = br.readLine()) != null) 
+			{
+				String strTopicID = strLine.split("\t")[0];
+				String[] arrWords = (strLine.split("\t")[2]).split(" ");
+				Vector<String> vecWord = new Vector<String>();
+				Vector<String> vecDocIDs = new Vector<String>();
+				Vector<String> vecAllWord = new Vector<String>();
+				Vector<String> vecExcluded = new Vector<String>();
+				
+				int k = 0;
+				for(String strWord : arrWords)
+				{
+					//vecAllWord.add(strWord);
+					if(k < 10)
+					{
+						//strWord += ":"+sM.GetUserTopicTotal().get(strWord);
+						vecWord.add(strWord);
+						Set<String> ids = sM.GetFullContextTopicSet(strWord);
+						if(ids != null)
+						{
+							for(String id : ids)
+							{
+								if(!vecDocIDs.contains(id))
+									vecDocIDs.add(id);
+							}
+						}
+					}
+					else
+						vecExcluded.add(strWord);
+					
+					k++;
+				}
+				
+				double dTotalScore = 0;
+				Vector<String> vecStr = new Vector<String>();
+				for(String strWord : arrWords)
+				{
+					Set<String> setStr = sM.GetFullContextTopicSet(strWord);
+					if(setStr!=null)
+					{
+						for(String s : setStr)
+						{
+							if(!vecStr.contains(s))
+								vecStr.add(s);
+						}
+					}
+					else
+					{
+						System.out.println("NULL topic set for :" + strWord);
+					}
+					vecAllWord.add(strWord);
+				}
+				
+				CalculateTopicCoherence(vecAllWord);
+				dTotalScore = TopicCompostion.getInstance().GetWeighting(vecStr, Integer.valueOf(strTopicID));
+				vecAllWord.add(0, String.format("%f", dTotalScore));
+				vecTopicTFIDF.add(vecAllWord);
+		
+				vecTopicToDocIDs.add(vecDocIDs);
+				vecDocWeighting.add(TopicCompostion.getInstance().GetWeighting(vecDocIDs, Integer.valueOf(strTopicID)));
+				
+				if(!vecWord.isEmpty())
+				{
+					CalculateTopicCoherence(vecWord);
+					vecWord.add(0, strTopicID);
+//					double dTFIDF = 0;
+//					for(String str : vecWord)
+//					{
+//						dTFIDF += TFIDFWorker.GetInstance().GetTFIDF(str, vecDocIDs);
+//					}
+//					vecNewTFIDF.add(dTFIDF);
+					vecUnsortedTopic.add(vecWord);
+					int i = 0;
+					boolean bFound = false;
+					for(Vector<String> vec : vecTopic)
+					{
+						if(vec.size()>=vecWord.size())
+						{
+							vecTopic.insertElementAt(vecWord, i);
+							bFound = true;
+							break;
+						}
+						i++;
+					}
+					
+					if(!bFound)
+						vecTopic.add(vecWord);
+				}
+				else
+					vecUnTopic.add(strTopicID);
+				
+				CalculateTopicCoherence(vecExcluded);
+			}
+			br.close();
+			
+			System.out.println("#################################");
+			for(int k = 0; k < vecScoreOnly.size(); k++)
+			{
+				System.out.println(String.format("%f,%f,%f", vecScoreOnly.get(k), vecScoreOnly.get(k+1), vecScoreOnly.get(k+2)));
+				k+=2;
+			}
+			
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 	
 	private void CalculateTopicCoherence(Vector<String> vecWords)
