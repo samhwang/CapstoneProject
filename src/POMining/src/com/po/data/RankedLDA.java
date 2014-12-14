@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -47,7 +46,6 @@ public class RankedLDA {
 		StoryParser.getInstance().LoadSentiment();
 		StoryParser.getInstance().LoadWordMapping();
 		sM = new StoryManager();
-		//sM.LoadStory("data" + File.separator + "auStory.txt");
 		sM.LoadStory("auStory.txt");
 		sM.LoadWordStats();
 		
@@ -59,17 +57,38 @@ public class RankedLDA {
 		RankedLDA rLDA = new RankedLDA();
 		System.out.println("Start RankedLDA...");
 		
-		//rLDA.GenerateMidFile("");
-		//rLDA.LDAScore();
-		//rLDA.CalculateTFIDF("jean");
+		int nMode = 0;
+		if(args.length >= 1 )
+			nMode = Integer.valueOf(args[0]);
 		
+		String strExtraArg = "";
+		if(args.length >=2 )
+			strExtraArg = args[1];
 		
-		//rLDA.LDAScoreEX();
+		switch (nMode){
+			case 1:
+				rLDA.GenerateMidFile(strExtraArg);
+				break;
+			case 2:
+				rLDA.LDAScore();
+				break;
+			case 3:
+				rLDA.CalculateTFIDF(strExtraArg);
+				break;
+			case 4:
+				rLDA.LDAScoreEX();
+				break;
+			case 5:
+				rLDA.RandomTopicLDA();
+			case 6:
+				rLDA.CalculatePMI();
+			case 7:
+				rLDA.TopicIDF();
+			default:
+				rLDA.LDAScoreEX();
+				break;
+		}
 		
-		rLDA.RandomTopicLDA();
-		
-		//rLDA.CalculatePMI();
-		//rLDA.TopicIDF();
 		System.out.println("End RankedLDA...");
 
 	}
@@ -166,7 +185,6 @@ public class RankedLDA {
 			//br = new BufferedReader(new FileReader("data" + File.separator + "word-mapping.txt"));
 			br = new BufferedReader(new FileReader("all_keys100.txt"));
 			String strLine;
-			int n = 0;
 			while ((strLine = br.readLine()) != null) 
 			{
 				String[] arrWords = (strLine.split("\t")[2]).split(" ");
@@ -180,8 +198,6 @@ public class RankedLDA {
 					else
 						mapTerms.put(strWord, 1.0);
 				}
-				
-				n++;
 			}
 			br.close();
 			
@@ -206,9 +222,6 @@ public class RankedLDA {
 	{
 		BufferedReader br;
 		try {
-			Vector<Vector<String>> vecTopic = new Vector<Vector<String>>();
-			Vector<String> vecUnTopic = new Vector<String>();
-			//br = new BufferedReader(new FileReader("data" + File.separator + "word-mapping.txt"));
 			br = new BufferedReader(new FileReader("all_keys100.txt"));
 			String strLine;
 			int n = 0;
@@ -269,9 +282,8 @@ public class RankedLDA {
 			Vector<Vector<String>> vecTopicToDocIDs = new Vector<Vector<String>>();
 			Vector<Vector<String>> vecTopicTFIDF = new Vector<Vector<String>>();
 			Vector<String> vecUnTopic = new Vector<String>();
-			Vector<Double> vecNewTFIDF = new Vector<Double>();
 			Vector<Float> vecDocWeighting = new Vector<Float>();
-			br = new BufferedReader(new FileReader("all_keys100.txt"));
+			br = new BufferedReader(new FileReader("all_keys20.txt"));
 			String strLine;
 			while ((strLine = br.readLine()) != null) 
 			{
@@ -284,7 +296,6 @@ public class RankedLDA {
 				
 				for(String strWord : arrWords)
 				{
-					//vecAllWord.add(strWord);
 					if(sM.HasTopic("ALL", strWord))
 					{
 						//strWord += ":"+sM.GetUserTopicTotal().get(strWord);
@@ -438,7 +449,7 @@ public class RankedLDA {
 	
 	private void RandomTopicLDA()
 	{
-BufferedReader br;
+		BufferedReader br;
 		
 		try {
 			Vector<Vector<String>> vecTopic = new Vector<Vector<String>>();
@@ -446,7 +457,6 @@ BufferedReader br;
 			Vector<Vector<String>> vecTopicToDocIDs = new Vector<Vector<String>>();
 			Vector<Vector<String>> vecTopicTFIDF = new Vector<Vector<String>>();
 			Vector<String> vecUnTopic = new Vector<String>();
-			Vector<Double> vecNewTFIDF = new Vector<Double>();
 			Vector<Float> vecDocWeighting = new Vector<Float>();
 			br = new BufferedReader(new FileReader("all_keys100.txt"));
 			String strLine;
@@ -463,7 +473,7 @@ BufferedReader br;
 				for(String strWord : arrWords)
 				{
 					//vecAllWord.add(strWord);
-					if(k < 10)
+					if(k < 4)
 					{
 						//strWord += ":"+sM.GetUserTopicTotal().get(strWord);
 						vecWord.add(strWord);
@@ -548,7 +558,10 @@ BufferedReader br;
 			System.out.println("#################################");
 			for(int k = 0; k < vecScoreOnly.size(); k++)
 			{
-				System.out.println(String.format("%f,%f,%f", vecScoreOnly.get(k), vecScoreOnly.get(k+1), vecScoreOnly.get(k+2)));
+				//System.out.println(String.format("%f,%f,%f", vecScoreOnly.get(k), vecScoreOnly.get(k+1), vecScoreOnly.get(k+2)));
+				
+				System.out.println(String.format("%f", vecScoreOnly.get(k+1)));
+				
 				k+=2;
 			}
 			
@@ -608,8 +621,6 @@ BufferedReader br;
 		BufferedReader br;
 		try {
 			Vector<Vector<String>> vecTopic = new Vector<Vector<String>>();
-			Vector<String> vecUnTopic = new Vector<String>();
-			//br = new BufferedReader(new FileReader("data" + File.separator + "word-mapping.txt"));
 			br = new BufferedReader(new FileReader("all_keys100.txt"));
 			String strLine;
 			while ((strLine = br.readLine()) != null) 
@@ -645,7 +656,6 @@ BufferedReader br;
 			}
 			br.close();
 			
-			int nCount = 0;
 			for(Vector<String> vec : vecTopic)
 			{
 				String strOut = "";
@@ -654,7 +664,6 @@ BufferedReader br;
 					strOut += strWord + " ";
 				}
 				System.out.println(strOut.trim());
-				nCount++;
 			}
 			
 		} catch (FileNotFoundException e1) {
