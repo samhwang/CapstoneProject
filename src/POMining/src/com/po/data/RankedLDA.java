@@ -64,9 +64,9 @@ public class RankedLDA {
 		//rLDA.CalculateTFIDF("jean");
 		
 		
-		//rLDA.LDAScoreEX();
+		rLDA.LDAScoreEX();
 		
-		rLDA.RandomTopicLDA();
+		//rLDA.RandomTopicLDA();
 		
 		//rLDA.CalculatePMI();
 		//rLDA.TopicIDF();
@@ -299,9 +299,21 @@ public class RankedLDA {
 							}
 						}
 					}
-					else
-						vecExcluded.add(strWord);
 				}
+				
+				for(int nCount = 0; nCount < vecWord.size(); nCount++)
+				{
+					vecExcluded.add(arrWords[nCount]);
+				}
+				
+//				int nCount = 0;
+//				for(String strWord : arrWords)
+//				{
+//					if( nCount >= vecWord.size() )
+//						break;
+//					vecExcluded.add(strWord);
+//					nCount ++;
+//				}
 				
 				double dTotalScore = 0;
 				Vector<String> vecStr = new Vector<String>();
@@ -594,12 +606,12 @@ BufferedReader br;
 			
 			for(int j = i + 1; j < vecTempString.size(); j++)
 			{
-				dTopicCoherence += Math.log10(((double)sM.getDocCoFrequency(vecTempString.get(i), vecTempString.get(j)) + 1)/(double)sM.getDocFrequency(vecTempString.get(i)));
+				dTopicCoherence += Math.log10(((double)sM.getDocCoFrequency(vecTempString.get(i), vecTempString.get(j)) + 1)/((double)sM.getDocFrequency(vecTempString.get(i))));
 			}
 		}
 		//System.out.println();
 		vecWords.add(0, String.format("[%f : %f]", dTopicCoherence, dTopicCoherence/((float)vecWords.size()*((float)vecWords.size()-1)/2)));
-		vecScoreOnly.add(dTopicCoherence/((float)vecWords.size()*((float)vecWords.size()-1)/2));
+		vecScoreOnly.add(dTopicCoherence);
 	}
 	
 	private void LDAScore()
