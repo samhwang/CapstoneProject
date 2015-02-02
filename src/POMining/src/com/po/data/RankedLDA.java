@@ -283,7 +283,7 @@ public class RankedLDA {
 			Vector<Vector<String>> vecTopicTFIDF = new Vector<Vector<String>>();
 			Vector<String> vecUnTopic = new Vector<String>();
 			Vector<Float> vecDocWeighting = new Vector<Float>();
-			br = new BufferedReader(new FileReader("all_keys20.txt"));
+			br = new BufferedReader(new FileReader("all_keys100.txt"));
 			String strLine;
 			while ((strLine = br.readLine()) != null) 
 			{
@@ -607,7 +607,7 @@ public class RankedLDA {
 			
 			for(int j = i + 1; j < vecTempString.size(); j++)
 			{
-				dTopicCoherence += Math.log10(((double)sM.getDocCoFrequency(vecTempString.get(i), vecTempString.get(j)) + 1)/(double)sM.getDocFrequency(vecTempString.get(i)));
+				dTopicCoherence += Math.log10(((double)sM.getDocCoFrequency(vecTempString.get(i), vecTempString.get(j)) + 1)/((double)sM.getDocFrequency(vecTempString.get(i))*(double)sM.getDocFrequency(vecTempString.get(j))));
 			}
 		}
 		//System.out.println();
