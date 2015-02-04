@@ -31,6 +31,7 @@ class storyManager:
         self.bagGood = {}
         self.bagBad = {}
         self.bagAll = {}
+        self.bagKey = {}
         
     def LoadStory(self):
         print 'Loading Stories...'
@@ -82,6 +83,12 @@ class storyManager:
                 else:
                     self.bagAll[good] = 1
         
+                for key in good.strip().split(' '):
+                    if key in self.bagKey:
+                        self.bagKey[key] = self.bagKey[key] + 1
+                    else:
+                        self.bagKey[key] = 1
+                        
         if(story.hasBad):
             for bad in story.GetBadAsVec():
                 if bad in self.bagBad:
@@ -94,6 +101,12 @@ class storyManager:
                 else:
                     self.bagAll[bad]  = 1
     
+                for key in bad.strip().split(' '):
+                    if key in self.bagKey:
+                        self.bagKey[key] = self.bagKey[key] + 1
+                    else:
+                        self.bagKey[key] = 1
+                        
     def CalculateStoryCount(self, story_):
 
         if(story_.hasGood and story_.hasBad):
@@ -126,6 +139,12 @@ class storyManager:
     def DumpBagsToCSV(self):
         
         print 'Save bag csv....'
+        with open('userkeys.csv', 'wb') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames = csvheader.wordbag_field)
+            writer.writeheader()
+            for k, v in self.bagKey.items():
+                writer.writerow({'keywords':k, 'count':v})
+                
         sortedBag = sorted(self.bagAll.items(), key = operator.itemgetter(1))
         with open('user_comment.csv', 'wb') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames = csvheader.wordbag_field)
