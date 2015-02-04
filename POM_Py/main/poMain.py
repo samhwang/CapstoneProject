@@ -6,10 +6,12 @@ Created on 3 Feb 2015
 
 import storyManager
 
+print 'Start....'
 sManager = storyManager.storyManager()
 sManager.LoadStory()
 sManager.DumpBagsToCSV()
-sManager.TestDumpStory()
-
+sManager.SaveDfData()
+#sManager.TestDumpStory()
+print 'End....'
 if __name__ == '__main__':
     pass
