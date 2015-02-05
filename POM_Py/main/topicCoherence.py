@@ -13,7 +13,8 @@ dfCounter.loadDocFreqData('df.csv')
 
 tk = topickeys.topickeys()
 tk.loadKeys("all_keys100.txt")
-tk.trimkeys(10)
+tk.sortkeys()
+tk.trimkeys(6)
 scoreList = []
 
 for key in tk.terms:

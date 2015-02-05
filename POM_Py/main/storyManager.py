@@ -3,35 +3,18 @@ Created on 25 Nov 2014
 
 @author: Bin.Lu
 '''
-import csv
-import operator
 import story
 import docFreqCounter
-import csvheader
+import storyCounter
+import wordBag
 
 class storyManager:
 
-
-    
     def __init__(self):
         self.dfCounter = docFreqCounter.docFreqCounter()
         self.storyCollection = []
-        self.totalGoodLen = 0
-        self.totalBadLen = 0
-        self.maxGoodLen = 0
-        self.maxBadLen = 0
-        self.averageGoodLen = 0
-        self.averageBadLen = 0
-        
-        self.goodStoryCount = 0
-        self.badStoryCount = 0
-        self.bothStoryCount = 0
-        self.noneStoryCount = 0
-        
-        self.bagGood = {}
-        self.bagBad = {}
-        self.bagAll = {}
-        self.bagKey = {}
+        self.storycounter = storyCounter.storyCounter()
+        self.wordbag = wordBag.WordBag()
         
     def LoadStory(self):
         print 'Loading Stories...'
@@ -63,108 +46,15 @@ class storyManager:
                 line = f.readline()
                 story_.SetBad(line.lstrip('Bad: ').strip().rstrip(';'))
                 self.storyCollection.append(story_)
-                self.CalculateStoryCount(story_)
-                self.FillInWordBags(story_)
+                self.storycounter.countStory(story_)
+                self.wordbag.fillInBags(story_)
                 self.dfCounter.addDocFreq(story_)
-        self.averageGoodLen = self.totalBadLen / (self.goodStoryCount + self.bothStoryCount)
-        self.averageBadLen = self.totalBadLen / (self.badStoryCount + self.bothStoryCount)
+        self.storycounter.CalculateAverage()
         f.closed
     
-    def FillInWordBags(self, story):
-        if(story.hasGood):
-            for good in story.GetGoodAsVec():
-                if good in self.bagGood:
-                    self.bagGood[good] = self.bagGood[good] + 1
-                else:
-                    self.bagGood[good] = 1
-                
-                if good in self.bagAll:
-                    self.bagAll[good] = self.bagAll[good] + 1
-                else:
-                    self.bagAll[good] = 1
-        
-                for key in good.strip().split(' '):
-                    if key in self.bagKey:
-                        self.bagKey[key] = self.bagKey[key] + 1
-                    else:
-                        self.bagKey[key] = 1
-                        
-        if(story.hasBad):
-            for bad in story.GetBadAsVec():
-                if bad in self.bagBad:
-                    self.bagBad[bad] = self.bagBad[bad]  + 1
-                else:
-                    self.bagBad[bad] = 1
-                
-                if bad in self.bagAll:
-                    self.bagAll[bad] = self.bagAll[bad] + 1
-                else:
-                    self.bagAll[bad]  = 1
-    
-                for key in bad.strip().split(' '):
-                    if key in self.bagKey:
-                        self.bagKey[key] = self.bagKey[key] + 1
-                    else:
-                        self.bagKey[key] = 1
-                        
-    def CalculateStoryCount(self, story_):
-
-        if(story_.hasGood and story_.hasBad):
-            self.bothStoryCount = self.bothStoryCount + 1
-                    
-            self.totalGoodLen = self.totalGoodLen + story_.GetGoodLen()
-            if(story_.GetGoodLen() > self.maxGoodLen):
-                self.maxGoodLen = story_.GetGoodLen()
-                    
-            self.totalBadLen = self.totalBadLen + story_.GetBadLen()
-            if(story_.GetBadLen() > self.maxBadLen):
-                self.maxBadLen = story_.GetBadLen()
-                        
-        elif(story_.hasGood):
-            self.goodStoryCount = self.goodStoryCount + 1
-                    
-            self.totalGoodLen = self.totalGoodLen + story_.GetGoodLen()
-            if(story_.GetGoodLen() > self.maxGoodLen):
-                self.maxGoodLen = story_.GetGoodLen()
-                        
-        elif(story_.hasBad):
-            self.badStoryCount = self.badStoryCount + 1
-                    
-            self.totalBadLen = self.totalBadLen + story_.GetBadLen()
-            if(story_.GetBadLen() > self.maxBadLen):
-                self.maxBadLen = story_.GetBadLen()
-        else:
-            self.noneStoryCount = self.noneStoryCount + 1
-    
     def DumpBagsToCSV(self):
-        
-        print 'Save bag csv....'
-        with open('userkeys.csv', 'wb') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames = csvheader.wordbag_field)
-            writer.writeheader()
-            for k, v in self.bagKey.items():
-                writer.writerow({'keywords':k, 'count':v})
-                
-        sortedBag = sorted(self.bagAll.items(), key = operator.itemgetter(1))
-        with open('user_comment.csv', 'wb') as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames = csvheader.wordbag_field)
-            writer.writeheader()
-            for v in reversed(sortedBag):
-                writer.writerow({'keywords': v[0], 'count':v[1]})
-    
-        sortedGood = sorted(self.bagGood.items(), key = operator.itemgetter(1))
-        with open('good.csv', 'wb') as csvGood:
-            writer = csv.DictWriter(csvGood, fieldnames = csvheader.wordbag_field)
-            writer.writeheader()
-            for v in reversed(sortedGood):
-                writer.writerow({'keywords': v[0], 'count':v[1]})
-                
-        sortedBad = sorted(self.bagBad.items(), key = operator.itemgetter(1))
-        with open('bad.csv', 'wb') as csvBad:
-            writer = csv.DictWriter(csvBad, fieldnames = csvheader.wordbag_field)
-            writer.writeheader()
-            for v in reversed(sortedBad):
-                writer.writerow({'keywords': v[0], 'count':v[1]})
+        self.wordbag.SaveToFile()
+
     
     def SaveDfData(self):
         self.dfCounter.SaveDocFreqData('df.csv')
@@ -180,10 +70,10 @@ class storyManager:
         testIdx = 0
         print 'Test Dumping Stories...'
         print 'Story Count: %d' % (len(self.storyCollection))
-        print 'Both: %d, Good: %d, Bad: %d, None: %d' % (self.bothStoryCount, self.goodStoryCount, self.badStoryCount, self.noneStoryCount)
-        print 'Max Good: %d, Max Bad: %d' % (self.maxGoodLen, self.maxBadLen)
-        print 'Average Good: %d, Average Bad: %d' % (self.averageGoodLen, self.averageBadLen)
-        print 'All: %d, Good: %d, Bad: %d' % (len(self.bagAll), len(self.bagGood), len(self.bagBad))
+        print 'Both: %d, Good: %d, Bad: %d, None: %d' % (self.storycounter.bothStoryCount, self.storycounter.goodStoryCount, self.storycounter.badStoryCount, self.storycounter.noneStoryCount)
+        print 'Max Good: %d, Max Bad: %d' % (self.storycounter.maxGoodLen, self.storycounter.maxBadLen)
+        print 'Average Good: %d, Average Bad: %d' % (self.storycounter.averageGoodLen, self.storycounter.averageBadLen)
+        print 'All: %d, Good: %d, Bad: %d' % (len(self.wordbag.bagAll), len(self.wordbag.bagGood), len(self.wordbag.bagBad))
         
         
         print '\n\n********************************\n'
