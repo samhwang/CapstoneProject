@@ -1,7 +1,7 @@
 '''
-Created on 4 Feb 2015
+Created on 7 Feb 2015
 
-@author: Bin.Lu
+@author: BLu
 '''
 
 import docFreqCounter
@@ -15,6 +15,8 @@ tk = topickeys.topickeys()
 tk.loadKeys("all_keys100_new.txt")
 tk.sortkeys()
 tk.trimkeys(10)
+
+
 scoreList = []
 
 for key in tk.terms:
@@ -23,7 +25,7 @@ for key in tk.terms:
     
     for t1 in key[:-1]:
         for t2 in key[1:]:
-            score = score + math.log10((dfCounter.getCoDocFreq(t1, t2)+1)/float((dfCounter.getDocFreq(t1) + 2)))
+            score = score + math.log10(float((dfCounter.getDocFreq(t1) + 2))/(dfCounter.getCoDocFreq(t1, t2)+1))
     
     scoreList.append(score)
     

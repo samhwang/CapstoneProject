@@ -62,13 +62,17 @@ class topickeys:
         
         self.averageFiltered = _totalFiltered/len(self.terms)
         self.terms = sortedKeys
-            
+    
+                
     def dumpKeys(self, index):
         print self.terms[index]
         
-    def dumpAllKeys(self):
+    def dumpAllKeys(self, isJoin = False):
         for v in self.terms:
-            print v
+            if isJoin:
+                print ','.join(v)
+            else:
+                print v
         
         print '*****************************************'
         
@@ -79,10 +83,10 @@ class topickeys:
         
 if __name__ == '__main__':
     tk_ = topickeys()
-    tk_.loadKeys('all_keys100.txt')
+    tk_.loadKeys('all_keys100_new.txt')
     #tk_.trimkeys(10)
-    tk_.dumpKeys(0)
-    tk_.sortkeys(True)
-    tk_.dumpKeys(0)
+    tk_.dumpAllKeys(True)
+    tk_.sortkeys()
+    tk_.dumpAllKeys(True)
     tk_.dumpCount()
     

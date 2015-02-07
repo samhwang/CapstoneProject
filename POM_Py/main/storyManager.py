@@ -57,7 +57,7 @@ class storyManager:
 
     
     def SaveDfData(self):
-        self.dfCounter.SaveDocFreqData('df.csv')
+        self.dfCounter.SaveDocFreqData('df.csv', 'sf.csv')
         
     def DumpStories(self):
         print 'Dumping Stories...'

@@ -13,8 +13,10 @@ class docFreqCounter:
     
     def __init__(self):
         self.docList = defaultdict(list)
+        self.summaryList = defaultdict(list)
         
     def addDocFreq(self, story):
+        self.addSummaryFeq(story)
         terms_set = storyparser.getTermsList(story.storyBody)
         for t in terms_set:
             if t in self.docList:
@@ -22,14 +24,30 @@ class docFreqCounter:
             else:
                 self.docList[t].append(story.ID)
  
-    
-    def SaveDocFreqData(self, path):
+    def addSummaryFeq(self, story):
+        terms_set = storyparser.getTermsList(story.good)
+        for t in terms_set:
+            if len(t.strip()) > 0:
+                self.summaryList[t].append(story.ID)
+        
+        terms_set = storyparser.getTermsList(story.bad)
+        for t in terms_set:
+            if len(t.strip()) > 0:
+                self.summaryList[t].append(story.ID)
+        
+    def SaveDocFreqData(self, path, summaryPath):
         print 'Saving df csv...'
         with open(path, 'wb') as csvdf:
             writer = csv.DictWriter(csvdf, fieldnames = csvheader.df_field)
             writer.writeheader()
             for v in self.docList:
                 writer.writerow({csvheader.df_field[0]: v, csvheader.df_field[1]: (" ").join(self.docList[v])})
+                
+        with open(summaryPath, 'wb') as csvsf:
+            writer = csv.DictWriter(csvsf, fieldnames = csvheader.df_field)
+            writer.writeheader()
+            for v in self.summaryList:
+                writer.writerow({csvheader.df_field[0]: v, csvheader.df_field[1]: (" ").join(self.summaryList[v])})
     
     def loadDocFreqData(self, path):
         print 'Loading df csv...'
