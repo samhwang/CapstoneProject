@@ -5605,3 +5605,120 @@ Story: Early this year (2014), my elderly father had a fall at home. As a result
 Relate: emergency;fall;frail;hearing;hearing aid;hospital;imaging;medication;nursing care;pain;pain relief;public hospital;SA;treatment;
 Good: 
 Bad: general services office;let down;lost and found;uncaring;
+ID: 59434
+Title: Healthy lifestyle program with Murrumbidgee Medicare Local made me feel empowered.
+Time: 2014-05-19T01:10:17Z
+Location: Healthy Lifestyle Program (Murrumbidgee Medicare Local);
+Author: a service user
+Story: Healthy lifestyle program is an excellent program. I have learnt so much about healthier lifestyle options and changes I can make to help me be healthier, feel better and look good. Program made me feel empowered.
+Relate: excellent program;feel better;Healthy Lifestyle Program;NSW;
+Good: 
+Bad: 
+ID: 59435
+Title: Pleasantly surprised by the wonderful experience at Geelong Hospital.
+Time: 2014-05-20T07:48:50Z
+Location: Geelong Hospital;Geelong Hospital / Accident & emergency;
+Author: the patient
+Story: I got bitten badly on my index finger, after which I went to my GP, got a tetanus boost injection and some penicillin (for in case). A couple of days later, however, my finger was swollen and throbbing and an angry red colour was starting to spread down my hand. I decided to go to Geelong Emergency Department as I didn't want to loose my finger or get blood poisoning. I registered as a patient - the staff I saw were efficient and quick. They directed me as to the expected waiting time, where to wait, where the nearest toilets were etc, etc. I was seen about two hours later (not as long as I thought I would have to wait to see someone) by, I thought, a knowledgeable, kind and professional doctor who after consultation with another doctor, advised me that the best course of action would be to take an x-ray (to ensure there were no breaks), admission to hospital to do intravenous antibiotics at different intervals and to go to theatre to cut the wounds open and flush them until clean. My drip was put in immediately without the usual digging around to find a vein. The ED waiting room seemed clean and neat. My x-rays were taken without much fuss or drama. ALL the doctors and nurses I saw were friendly and forthcoming with information while maintaining a sense of humour and perfect professionalism. Even a bubble(s) in the drip line was dealt with quickly and efficiently. Once I was admitted to the hospital (there were no beds available elsewhere so I spent my time in Paediatrics - highly recommended as its colourful and you can get ice cream and jelly! ! ! ), the ward staff that saw me were friendly and the doctors still came to see me and keep me up to date. I did not want to have general anaesthetics for such a short procedure, only local and discussed it with my surgeon. I felt my opinion and choices were listened too and respected. And the stitches are neat and small - I could honestly not have asked for a more pleasant experience due to unpleasant circumstances. Well done to the ED and all surgical and nursing staff. This is almost exactly what medicine is all about. Keep up the great work.
+Relate: antibiotics;blood poisoning;drip;finger;hospital;penicillin;public hospital;stitches;tetanus;Vic;X-ray;
+Good: 
+Bad: 
+ID: 59437
+Title: Great General Practice in Inala
+Time: 2014-05-24T03:38:02Z
+Location: GPs in the Inala Electoral District;
+Author: the patient
+Story: I have been attending a general practice in Inala for the last 12 months. I cannot believe the personal care and attention you receive. I feel that both the GP and the practice manager, treat you as if you are the only person they are taking care of. I have an elderly friend who also attends this practice, recently I have been worried about his health and home care. I was able to call the practice up and let them know my concerns. They maintained total confidentiality on his behalf (ie didn't release any information to me) but attended to my concerns within two days by arranging follow up for him. My own care has been extremely personal, too, with the doctor I feel taking a personal interest in my health from a holistic perspective. She seems to respect my thoughts, wishes and research and works through options with me respectfully. I think that if all our GP practices were like this, the government would need to spend a lot LESS money on picking up the pieces. Thanks to everyone at my clinic, you are really fabulous! !
+Relate: elderly;GP;primary care;QLD;
+Good: 
+Bad: 
+ID: 59440
+Title: I found Wagga Applied Psychology Service supportive and understanding.
+Time: 2014-05-28T00:12:37Z
+Location: Wagga Applied Psychology Service (Murrumbidgee Medicare Local);
+Author: the patient
+Story: After ongoing stress/anxiety/depression - and then following my child's psychological care - the psychologist referred me to this service. I was met with very friendly and positive reception staff (called to make sure I was still coming to my appointment, as I had forgotten times). I found the service very helpful, calm, supportive and understanding and encouraging me to care for and love myself. The access to medicare funded mental health care was particularly helpful. Not to have high costs involved made it much easier to be involved in the care needed. Thank you.
+Relate: after care;anxiety;depression;epilepsy;mental health;NSW;
+Good: 
+Bad: 
+ID: 59446
+Title: Murrumbidgee ML, Annmaree and Beth-Louise, words couldn't describe how good they are.
+Time: 2014-05-28T02:40:25Z
+Location: Aboriginal Outreach Program (Murrumbidgee Medicare Local);
+Author: a service user
+Story: I couldn't have two better people, than Annmaree and Beth-Louise looking after me. Nothing is ever too hard for them, and everything you ask of them they are happy to do. They use language that you can understand and I feel so lucky to have them. Words couldn't describe how good they are. When you go to see them you actually look forward to it. They are very professional and make me feel that I can talk to them about anything, any problems, anything at all. And they really seem to listen. You find yourself opening up, to talk, because they seem to be really, really interested in me. It took me awhile to go to them, but I must have been bless to get them. As I said, words couldn't describe how good they are. I wanted them to know, how good they have been. Thank you.
+Relate: Aboriginal and Torres Strait Island Health;closing the Gap program;NSW;outreach;outreach program;
+Good: 
+Bad: 
+ID: 59447
+Title: No responsibility by Royal Adelaide Hospital for lost property
+Time: 2014-05-29T01:03:55Z
+Location: Royal Adelaide Hospital / Emergency Department;
+Author: a relative
+Story: Early this year (2014), my elderly father had a fall at home. As a result, he was taken by ambulance to the Royal Adelaide Hospital for treatment of suspected fractures to several ribs and vertebrae. I felt that the care and treatment he received in Emergency was prompt, professional and thorough. NB. though having to tell his story to 5-6 different health professionals was a little stressful for him and probably taking QA too far, but that's another story - an important efficiency story for our struggling hospital network! ! When it was determined at 2. 30am the next morning that my father would be admitted, I left him comfortably resting. Critical to this story, I left him with BOTH of his hearing aids in place. When my brother and I visited Dad in the ward later that day, he had only ONE of his hearing aids. We raised this with the nursing staff who were caring for my father who said that sometimes little things like that can get caught up in bed clothes and the like on transfer. They said they would conduct a search and let us know if/when the hearing aid was located. After several days, they conceded that the aid had been lost and could not be found. I then spoke with the nurse manager of the ward who indicated that he would (the next time I came in) provide me with a form to claim compensation for the loss. Despite my requests, on each subsequent visit to the ward, no form was presented. After chasing the form and the nurse manager for 2 weeks, he eventually spoke with me and said that there was no form after all and I had to contact the hospital's General Services Office about the loss. That same day, late February, I wrote to the General Services Office about the lost hearing aid. Four weeks passed and we received no contact from that Office. I then received a written reply, by letter, which I felt ostensibly shrugged off the matter in a very insulting and uncaring fashion, and seemingly with no understanding or appreciation of the Emergency Department environment and procedures or of the effect of pain relief medication on physical and cognitive function. The letter in part read "a thorough search has been conducted but nothing has been found" and "upon the investigation the CSC advised us that [my father] had no cognitive or major physical limitations limiting him from looking after his own property" and "it is hospital policy that patients and patient minders are responsible for their own belongings and the Royal Adelaide Hospital will not take responsibility for the lost hearing aid". I think this blame-shifting on to a drugged-up, frail old man is disrespectful, insulting and very poor form. That lost has ultimately cost my pensioner parents very dearly! !
+Relate: emergency;fall;frail;hearing;hearing aid;hospital;imaging;medication;nursing care;pain;pain relief;public hospital;SA;treatment;
+Good: 
+Bad: 
+ID: 59829
+Title: Excellent services at Goodna Community Health Plaza let down by receptionist.
+Time: 2015-03-23T05:07:43Z
+Location: Goodna Community Health Centre;
+Author: a parent/guardian
+Story: On our first official appointment at Goodna Community Health Plaza, Qld, we were told to meet our therapist in the exact same place where we had my child’s initial assessment done. We walked through the doors and sat outside the exact room where we had the initial assessment done. We were on time for our appointment. In the meantime my baby started crying for a feed and I fed my baby while my other child was entertaining themselves. We were the only people in the front of the building. Eventually after waiting for half an hour, I went up to the booth, which turned out to be the reception. There was no signage as one entered the building that indicated where the reception was and that one had to report to the reception. When I asked the receptionist whether our appointment was running late, she was quite short with me and told me that I should have reported to reception on my arrival. I told her that I was instructed by the therapist to meet outside the therapy room. The receptionist told me that they were incredibly busy and that they have many therapists who are working at their centre and that I have to announce my arrival. This irritated me immensely as we were the ONLY patients in the front of the building. My child was running up and down past her booth, and my baby was screaming for a feed, surely she should have heard and seen us. It would have been lovely if she could have just gotten up off her chair and enquired whether we needed her help, as this was our first official appointment at the centre. (She did not look busy and there was no one else in any of the 3 allocated waiting rooms!). A few months on and we now know the modus operandi. Today we again reported to reception with our Medicare card and told the receptionist that our details are still all the same. I told her that we were just quickly going to go to the toilet, as we were 5 minutes early for our appointment. We came out of the toilet and waited for 30 minutes directly in front of the receptionist's booth, until the therapist came out to meet with us. She apologized for being late, but told us that the receptionist had never phoned her to inform her that we were in the waiting room. Both our time and the therapist's time were wasted. There has also been another occasion where I was asked to take an appointment sheet to the receptionist after a session with 3 future-dated appointment dates on it. I felt the receptionist saw that it was 3 appointment dates that she would have to enter into the system and said that it was too much work for her to do at that moment, so she photocopied the sheet instead and said that she would enter the dates onto her system at a later occasion. Surely expert, efficient, friendly and professional therapists deserve to have a receptionist represent them that is of the same calibre. I believe this receptionist is an awful misrepresentation of the excellent services which this institution offers.
+Relate: attitude;communication;QLD;unhelpful;waiting;waiting time;
+Good: 
+Bad: 
+ID: 59843
+Title: Why am I paying for private health insurance but not being treated like a private patient?
+Time: 2015-03-26T01:42:06Z
+Location: Shoalhaven District Memorial Hospital;
+Author: the patient
+Story: My GP recommended me to Shoalhaven Hospital for a procedure because he believed they deal better with diabetes than other hospitals. My GP took the time to carefully pick the doctor for my procedure. When I presented to the Shoalhaven Hospital I gave them my private health insurance membership card. I also saw a list that said private rooms were given as first to those who really needed their own room and second to privately insured patients. I was put in a room with 3 other people, one who I think, from the things I heard, had Golden Staph! I had keyhole surgery, which went on to then needing to have another operation, leaving me with a large wound. I had to share a bathroom with the other 3 people. When I went for a walk I noticed plenty of vacant rooms available. All I got during my stay was a TV to watch and a newspaper. I'm left wondering is my private insurance a waste. I've paid $2500 per year for the last 20+ years, and it will soon be going up to $3000. Why am I paying it when everybody got the same treatment whether they were a privately insured patient or not. I have absolutely no complaints about my treatment and was very happy with the doctors during my stay, I just want to know what do you have to do to get a private room? I feel the hospital doesn't care because they get paid no matter what.
+Relate: diabetes;hospital;keyhole surgery;NSW;operation;private health insurance;private patient;public hospital;surgery;
+Good: 
+Bad: 
+ID: 59844
+Title: Couldn't contact a staff member for Murrumbidgee Medicare Local Regional Office.
+Time: 2015-03-26T06:32:34Z
+Location: Aboriginal Outreach Program (Murrumbidgee Medicare Local);
+Author: a relative
+Story: Client rang to see if staff was in town today so I rang the office and unable to get in contact with staff. This family requires all the help that is needed.
+Relate: aboriginal health;indigenous health;NSW;outreach;outreach worker;
+Good: 
+Bad: 
+ID: 59847
+Title: Received wonderful care at The Alfred Hospital
+Time: 2015-03-27T14:53:37Z
+Location: The Alfred / Emergency Department;
+Author: the patient
+Story: I was in Emergency at Alfred, all I can say what wonderful care I received. Went back for ultrasound, have gall stones and a polyp, the hospital rang me and said to go and see my doctor, I did that, was told not to worry about it.
+Relate: emergency;Emergency department;gall stones;hospital;public hospital;VIC;
+Good: 
+Bad: 
+ID: 59848
+Title: My mum was treated incredibly well at Maroondah Hospital.
+Time: 2015-03-30T03:07:05Z
+Location: Maroondah Hospital;
+Author: a relative
+Story: My mother experienced a critical medical emergency and was ambulanced to Eastern Health Maroondah hospital. She was treated incredibly well. I was so surprised - you hear so many poor stories - you don't have much confidence - but her care, the setting, the staff were world class.
+Relate: emergency;hospital;public hospital;VIC;
+Good: 
+Bad: 
+ID: 59849
+Title: Outstanding level of care
+Time: 2015-03-30T08:36:23Z
+Location: Headspace Camperdown;
+Author: the patient
+Story: I've been seeing 3 health professionals over the past 3 years at the Camperdown Headspace and my health has significantly improved due to my own personal persistence, and the commitment, efforts, and sense of humour of my 'treatment team'. They're happy for me to work with me to try things out, ranging from different medicines to challenging my performance anxiety. I normally would not have sought out such support if hadn't been for a major relapse, but have been constantly rewarded by my own personal growth facilitated by their belief in me. Their reception has also seen it all, they can accept me in a good mood or if I'm feeling teary.
+Relate: anxiety;commitment;growth;NSW;staff;treatment;
+Good: 
+Bad: 
+ID: 58155
+Title: Seeing my doctor for repeat prescriptions
+Time: 2012-03-07T05:14:30Z
+Location: GPs in the Morayfield Electoral District;
+Author: the patient
+Story: I am on colestrol tablets and my doctor says I have to stay on them permanently, I find it most annoying that I have to wait to see my doctor, sometimes up to 4 days to get a prescription renewed. I think it would be much better for me and the government if the doctor could write out a script and leave it at the desk for a small fee instead of a visit which costs me nothing but Medicare a doctors fee.
+Relate: cholesterol;doctor;doctor fees;GP;medicare;QLD;renewed prescription;repeat prescription;
+Good: 
+Bad: 

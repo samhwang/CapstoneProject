@@ -6,7 +6,7 @@ public class PoMMain {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String strRegion = "au";
-		int nMode = Crawler.ModeStory;
+		int nMode = Crawler.ModeID;
 		int nStartSeq = 0;
 		if(args.length >= 2)
 		{
