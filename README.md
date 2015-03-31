@@ -1,4 +1,7 @@
-mt
+CAPSTONE PROJECT
 ==
 
-Minor Thesis
+CAPSTONE PROJECT 2015A
+TEAM MEMBER:
+Huy Huynh - s3412240
+Stuart Barker - s3431404
