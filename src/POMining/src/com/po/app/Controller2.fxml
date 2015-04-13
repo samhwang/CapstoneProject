@@ -21,7 +21,7 @@
                         
                         <!-- Graph foundation, Stuart Barker 14/04/2015 -->
                         
-                        <Button fx:id="GraphGenerate" layoutX="450.0" layoutY="370.0" text="Graph" onAction="#GraphGenerate"/>
+                        <Button fx:id="GraphGenerate" layoutX="450.0" layoutY="370.0" text="We're now in a new Scene" onAction="#GraphGenerate"/>
                         
                         <!-- End -->
                         
