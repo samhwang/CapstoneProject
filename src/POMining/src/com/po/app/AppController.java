@@ -1,5 +1,6 @@
 package com.po.app;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -16,13 +17,19 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView; 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ChoiceBox;
+import javafx.stage.Stage;
 
 public class AppController implements Initializable{
 	StoryManager sM;
@@ -31,6 +38,9 @@ public class AppController implements Initializable{
     @FXML private ListView<String> TopicList;
     @FXML private Label StoryCount;
     @FXML private TextArea StoryBody;
+    // Stuart Barker 14/4/2015
+    @FXML private Button GraphGenerate;
+    
     @FXML private ChoiceBox<String> SentimentChoice;
     @FXML private CheckBox cbNSW;
     @FXML private CheckBox cbVIC;
@@ -50,6 +60,11 @@ public class AppController implements Initializable{
     private int nStateSelection;
     
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+
+		/* If we can check which .fxml file is being used, we should be able to change
+		 * the initialization to avoid null reference errors from using a different .fxml 
+		 * document with the same controller. */
 	
 		InitUI();
 		InitStory();
@@ -61,6 +76,8 @@ public class AppController implements Initializable{
 	
 	private void InitUI()
 	{
+		
+		
 		StoryIDList.setItems(listItems);
 		TopicList.setItems(topicListItems);
 		StoryBody.setEditable(false);
@@ -174,7 +191,24 @@ public class AppController implements Initializable{
 	                    LoadStoryIDList();
 	            }
 	        });
+		
 	}
+	
+	// Change scene (prepare graph page on button press). Stuart Barker 14/4/2015
+	
+	public void GraphGenerate(ActionEvent e) throws IOException
+    {
+		Stage stage; 
+	    Parent root;        
+	        
+	    stage=(Stage) GraphGenerate.getScene().getWindow();
+	        //load up OTHER FXML document
+	     root = FXMLLoader.load(getClass().getResource("Controller2.fxml"));
+	     //create a new scene with root and set the stage
+	     Scene scene = new Scene(root);
+	     stage.setScene(scene);
+	     stage.show();	
+    }
 	
 	private void LoadTopicList()
 	{
@@ -215,6 +249,8 @@ public class AppController implements Initializable{
 		
 		StoryCount.setText(String.format("Total: %d", listItems.size()));
 	}
+	
+	// State checkboxes
 	
 	private void RefreshStateFlag()
 	{
@@ -258,4 +294,7 @@ public class AppController implements Initializable{
 		else
 			nStateSelection &= ~Story.AU_STATE_FLAG_WA;
 	}
+	
+	
+	
 }
