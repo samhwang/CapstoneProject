@@ -65,13 +65,24 @@ public class AppController implements Initializable{
 		/* If we can check which .fxml file is being used, we should be able to change
 		 * the initialization to avoid null reference errors from using a different .fxml 
 		 * document with the same controller. */
-	
-		InitUI();
-		InitStory();
-		InitListeners();
 		
-		RefreshStateFlag();
-		SentimentChoice.getSelectionModel().selectFirst();
+		String resource = arg0.toString();
+		String document = resource.substring(resource.length()-15);
+		/*System.out.println(resource);
+		System.out.println(document);*/
+		
+		/* Stuart Barker 15/04/2015 - Run initialize only for scene 1 
+		 * (not for the scene dedicated to a generated graph, which would cause conflicts) */
+		
+		if(document.equals("Controller.fxml"))
+		{	
+			InitUI();
+			InitStory();
+			InitListeners();
+		
+			RefreshStateFlag();
+			SentimentChoice.getSelectionModel().selectFirst();
+		}
 	}
 	
 	private void InitUI()
