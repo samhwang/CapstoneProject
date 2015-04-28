@@ -40,6 +40,7 @@ public class AppController implements Initializable{
     @FXML private TextArea StoryBody;
     // Stuart Barker 14/4/2015
     @FXML private Button GraphGenerate;
+    @FXML private Button BackToText;
     
     @FXML private ChoiceBox<String> SentimentChoice;
     @FXML private CheckBox cbNSW;
@@ -215,6 +216,22 @@ public class AppController implements Initializable{
 	    stage=(Stage) GraphGenerate.getScene().getWindow();
 	        //load up OTHER FXML document
 	     root = FXMLLoader.load(getClass().getResource("Controller2.fxml"));
+	     //create a new scene with root and set the stage
+	     Scene scene = new Scene(root);
+	     stage.setScene(scene);
+	     stage.show();	
+    }
+	
+	// Change from graph scene to original text screen. Huy Huynh 28/4/2015
+	
+	public void BackToText(ActionEvent e) throws IOException
+    {
+		Stage stage; 
+	    Parent root;        
+	        
+	    stage=(Stage) BackToText.getScene().getWindow();
+	        //load up OTHER FXML document
+	     root = FXMLLoader.load(getClass().getResource("Controller.fxml"));
 	     //create a new scene with root and set the stage
 	     Scene scene = new Scene(root);
 	     stage.setScene(scene);
