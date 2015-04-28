@@ -24,7 +24,7 @@ import com.googlecode.charts4j.LinearGradientFill;
 import com.googlecode.charts4j.Plots;
 
 public class TestGraph {
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		Logger.global.setLevel(Level.ALL);
@@ -83,7 +83,7 @@ public class TestGraph {
 }
 
 /*
- * So in the end, what this does is generate an url that will eventually leads to a chart
- * We need to find a way to put this in the actual app.
- * Huy Huynh, 28/04/2015
+ * So in the end, what this does is generate an url that will eventually leads
+ * to a chart We need to find a way to put this in the actual app. Huy Huynh,
+ * 28/04/2015
  */

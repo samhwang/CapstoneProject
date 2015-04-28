@@ -14,7 +14,7 @@ public class ParserMain {
 		StoryParser.getInstance().LoadWordMapping();
 		StoryManager sM = new StoryManager();
 		sM.LoadStory("data" + File.separator + "auStory.txt");
-		
+
 		sM.PrintStats();
 	}
 
