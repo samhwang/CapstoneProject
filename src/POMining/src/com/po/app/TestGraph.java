@@ -35,8 +35,7 @@ public class TestGraph {
 		// EXAMPLE CODE START
 		// Defining data plots.
 		BarChartPlot good = Plots.newBarChartPlot(
-				Data.newData(90, 80, 40, 50, 25, 43, 12, 30), BLUEVIOLET,
-				"Good");
+				Data.newData(90, 80, 40, 50, 25, 43, 12, 30), BLUEVIOLET, "Good");
 		BarChartPlot bad = Plots.newBarChartPlot(
 				Data.newData(40, 50, 30, 20, 10, 35, 11, 05), ORANGERED, "Bad");
 		// BarChartPlot team3 = Plots.newBarChartPlot(
@@ -58,7 +57,7 @@ public class TestGraph {
 		chart.addXAxisLabels(AxisLabelsFactory.newAxisLabels("VIC", "NSW",
 				"ACT", "QLD", "SA", "WA", "NT", "TAS"));
 		chart.addYAxisLabels(AxisLabelsFactory
-				.newNumericRangeAxisLabels(0, 100));
+				.newNumericRangeAxisLabels(0, 200));
 		chart.addYAxisLabels(review);
 		chart.addXAxisLabels(state);
 
