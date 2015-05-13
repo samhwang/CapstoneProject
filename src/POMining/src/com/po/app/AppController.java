@@ -29,6 +29,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AppController implements Initializable {
@@ -47,6 +48,10 @@ public class AppController implements Initializable {
 	private Button GraphGenerate;
 	@FXML
 	private Button BackToText;
+	
+	// Stuart Barker 13/05/2015
+	@FXML
+	private TextField Search;
 
 	@FXML
 	private ChoiceBox<String> SentimentChoice;
@@ -255,7 +260,51 @@ public class AppController implements Initializable {
 				LoadStoryIDList();
 			}
 		});
-
+		
+		// Search keywords (jump to keyword on enter key in search bar). Stuart Barker
+		// 13/5/2015
+		Search.setOnAction((event) -> {
+			
+			// Grab the text in the search bar as well as create the hashmap
+			// stating how many results (stories) exist for each list item
+			// (dependent on the current 'sentiment choice' (good/bad/all))
+			String searchtext = Search.getText().toLowerCase();
+			Map<String, Integer> topicMap = new HashMap<String, Integer>();
+			if (strMode == "All") {
+				topicMap = sM.GetUserTopicTotal();
+			} else if (strMode == "Good") {
+				topicMap = sM.GetUserTopicGood();
+			} else if (strMode == "Bad") {
+				topicMap = sM.GetUserTopicBad();
+			}
+			
+			// Because the text in the TopicList include the number of results
+			// each keyword has, append the number of results/stories to the
+			// search text by referring to the hashmap so the search text formatting
+			// is appropriate.
+			
+			// The if-else checks whether the searchtext exists at all and responds
+			// appropriately, defaulting the selection to the first List item ("All") if
+			// the text isn't found
+			if(topicMap.get(searchtext)!=null)
+			{
+				searchtext = searchtext + "(" + topicMap.get(searchtext) + ")";
+			
+				// Search for the new text in the list, select and scroll to it when found
+				TopicList.getSelectionModel().select(searchtext);
+				TopicList.scrollTo(TopicList.getSelectionModel().getSelectedIndex());
+				Search.clear();
+				Search.setPromptText("Type Search Text...");
+			}
+			else
+			{
+				Search.clear();
+				Search.setPromptText("Type Search Text...");
+				TopicList.getSelectionModel().selectFirst();
+				TopicList.scrollTo(TopicList.getSelectionModel().getSelectedIndex());
+			}
+			
+		});	
 	}
 
 	// Change scene (prepare graph page on button press). Stuart Barker
@@ -288,6 +337,8 @@ public class AppController implements Initializable {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	
 
 	private void LoadTopicList() {
 		topicListItems.clear();

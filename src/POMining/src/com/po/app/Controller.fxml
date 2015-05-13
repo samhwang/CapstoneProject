@@ -15,18 +15,23 @@
             <content>
               <AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="600.0" minWidth="800.0" prefHeight="400.0" prefWidth="600.0">
                      <children>
-                        <ListView fx:id="StoryIDList" layoutX="186.0" layoutY="46.0" prefHeight="508.0" prefWidth="85.0" />
-                        <Label fx:id="StoryCount" alignment="CENTER" layoutX="187.0" layoutY="29.0" prefHeight="17.0" prefWidth="84.0" text="0" />
-                        <TextArea fx:id="StoryBody" layoutX="280.0" layoutY="48.0" maxHeight="314.0" maxWidth="476.0" minHeight="280.0" minWidth="303.0" prefHeight="292.0" prefWidth="303.0" wrapText="true" />
+                        <ListView fx:id="StoryIDList" layoutX="186.0" layoutY="60.0" prefHeight="508.0" prefWidth="85.0" />
+                        <Label fx:id="StoryCount" alignment="CENTER" layoutX="187.0" layoutY="43.0" prefHeight="17.0" prefWidth="84.0" text="0" />
+                        <TextArea fx:id="StoryBody" layoutX="280.0" layoutY="62.0" maxHeight="314.0" maxWidth="476.0" minHeight="280.0" minWidth="303.0" prefHeight="292.0" prefWidth="303.0" wrapText="true" />
                         
                         <!-- Graph foundation, Stuart Barker 14/04/2015 -->
                         
                         <Button fx:id="GraphGenerate" layoutX="450.0" layoutY="370.0" text="Graph" onAction="#GraphGenerate"/>
                         
                         <!-- End -->
-                        
-                        <ListView fx:id="TopicList" layoutX="14.0" layoutY="46.0" prefHeight="507.0" prefWidth="161.0" />
-                        <ChoiceBox fx:id="SentimentChoice" layoutX="14.0" layoutY="17.0" prefHeight="25.0" prefWidth="102.0" />
+                        <!--  Search Bar, Stuart Barker 13/05/2015 -->
+                       
+                        <TextField fx:id="Search" layoutX="14.0" layoutY="5.0" prefHeight="15.0" prefWidth="170.0" promptText="Type Search Text..." />
+                       
+                        <!-- End -->
+               			<ListView fx:id="TopicList" layoutX="14.0" layoutY="60.0" prefHeight="507.0" prefWidth="161.0" />
+                        <ChoiceBox fx:id="SentimentChoice" layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="102.0" />
+               			
                         <CheckBox fx:id="cbNSW" layoutX="194.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="NSW" />
                         <CheckBox fx:id="cbVIC" layoutX="254.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="VIC" />
                         <CheckBox fx:id="cbACT" layoutX="303.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="ACT" />
