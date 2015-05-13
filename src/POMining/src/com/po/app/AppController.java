@@ -106,6 +106,15 @@ public class AppController implements Initializable {
 			RefreshStateFlag();
 			SentimentChoice.getSelectionModel().selectFirst();
 		}
+		
+		/* 
+		 * Stuart Barker 6/05/2015 - initialize controller2 for graph.
+		 */
+		
+		if (document.equals("Controller2.fxml")) {
+			InitGraphUI();
+			InitGraphListeners();
+		}
 	}
 
 	private void InitUI() {
@@ -116,6 +125,14 @@ public class AppController implements Initializable {
 		SentimentChoice.setItems(SentimentsBox);
 
 	}
+	
+	private void InitGraphUI() {
+
+		/*
+		 * 
+		 */
+
+	}
 
 	private void InitStory() {
 		StoryParser.getInstance().LoadStopWords();
@@ -124,6 +141,14 @@ public class AppController implements Initializable {
 		sM = new StoryManager();
 		// sM.LoadStory("data" + File.separator + "auStory.txt");
 		sM.LoadStory("auStory.txt");
+	}
+	
+	private void InitGraphListeners() {
+
+		/*
+		 * 
+		 */
+
 	}
 
 	private void InitListeners() {
