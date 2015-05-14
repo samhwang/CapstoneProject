@@ -31,7 +31,7 @@ public class TestGraph {
 	}
 
 	@Test
-	public void example1() {
+	public void example1() { // FOR TESTING PURPOSES.
 		// EXAMPLE CODE START
 		// Defining data plots.
 		BarChartPlot good = Plots.newBarChartPlot(
@@ -72,6 +72,7 @@ public class TestGraph {
 		fill.addColorAndOffset(WHITE, 0);
 		chart.setAreaFill(fill);
 		String url = chart.toURLString();
+		System.out.println(url);
 
 		// EXAMPLE CODE END. Use this url string in your web or
 		// Internet application.
@@ -81,6 +82,50 @@ public class TestGraph {
 		// assertEquals("Junit error", normalize(expectedString),
 		// normalize(url));
 
+	}
+	
+	
+	public String GenerateChart(){//Huy Huynh 14/5/2015
+		//Generate URL to output the chart.
+		// Defining data plots.
+		BarChartPlot good = Plots.newBarChartPlot(
+				Data.newData(90/2, 80/2, 40/2, 50/2, 25/2, 43/2, 12/2, 30/2), BLUEVIOLET, "Good");
+		BarChartPlot bad = Plots.newBarChartPlot(
+				Data.newData(40/2, 50/2, 30/2, 20/2, 10/2, 35/2, 11/2, 05/2), ORANGERED, "Bad");
+	
+		// Instantiating chart.
+		BarChart chart = GCharts.newBarChart(good, bad);
+	
+		// Defining axis info and styles
+		AxisStyle axisStyle = AxisStyle.newAxisStyle(BLACK, 13,
+				AxisTextAlignment.CENTER);
+		AxisLabels review = AxisLabelsFactory.newAxisLabels("Reviews", 50.0);
+		review.setAxisStyle(axisStyle);
+		AxisLabels state = AxisLabelsFactory.newAxisLabels("State", 50.0);
+		state.setAxisStyle(axisStyle);
+	
+		// Adding axis info to chart.
+		chart.addXAxisLabels(AxisLabelsFactory.newAxisLabels("VIC", "NSW",
+				"ACT", "QLD", "SA", "WA", "NT", "TAS"));
+		chart.addYAxisLabels(AxisLabelsFactory
+				.newNumericRangeAxisLabels(0, 100));
+		chart.addYAxisLabels(review);
+		chart.addXAxisLabels(state);
+	
+		chart.setSize(600, 450);
+		chart.setBarWidth(40);
+		chart.setSpaceWithinGroupsOfBars(20);
+		chart.setDataStacked(true);
+		chart.setTitle("PationOpinions.org.au Reviews", BLACK, 16);
+		chart.setGrid(250, 10, 3, 2);
+		chart.setBackgroundFill(Fills.newSolidFill(ALICEBLUE));
+		LinearGradientFill fill = Fills.newLinearGradientFill(0, LAVENDER, 100);
+		fill.addColorAndOffset(WHITE, 0);
+		chart.setAreaFill(fill);
+		String url = chart.toURLString();
+		System.out.println(url);
+		
+		return url;
 	}
 
 }

@@ -32,6 +32,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+//Huy Huynh - 14/5/2015 - In case we need the chart imports
+
 public class AppController implements Initializable {
 	StoryManager sM;
 
@@ -48,6 +50,11 @@ public class AppController implements Initializable {
 	private Button GraphGenerate;
 	@FXML
 	private Button BackToText;
+	
+	// Huy Huynh - 14/5/2015 - test for graph generating
+	@FXML
+	private TextArea GraphArea;
+	private String url = (new TestGraph().GenerateChart());
 	
 	// Stuart Barker 13/05/2015
 	@FXML
@@ -132,11 +139,9 @@ public class AppController implements Initializable {
 	}
 	
 	private void InitGraphUI() {
-
-		/*
-		 * 
-		 */
-
+		// Huy Huynh - 14/05/2013 - Load the chart url.
+		TestGraph chart = new TestGraph();
+		GraphArea.setText(chart.GenerateChart());
 	}
 
 	private void InitStory() {
@@ -149,11 +154,8 @@ public class AppController implements Initializable {
 	}
 	
 	private void InitGraphListeners() {
-
-		/*
-		 * 
-		 */
-
+		// will be blank for now, since the chart currently has no "interactive methods"
+		// Huy Huynh - 14/5/2015
 	}
 
 	private void InitListeners() {
