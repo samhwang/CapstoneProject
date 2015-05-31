@@ -186,7 +186,6 @@ public class TestGraph {
 		// END Stuart Barker code
 		
 		// Instantiating chart.
-		// BarChart chart = GCharts.newBarChart(team1, team2, team3);
 		BarChart chart = GCharts.newBarChart(good, bad);
 
 		// Defining axis info and styles
