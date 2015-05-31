@@ -5,8 +5,14 @@ import static com.googlecode.charts4j.UrlUtil.normalize;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javafx.collections.ObservableList;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,6 +28,8 @@ import com.googlecode.charts4j.Fills;
 import com.googlecode.charts4j.GCharts;
 import com.googlecode.charts4j.LinearGradientFill;
 import com.googlecode.charts4j.Plots;
+import com.po.parser.Story;
+import com.po.parser.StoryManager;
 
 public class TestGraph {
 
@@ -31,7 +39,131 @@ public class TestGraph {
 	}
 
 	@Test
-	public void example1() { // FOR TESTING PURPOSES.
+	public String example1(StoryManager sM, String strMode, String strCurrentTopic, ObservableList<String> listItems) {
+		
+		// Tally up the "Good" and "Bad" feedback for each state FOR THE SELECTED TOPIC and store the values. This
+		// also tracks the feedback that didn't have a state associated with them.
+		// Stuart Barker, 31/05/2015
+
+		int nsw = 0;
+		int vic = 0;
+		int act = 0;
+		int qld = 0;
+		int tas = 0;
+		int sa = 0;
+		int nt = 0;
+		int wa = 0;
+		int other = 0;
+		
+		int nswBad = 0;
+		int vicBad = 0;
+		int actBad = 0;
+		int qldBad = 0;
+		int tasBad = 0;
+		int saBad = 0;
+		int ntBad = 0;
+		int waBad = 0;
+		int otherBad = 0;
+		
+		Set<String> setIDgood = new HashSet<String>();
+		setIDgood = sM.GetIDsByTopic("Good", strCurrentTopic);
+
+		for (String id : setIDgood) {
+			if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_NSW) > 0))
+			{
+				nsw++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_VIC) > 0))
+			{
+				vic++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_ACT) > 0))
+			{
+				act++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_QLD) > 0))
+			{
+				qld++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_TAS) > 0))
+			{
+				tas++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_SA) > 0))
+			{
+				sa++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_NT) > 0))
+			{
+				nt++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_WA) > 0))
+			{
+				wa++;
+			}
+			else
+			{
+				other++;
+			}
+		}
+		
+		Set<String> setIDbad = new HashSet<String>();
+		setIDbad = sM.GetIDsByTopic("Bad", strCurrentTopic);
+
+		for (String id : setIDbad) {
+			if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_NSW) > 0))
+			{
+				nswBad++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_VIC) > 0))
+			{
+				vicBad++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_ACT) > 0))
+			{
+				actBad++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_QLD) > 0))
+			{
+				qldBad++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_TAS) > 0))
+			{
+				tasBad++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_SA) > 0))
+			{
+				saBad++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_NT) > 0))
+			{
+				ntBad++;
+			}
+			else if (((sM.GetStoryStateFlag(id.replace("ID:", "").trim()) & Story.AU_STATE_FLAG_WA) > 0))
+			{
+				waBad++;
+			}
+			else
+			{
+				otherBad++;
+			}
+		}
+		
+		// These printing statements are for testing purposes to ensure that the graph is accurate based on
+		// at least the first few state feedback values. They should be commented out on final delivery.
+		// Stuart Barker, 31/05/2015
+		
+		/*System.out.println(String.format("VIC Good/Bad Total: %d/%d", vic, vicBad));
+		System.out.println(String.format("NSW Good/Bad Total: %d/%d", nsw, nswBad));
+		System.out.println(String.format("ACT Good/Bad Total: %d/%d", act, actBad));
+		System.out.println(String.format("QLD Good/Bad Total: %d/%d", qld, qldBad));*/
+		
+		/*System.out.println(String.format("STATE Good Total: %d", nsw+vic+act+qld+tas+sa+nt+wa));
+		System.out.println(String.format("OTHER Good Total: %d", other));*/
+		
+		
+		
+		// FOR TESTING PURPOSES.
 		// EXAMPLE CODE START
 		// Defining data plots.
 		BarChartPlot good = Plots.newBarChartPlot(
@@ -40,7 +172,19 @@ public class TestGraph {
 				Data.newData(40/2, 50/2, 30/2, 20/2, 10/2, 35/2, 11/2, 05/2), ORANGERED, "Bad");
 		// BarChartPlot team3 = Plots.newBarChartPlot(
 		// Data.newData(10, 20, 30, 30), LIMEGREEN, "Team C");
-
+		
+		// CURRENTLY COMMENTED OUT
+		// The following is an example of plugging in the found values to the graph. Currently not fully functional.
+		// INTENDED FUNCTIONALITY CHANGE: Add a column for "Other" or "Unspecified" state feedback.
+		// Stuart Barker, 31/05/2015
+		
+		/*BarChartPlot good = Plots.newBarChartPlot(
+				Data.newData(vic, nsw, act, qld, sa, wa, nt, tas), BLUEVIOLET, "Good");
+		BarChartPlot bad = Plots.newBarChartPlot(
+				Data.newData(vicBad, nswBad, actBad, qldBad, saBad, waBad, ntBad, tasBad), ORANGERED, "Bad");*/
+		
+		// END Stuart Barker code
+		
 		// Instantiating chart.
 		// BarChart chart = GCharts.newBarChart(team1, team2, team3);
 		BarChart chart = GCharts.newBarChart(good, bad);
@@ -65,22 +209,22 @@ public class TestGraph {
 		chart.setBarWidth(40);
 		chart.setSpaceWithinGroupsOfBars(20);
 		chart.setDataStacked(true);
-		chart.setTitle("PationOpinions.org.au Reviews", BLACK, 16);
+		chart.setTitle("PatientOpinions.org.au Feedback", BLACK, 16);
 		chart.setGrid(250, 10, 3, 2);
 		chart.setBackgroundFill(Fills.newSolidFill(ALICEBLUE));
 		LinearGradientFill fill = Fills.newLinearGradientFill(0, LAVENDER, 100);
 		fill.addColorAndOffset(WHITE, 0);
 		chart.setAreaFill(fill);
 		String url = chart.toURLString();
-		System.out.println(url);
 
 		// EXAMPLE CODE END. Use this url string in your web or
 		// Internet application.
-		Logger.global.info(url);
+		//			Logger.global.info(url);
 		// String expectedString =
 		// "http://chart.apis.google.com/chart?chf=bg,s,F0F8FF|c,lg,0,E6E6FA,1.0,FFFFFF,0.0&chs=600x450&chd=e:QAbhHrTN,FIWZHCDN,GaMzTNTN&chtt=Team+Scores&chts=000000,16&chg=100.0,10.0,3,2&chxt=y,y,x,x&chxr=0,0.0,100.0|1,0.0,100.0|3,0.0,100.0&chxl=1:|Score|2:|2002|2003|2004|2005|3:|Year&chxp=1,50.0|3,50.0&chxs=1,000000,13,0|3,000000,13,0&chdl=Team+A|Team+B|Team+C&chco=8A2BE2,FF4500,32CD32&chbh=100,20,8&cht=bvs";
 		// assertEquals("Junit error", normalize(expectedString),
 		// normalize(url));
+		return url;
 
 	}
 	

@@ -59,6 +59,10 @@ public class AppController implements Initializable {
 	// Stuart Barker 13/05/2015
 	@FXML
 	private TextField Search;
+	
+	// Stuart Barker 28/05/2015
+	@FXML
+	private TextArea GraphURL;
 
 	@FXML
 	private ChoiceBox<String> SentimentChoice;
@@ -117,6 +121,8 @@ public class AppController implements Initializable {
 
 			RefreshStateFlag();
 			SentimentChoice.getSelectionModel().selectFirst();
+			
+			
 		}
 		
 		/* 
@@ -312,7 +318,7 @@ public class AppController implements Initializable {
 	// Change scene (prepare graph page on button press). Stuart Barker
 	// 14/4/2015
 
-	public void GraphGenerate(ActionEvent e) throws IOException {
+	/*public void GraphGenerate(ActionEvent e) throws IOException {
 		Stage stage;
 		Parent root;
 
@@ -323,6 +329,28 @@ public class AppController implements Initializable {
 		Scene scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
+	}*/
+	
+	// Alternative graph generation - provide a URL on default scene and highlight it for copying.
+	// It is IMPORTANT TO NOTE that the graph created uses only data points from the selected Topic/keyword,
+	// which by default (depending on user interaction) will be "All"
+	// Currently some method/class names, "TestGraph" and "example1" are subject to change by final
+	// release. Further code information can be found in TestGraph.java
+	// Stuart Barker, 28/05/2015
+	
+	public void PrepareGraph() {
+        TestGraph tGraph = new TestGraph();
+        String url = tGraph.example1(sM, strMode, strCurrentTopic, listItems);
+        //System.out.println(url);
+        GraphURL.setText(url);
+        GraphURL.selectAll();
+        //LoadStoryIDList();
+   }
+	
+	public void GraphGenerate(ActionEvent e) throws IOException {
+
+		PrepareGraph();
+		
 	}
 
 	// Change from graph scene to original text screen. Huy Huynh 28/4/2015
