@@ -145,7 +145,7 @@ public class AppController implements Initializable {
 	}
 	
 	private void InitGraphUI() {
-		// Huy Huynh - 14/05/2013 - Load the chart url.
+		// Huy Huynh - 14/05/2013 - Load the chart url. intended to use on second scene.
 		TestGraph chart = new TestGraph();
 		GraphArea.setText(chart.GenerateChart());
 	}
