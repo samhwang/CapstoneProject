@@ -64,8 +64,8 @@ public class AppController implements Initializable {
 	@FXML
 	private TextArea GraphURL;
 
-	@FXML
-	private ChoiceBox<String> SentimentChoice;
+	//@FXML
+	//private ChoiceBox<String> SentimentChoice;
 	@FXML
 	private CheckBox cbNSW;
 	@FXML
@@ -82,6 +82,12 @@ public class AppController implements Initializable {
 	private CheckBox cbNT;
 	@FXML
 	private CheckBox cbWA;
+	
+	// Stuart Barker 8/6/2015
+	@FXML
+	private CheckBox cbGood;
+	@FXML
+	private CheckBox cbBad;
 
 	final ObservableList<String> listItems = FXCollections
 			.observableArrayList();
@@ -120,7 +126,11 @@ public class AppController implements Initializable {
 			InitListeners();
 
 			RefreshStateFlag();
-			SentimentChoice.getSelectionModel().selectFirst();
+			//SentimentChoice.getSelectionModel().selectFirst();
+			// Stuart Barker 8/6/2015 Change Dropdown box to Checkboxes
+			strMode = "All";
+			LoadTopicList();
+			TopicList.getSelectionModel().selectFirst();
 			
 			
 		}
@@ -140,7 +150,7 @@ public class AppController implements Initializable {
 		StoryIDList.setItems(listItems);
 		TopicList.setItems(topicListItems);
 		StoryBody.setEditable(false);
-		SentimentChoice.setItems(SentimentsBox);
+		//SentimentChoice.setItems(SentimentsBox);
 
 	}
 	
@@ -190,7 +200,7 @@ public class AppController implements Initializable {
 						}
 					}
 				});
-
+/*
 		SentimentChoice.getSelectionModel().selectedItemProperty()
 				.addListener(new ChangeListener<String>() {
 					public void changed(
@@ -204,11 +214,87 @@ public class AppController implements Initializable {
 						}
 					}
 				});
+	*/	
+		// Stuart Barker 8/6/2015. Changed Sentiment Choice dropdown box with Checkboxes
+		cbGood.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			public void changed(ObservableValue<? extends Boolean> ov,
+					Boolean old_val, Boolean new_val) {
+				if (cbBad.isSelected() && cbGood.isSelected())
+				{
+					strMode = "All";
+					LoadTopicList();
+					TopicList.getSelectionModel().selectFirst();
+				}
+				else if (cbGood.isSelected())
+				{
+					strMode = "Good";
+					LoadTopicList();
+					TopicList.getSelectionModel().selectFirst();
+				}
+				else if (cbBad.isSelected())
+				{
+					strMode = "Bad";
+					LoadTopicList();
+					TopicList.getSelectionModel().selectFirst();
+				}
+				else
+				{
+					strMode = "Null";
+					LoadTopicList();
+					TopicList.getSelectionModel().clearSelection();
+					listItems.clear();
+					StoryCount.setText(String.format("Total: 0"));
+					StoryBody.clear();
+				}
+				
+			}
+		});
+		
+		cbBad.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			public void changed(ObservableValue<? extends Boolean> ov,
+					Boolean old_val, Boolean new_val) {
+				if (cbBad.isSelected() && cbGood.isSelected())
+				{
+					strMode = "All";
+					LoadTopicList();
+					TopicList.getSelectionModel().selectFirst();
+				}
+				else if (cbGood.isSelected())
+				{
+					strMode = "Good";
+					LoadTopicList();
+					TopicList.getSelectionModel().selectFirst();
+				}
+				else if (cbBad.isSelected())
+				{
+					strMode = "Bad";
+					LoadTopicList();
+					TopicList.getSelectionModel().selectFirst();
+				}
+				else
+				{
+					strMode = "Null";
+					LoadTopicList();
+					TopicList.getSelectionModel().clearSelection();
+					listItems.clear();
+					StoryCount.setText(String.format("Total: 0"));
+					StoryBody.clear();
+				}
+				
+			}
+		});
 
+		// end code (Stuart Barker)
+		
 		cbNSW.selectedProperty().addListener(new ChangeListener<Boolean>() {
 			public void changed(ObservableValue<? extends Boolean> ov,
 					Boolean old_val, Boolean new_val) {
 				RefreshStateFlag();
+				
+				// Stuart Barker 8/6/2015. Added topic list update to checkbox selections
+				//LoadTopicList();
+				//TopicList.getSelectionModel().selectFirst();
+				
 				LoadStoryIDList();
 			}
 		});
@@ -217,6 +303,11 @@ public class AppController implements Initializable {
 			public void changed(ObservableValue<? extends Boolean> ov,
 					Boolean old_val, Boolean new_val) {
 				RefreshStateFlag();
+				
+				// Stuart Barker 8/6/2015. Added topic list update to checkbox selections
+				//LoadTopicList();
+				//TopicList.getSelectionModel().selectFirst();
+				
 				LoadStoryIDList();
 			}
 		});
@@ -225,6 +316,11 @@ public class AppController implements Initializable {
 			public void changed(ObservableValue<? extends Boolean> ov,
 					Boolean old_val, Boolean new_val) {
 				RefreshStateFlag();
+				
+				// Stuart Barker 8/6/2015. Added topic list update to checkbox selections
+				//LoadTopicList();
+				//TopicList.getSelectionModel().selectFirst();
+				
 				LoadStoryIDList();
 			}
 		});
@@ -233,6 +329,11 @@ public class AppController implements Initializable {
 			public void changed(ObservableValue<? extends Boolean> ov,
 					Boolean old_val, Boolean new_val) {
 				RefreshStateFlag();
+				
+				// Stuart Barker 8/6/2015. Added topic list update to checkbox selections
+				//LoadTopicList();
+				//TopicList.getSelectionModel().selectFirst();
+				
 				LoadStoryIDList();
 			}
 		});
@@ -241,6 +342,11 @@ public class AppController implements Initializable {
 			public void changed(ObservableValue<? extends Boolean> ov,
 					Boolean old_val, Boolean new_val) {
 				RefreshStateFlag();
+				
+				// Stuart Barker 8/6/2015. Added topic list update to checkbox selections
+				//LoadTopicList();
+				//TopicList.getSelectionModel().selectFirst();
+				
 				LoadStoryIDList();
 			}
 		});
@@ -249,6 +355,11 @@ public class AppController implements Initializable {
 			public void changed(ObservableValue<? extends Boolean> ov,
 					Boolean old_val, Boolean new_val) {
 				RefreshStateFlag();
+				
+				// Stuart Barker 8/6/2015. Added topic list update to checkbox selections
+				//LoadTopicList();
+				//TopicList.getSelectionModel().selectFirst();
+				
 				LoadStoryIDList();
 			}
 		});
@@ -257,6 +368,11 @@ public class AppController implements Initializable {
 			public void changed(ObservableValue<? extends Boolean> ov,
 					Boolean old_val, Boolean new_val) {
 				RefreshStateFlag();
+				
+				// Stuart Barker 8/6/2015. Added topic list update to checkbox selections
+				//LoadTopicList();
+				//TopicList.getSelectionModel().selectFirst();
+				
 				LoadStoryIDList();
 			}
 		});
@@ -265,6 +381,11 @@ public class AppController implements Initializable {
 			public void changed(ObservableValue<? extends Boolean> ov,
 					Boolean old_val, Boolean new_val) {
 				RefreshStateFlag();
+				
+				// Stuart Barker 8/6/2015. Added topic list update to checkbox selections
+				//LoadTopicList();
+				//TopicList.getSelectionModel().selectFirst();
+				
 				LoadStoryIDList();
 			}
 		});
@@ -296,7 +417,7 @@ public class AppController implements Initializable {
 			// the text isn't found
 			if(topicMap.get(searchtext)!=null)
 			{
-				searchtext = searchtext + "(" + topicMap.get(searchtext) + ")";
+				searchtext = searchtext + " (" + topicMap.get(searchtext) + ")";
 			
 				// Search for the new text in the list, select and scroll to it when found
 				TopicList.getSelectionModel().select(searchtext);
@@ -379,13 +500,20 @@ public class AppController implements Initializable {
 			topicMap = sM.GetUserTopicGood();
 		} else if (strMode == "Bad") {
 			topicMap = sM.GetUserTopicBad();
+		} 
+		// Stuart Barker 8/5/15, Dropdown Box to Checkbox change
+		else if (strMode == "Null") {
+			return;
 		}
 
-		topicListItems.add("All(" + topicMap.size() + ")");
+		
+		topicListItems.add("All (" + topicMap.size() + ")");
 		Vector<String> sortedVec = StoryManager.SortTopic(topicMap);
 		for (String key : sortedVec) {
-			topicListItems.add(key + "(" + topicMap.get(key) + ")");
+			topicListItems.add(key + " (" + topicMap.get(key) + ")");
 		}
+		
+		
 	}
 
 	private void LoadStoryIDList() {
