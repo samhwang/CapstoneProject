@@ -83,6 +83,10 @@ public class AppController implements Initializable {
 	@FXML
 	private CheckBox cbWA;
 	
+	// Stuart Barker 17/06/2015
+	@FXML
+	private CheckBox cbOther;
+	
 	// Stuart Barker 8/6/2015
 	@FXML
 	private CheckBox cbGood;
@@ -390,6 +394,20 @@ public class AppController implements Initializable {
 			}
 		});
 		
+		// Stuart Barker 17/06/2015
+		cbOther.selectedProperty().addListener(new ChangeListener<Boolean>() {
+			public void changed(ObservableValue<? extends Boolean> ov,
+					Boolean old_val, Boolean new_val) {
+				RefreshStateFlag();
+				
+				// Stuart Barker 8/6/2015. Added topic list update to checkbox selections
+				//LoadTopicList();
+				//TopicList.getSelectionModel().selectFirst();
+				
+				LoadStoryIDList();
+			}
+		});
+		
 		// Search keywords (jump to keyword on enter key in search bar). Stuart Barker
 		// 13/5/2015
 		Search.setOnAction((event) -> {
@@ -572,6 +590,12 @@ public class AppController implements Initializable {
 			nStateSelection |= Story.AU_STATE_FLAG_WA;
 		else
 			nStateSelection &= ~Story.AU_STATE_FLAG_WA;
+		
+		// Stuart Barker 17/06/2015
+		if (cbOther.isSelected())
+			nStateSelection |= Story.AU_STATE_FLAG_OTHER;
+		else
+			nStateSelection &= ~Story.AU_STATE_FLAG_OTHER;
 	}
 
 }

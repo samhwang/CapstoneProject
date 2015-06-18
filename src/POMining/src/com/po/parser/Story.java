@@ -25,7 +25,10 @@ public class Story {
 	public static final int AU_STATE_FLAG_SA = 0x20;
 	public static final int AU_STATE_FLAG_NT = 0x40;
 	public static final int AU_STATE_FLAG_WA = 0x80;
-
+	// Checkbox for "no state", Stuart Barker 17/06/2015
+	public static final int AU_STATE_FLAG_OTHER = 0x100;
+	private final String AU_STATE_OTHER = "OTHER";
+	
 	private final String AU_STATE_NSW = "NSW";
 	private final String AU_STATE_VIC = "VIC";
 	private final String AU_STATE_ACT = "ACT";
@@ -34,6 +37,7 @@ public class Story {
 	private final String AU_STATE_SA = "SA";
 	private final String AU_STATE_NT = "NT";
 	private final String AU_STATE_WA = "WA";
+	
 
 	public Story(String strID, String strTitle, String strStory,
 			String strTime, String strLocation, String strAuthor,
@@ -112,6 +116,11 @@ public class Story {
 					return;
 				}
 			}
+			// Checkbox for "no state", Stuart Barker 17/06/2015
+			
+				strState = AU_STATE_OTHER;
+				return;
+			
 		}
 	}
 
@@ -143,6 +152,10 @@ public class Story {
 			break;
 		case AU_STATE_WA:
 			nStateFlag = AU_STATE_FLAG_WA;
+			break;
+		// Checkbox for "no state", Stuart Barker 17/06/2015
+		case AU_STATE_OTHER:
+			nStateFlag = AU_STATE_FLAG_OTHER;
 			break;
 		default:
 			nStateFlag = 0;

@@ -53,6 +53,12 @@
                         <CheckBox fx:id="cbSA" layoutX="452.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="SA" />
                         <CheckBox fx:id="cbNT" layoutX="496.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="NT" />
                         <CheckBox fx:id="cbWA" layoutX="540.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="WA" />
+                        
+                        <!-- Checkbox for "no state", Stuart Barker 17/06/2015 -->
+                       
+                        <CheckBox fx:id="cbOther" layoutX="584.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="OTHER" />
+                       
+                        <!-- End -->
                      </children>
                   </AnchorPane>
             </content>
