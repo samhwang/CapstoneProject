@@ -1,5 +1,4 @@
 package com.po.main;
-
 import com.po.crawler.Crawler;
 
 public class PoMMain {
@@ -9,16 +8,17 @@ public class PoMMain {
 		String strRegion = "au";
 		int nMode = Crawler.ModeStory;
 		int nStartSeq = 0;
-		if (args.length >= 2) {
+		if(args.length >= 2)
+		{
 			nMode = Integer.valueOf(args[0]).intValue();
 			strRegion = args[1];
 		}
-		if (args.length >= 3)
+		if(args.length >= 3)
 			nStartSeq = Integer.valueOf(args[2]).intValue();
-
+		
 		Crawler crawler = new Crawler();
 		crawler.run(nMode, strRegion, nStartSeq);
-		// crawler.run(2, "uk", 0);
+		//crawler.run(2, "uk", 0);
 	}
 
 }

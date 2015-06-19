@@ -15,36 +15,11 @@
             <content>
               <AnchorPane maxHeight="400.0" maxWidth="600.0" minHeight="600.0" minWidth="800.0" prefHeight="400.0" prefWidth="600.0">
                      <children>
-                        <ListView fx:id="StoryIDList" layoutX="186.0" layoutY="60.0" prefHeight="508.0" prefWidth="85.0" />
-                        <Label fx:id="StoryCount" alignment="CENTER" layoutX="187.0" layoutY="43.0" prefHeight="17.0" prefWidth="84.0" text="0" />
-                        <TextArea fx:id="StoryBody" layoutX="280.0" layoutY="62.0" maxHeight="314.0" maxWidth="476.0" minHeight="280.0" minWidth="303.0" prefHeight="292.0" prefWidth="303.0" wrapText="true" />
-                        
-                        <!-- Graph foundation, Stuart Barker 14/04/2015 -->
-                        
-                        <Button fx:id="GraphGenerate" layoutX="280.0" layoutY="359.0" text="Generate Positivity Graph" onAction="#GraphGenerate"/>
-                        
-                        <!-- End -->
-                        <!-- Graph Solution, Stuart Barker 28/05/2015 -->
-                        
-                        <Label fx:id="GraphInstruction" alignment="CENTER" layoutX="280.0" layoutY="376.0" prefHeight="205.0" prefWidth="150.0" text="After selecting the Graph Generate button, please copy the URL from the textbox to the right into the browser of your choice. &#10;The graph will compare the positivity of the feedback for each state for the selected Topic/Keyword." wrapText="true"/>
-                        <TextArea fx:id="GraphURL" layoutX="430.0" layoutY="359.0" text="Graph URL Here" maxHeight="207.0" maxWidth="153.0" minHeight="20.0" minWidth="50.0" prefHeight="207.0" prefWidth="153.0" wrapText="true"/>
-                        
-                        <!-- End -->
-                        <!--  Search Bar, Stuart Barker 13/05/2015 -->
-                       
-                        <TextField fx:id="Search" layoutX="14.0" layoutY="5.0" prefHeight="15.0" prefWidth="170.0" promptText="Type Search Text..." />
-                       
-                        <!-- End -->
-               			<ListView fx:id="TopicList" layoutX="14.0" layoutY="60.0" prefHeight="507.0" prefWidth="161.0" />
-               			
-               			<!--  Replace Dropdown box with Checkboxes, Stuart Barker 8/6/2015 -->
-               			<!-- <ChoiceBox fx:id="SentimentChoice" layoutX="14.0" layoutY="31.0" prefHeight="25.0" prefWidth="102.0" /> -->
-                       
-                        <CheckBox fx:id="cbGood" layoutX="14.0" layoutY="31.0" mnemonicParsing="false" selected="true" text="Good" />
-                        <CheckBox fx:id="cbBad" layoutX="80.0" layoutY="31.0" mnemonicParsing="false" selected="true" text="Bad" />
-                       
-                        <!-- End -->
-               			
+                        <ListView fx:id="StoryIDList" layoutX="186.0" layoutY="46.0" prefHeight="508.0" prefWidth="85.0" />
+                        <Label fx:id="StoryCount" alignment="CENTER" layoutX="187.0" layoutY="29.0" prefHeight="17.0" prefWidth="84.0" text="0" />
+                        <TextArea fx:id="StoryBody" layoutX="280.0" layoutY="48.0" maxHeight="314.0" maxWidth="476.0" minHeight="280.0" minWidth="303.0" prefHeight="292.0" prefWidth="303.0" wrapText="true" />
+                        <ListView fx:id="TopicList" layoutX="14.0" layoutY="46.0" prefHeight="507.0" prefWidth="161.0" />
+                        <ChoiceBox fx:id="SentimentChoice" layoutX="14.0" layoutY="17.0" prefHeight="25.0" prefWidth="102.0" />
                         <CheckBox fx:id="cbNSW" layoutX="194.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="NSW" />
                         <CheckBox fx:id="cbVIC" layoutX="254.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="VIC" />
                         <CheckBox fx:id="cbACT" layoutX="303.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="ACT" />
@@ -53,12 +28,6 @@
                         <CheckBox fx:id="cbSA" layoutX="452.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="SA" />
                         <CheckBox fx:id="cbNT" layoutX="496.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="NT" />
                         <CheckBox fx:id="cbWA" layoutX="540.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="WA" />
-                        
-                        <!-- Checkbox for "no state", Stuart Barker 17/06/2015 -->
-                       
-                        <CheckBox fx:id="cbOther" layoutX="584.0" layoutY="9.0" mnemonicParsing="false" selected="true" text="OTHER" />
-                       
-                        <!-- End -->
                      </children>
                   </AnchorPane>
             </content>

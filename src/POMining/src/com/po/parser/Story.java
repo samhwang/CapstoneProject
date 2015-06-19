@@ -16,7 +16,7 @@ public class Story {
 	private Vector<String> vecGood;
 	private Vector<String> vecBad;
 	private Vector<String> vecStory;
-
+	
 	public static final int AU_STATE_FLAG_NSW = 0x01;
 	public static final int AU_STATE_FLAG_VIC = 0x02;
 	public static final int AU_STATE_FLAG_ACT = 0x04;
@@ -25,9 +25,6 @@ public class Story {
 	public static final int AU_STATE_FLAG_SA = 0x20;
 	public static final int AU_STATE_FLAG_NT = 0x40;
 	public static final int AU_STATE_FLAG_WA = 0x80;
-	// Checkbox for "no state", Stuart Barker 17/06/2015
-	public static final int AU_STATE_FLAG_OTHER = 0x100;
-	private final String AU_STATE_OTHER = "OTHER";
 	
 	private final String AU_STATE_NSW = "NSW";
 	private final String AU_STATE_VIC = "VIC";
@@ -38,10 +35,9 @@ public class Story {
 	private final String AU_STATE_NT = "NT";
 	private final String AU_STATE_WA = "WA";
 	
-
-	public Story(String strID, String strTitle, String strStory,
-			String strTime, String strLocation, String strAuthor,
-			String strRelate, String strGood, String strBad, String strCountry) {
+	public Story(String strID, String strTitle, String strStory, String strTime, 
+			String strLocation, String strAuthor, String strRelate, String strGood, String strBad, String strCountry)
+	{
 		strState = "";
 		this.strID = strID;
 		this.strCountry = strCountry;
@@ -52,83 +48,90 @@ public class Story {
 		vecGood = new Vector<String>();
 		vecBad = new Vector<String>();
 		vecStory = new Vector<String>();
-
+		
 		String[] arrGood = strGood.substring(5).split(";");
-		for (String str : arrGood) {
-			if (!str.trim().isEmpty()) {
-				String newString = StoryParser.getInstance().RemoveSentiment(
-						str.trim().toLowerCase(), " ",
-						StoryParser.nSentimentModeALL);
-				if (!newString.trim().isEmpty()) {
+		for(String str : arrGood)
+		{
+			if(!str.trim().isEmpty())
+			{
+				String newString = StoryParser.getInstance().RemoveSentiment(str.trim().toLowerCase(), " ", StoryParser.nSentimentModeALL);
+				if(!newString.trim().isEmpty())
+				{
 					String[] arrStr = newString.split(" ");
-					for (String word : arrStr) {
-						if (!word.trim().isEmpty())
+					for(String word : arrStr)
+					{
+						if(!word.trim().isEmpty())
 							vecGood.add(word);
 					}
-
+					
 				}
 			}
 		}
-
+		
 		String[] arrBad = strBad.substring(4).split(";");
-		for (String str : arrBad) {
-			if (!str.trim().isEmpty()) {
-				String newString = StoryParser.getInstance().RemoveSentiment(
-						str.trim().toLowerCase(), " ",
-						StoryParser.nSentimentModeALL);
-				if (!newString.trim().isEmpty()) {
+		for(String str : arrBad)
+		{
+			if(!str.trim().isEmpty())
+			{
+				String newString = StoryParser.getInstance().RemoveSentiment(str.trim().toLowerCase(), " ", StoryParser.nSentimentModeALL);
+				if(!newString.trim().isEmpty())
+				{
 					String[] arrStr = newString.split(" ");
-					for (String word : arrStr) {
-						if (!word.trim().isEmpty())
+					for(String word : arrStr)
+					{
+						if(!word.trim().isEmpty())
 							vecBad.add(word);
 					}
 				}
 			}
 		}
-
+		
 		strRawStory = strStory.toLowerCase();
 		String[] arrStory = strStory.substring(6).split("\\. ");
-		for (String str : arrStory) {
-			if (!str.trim().isEmpty()) {
+		for(String str : arrStory)
+		{
+			if(!str.trim().isEmpty())
+			{
 				vecStory.add(str.trim().toLowerCase());
 			}
 		}
-
+		
 		ParseState(strRelate);
 		SetStateFlag();
 	}
-
-	private void ParseState(String strRelate) {
-		if (strRelate.isEmpty())
+	
+	private void ParseState(String strRelate)
+	{
+		if(strRelate.isEmpty())
 			return;
-		if (strCountry.equalsIgnoreCase("AU")) {
+		if(strCountry.equalsIgnoreCase("AU"))
+		{
 			String[] strArr = strRelate.split(";");
-			for (String str : strArr) {
-				if (str.equalsIgnoreCase(AU_STATE_NSW)
-						|| str.equalsIgnoreCase(AU_STATE_VIC)
-						|| str.equalsIgnoreCase(AU_STATE_ACT)
-						|| str.equalsIgnoreCase(AU_STATE_TAS)
-						|| str.equalsIgnoreCase(AU_STATE_QLD)
-						|| str.equalsIgnoreCase(AU_STATE_SA)
-						|| str.equalsIgnoreCase(AU_STATE_NT)
-						|| str.equalsIgnoreCase(AU_STATE_WA)) {
+			for(String str : strArr)
+			{
+				if(str.equalsIgnoreCase(AU_STATE_NSW)
+					||str.equalsIgnoreCase(AU_STATE_VIC)
+					||str.equalsIgnoreCase(AU_STATE_ACT)
+					||str.equalsIgnoreCase(AU_STATE_TAS)
+					||str.equalsIgnoreCase(AU_STATE_QLD)
+					||str.equalsIgnoreCase(AU_STATE_SA)
+					||str.equalsIgnoreCase(AU_STATE_NT)
+					||str.equalsIgnoreCase(AU_STATE_WA))
+				{
 					strState = str.toUpperCase();
 					return;
 				}
 			}
-			// Checkbox for "no state", Stuart Barker 17/06/2015
-			
-				strState = AU_STATE_OTHER;
-				return;
-			
 		}
 	}
-
-	private void SetStateFlag() {
-		if (strState.isEmpty())
+	
+	private void SetStateFlag()
+	{
+		if(strState.isEmpty())
 			return;
-
-		switch (strState) {
+		
+		switch(strState)
+		{
 		case AU_STATE_NSW:
 			nStateFlag = AU_STATE_FLAG_NSW;
 			break;
@@ -153,60 +156,21 @@ public class Story {
 		case AU_STATE_WA:
 			nStateFlag = AU_STATE_FLAG_WA;
 			break;
-		// Checkbox for "no state", Stuart Barker 17/06/2015
-		case AU_STATE_OTHER:
-			nStateFlag = AU_STATE_FLAG_OTHER;
-			break;
 		default:
 			nStateFlag = 0;
 		}
 	}
-
-	public String GetID() {
-		return strID;
-	}
-
-	public String GetTitle() {
-		return strTitle;
-	}
-
-	public String GetTime() {
-		return strTime;
-	}
-
-	public String GetAuthor() {
-		return strAuthor;
-	}
-
-	public String GetCountry() {
-		return strCountry;
-	}
-
-	public String GetState() {
-		return strState;
-	}
-
-	public String GetRelate() {
-		return strRelate;
-	}
-
-	public String GetRawStory() {
-		return strRawStory;
-	}
-
-	public Vector<String> getGood() {
-		return vecGood;
-	}
-
-	public Vector<String> getBad() {
-		return vecBad;
-	}
-
-	public Vector<String> getStory() {
-		return vecStory;
-	}
-
-	public int GetStateFlag() {
-		return nStateFlag;
-	}
+	
+	public String GetID() 		{ return strID; }
+	public String GetTitle() 	{ return strTitle; }
+	public String GetTime() 	{ return strTime; }
+	public String GetAuthor() 	{ return strAuthor; }
+	public String GetCountry() 	{ return strCountry; }
+	public String GetState() 	{ return strState; }
+	public String GetRelate() 	{ return strRelate; }
+	public String GetRawStory()	{ return strRawStory; }
+	public Vector<String> getGood() {return vecGood;}
+	public Vector<String> getBad() 	{return vecBad;}
+	public Vector<String> getStory() {return vecStory;}
+	public int GetStateFlag() 	{ return nStateFlag; }
 }
